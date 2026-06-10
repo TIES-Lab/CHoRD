@@ -1,0 +1,39 @@
+{
+  "params": {
+    "SeqLen": 64,
+    "DModel": 128,
+    "NumHeads": 8,
+    "DFF": 512,
+    "Layers": 2,
+    "NumClass": 2
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dTokEmb": "bt.TokEmb",
+    "b.dPosEmb": "bt.PosEmb",
+    "b.dTypeEmb": "bt.TypeEmb",
+    "b.dEmbTmp": "bt.EmbTmp",
+    "b.dEmbSum": "bt.EmbSum",
+    "b.dEmbGamma": "bt.EmbGamma",
+    "b.dEmbBeta": "bt.EmbBeta",
+    "b.dX": "bt.X",
+    "b.dX2": "bt.X2",
+    "b.dQ": "bt.Q",
+    "b.dK": "bt.K",
+    "b.dV": "bt.V",
+    "b.dScores": "bt.Scores",
+    "b.dProbs": "bt.Probs",
+    "b.dContext": "bt.Context",
+    "b.dOut": "bt.Out",
+    "b.dY1": "bt.Y1",
+    "b.dY1n": "bt.Y1n",
+    "b.dFF1Buf": "bt.FF1",
+    "b.dFF2Buf": "bt.FF2",
+    "b.dY2": "bt.Y2",
+    "b.dPool": "bt.Pool",
+    "b.dLogits": "bt.Logits",
+    "b.dWPool": "bt.WPool",
+    "b.dWCls": "bt.WCls"
+  },
+  "benchmark": "bert_tiny"
+}

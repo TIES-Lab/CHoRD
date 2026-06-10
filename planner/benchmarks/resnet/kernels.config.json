@@ -1,0 +1,29 @@
+{
+  "params": {
+    "InH": 128,
+    "InW": 128,
+    "Cin": 3,
+    "C": 16,
+    "Blocks": 3,
+    "K": 3,
+    "Pad": 1,
+    "NumClass": 10,
+    "GapTiles": 64
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dIn": "rn.Input",
+    "b.dStem": "rn.Stem.Out",
+    "b.dTmp1": "rn.Blk.T1",
+    "b.dTmp2": "rn.Blk.T2",
+    "b.dBlockOut": "rn.Blk.Out",
+    "b.dGapPartial": "rn.GAP.Partial",
+    "b.dGAP": "rn.GAP.Out",
+    "b.dOut": "rn.FC.Out",
+    "b.dW0": "rn.Stem.W",
+    "b.dB0": "rn.Stem.B",
+    "b.dWfc": "rn.FC.W",
+    "b.dBfc": "rn.FC.B"
+  },
+  "benchmark": "resnet"
+}

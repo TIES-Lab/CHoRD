@@ -1,0 +1,14 @@
+{
+  "chiplets": 8,
+  "page_bytes": 4096,
+  "sa_per_chiplet": 4,
+  "cu_per_sa": 4,
+  "banks_per_chiplet": 4,
+  "chiplet_cap_pages": 400,
+  "meta": {
+    "chiplet_cap_pages_note": "Scaled-down per-chiplet DRAM capacity to prevent degenerate 'all pages on one chiplet' plans. 400 pages * 4096B = 1,638,400 bytes (~1.56MiB) per chiplet. For 4 chiplets, total capacity ~6.25MiB, enough for current small CNN/Transformer benches; adjust when scaling workloads.",
+    "chiplet_overflow_note": "Soft overflow tier for hot low-parallel buffers. Lets the planner exceed chiplet_cap_pages when remote-traffic savings dominate, but charges an extra per-page penalty. Useful for small FC / norm hot spots without fully removing capacity discipline."
+  },
+  "chiplet_overflow_pages": 1024,
+  "chiplet_overflow_penalty": 1024
+}

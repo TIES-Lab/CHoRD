@@ -1,0 +1,21 @@
+{
+  "params": {
+    "SeqLen": 256,
+    "DModel": 128,
+    "Layers": 4,
+    "ConvK": 3,
+    "InvDModelQ": 7813
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dX": "mb.X",
+    "b.dX2": "mb.X2",
+    "b.dNorm": "mb.Norm",
+    "b.dProjX": "mb.ProjX",
+    "b.dProjZ": "mb.ProjZ",
+    "b.dConv": "mb.Conv",
+    "b.dScanOut": "mb.Scan",
+    "b.dTmpOut": "mb.TmpOut"
+  },
+  "benchmark": "mamba_tiny"
+}

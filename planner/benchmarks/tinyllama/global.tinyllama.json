@@ -1,0 +1,8027 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "tinyllama",
+  "package": "tinyllama",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "405a1dcc5385c823852304f66797c5dc8adecff976a0353737ea55c5a07eba10",
+    "kernels.cl": "06df883f13bd7e7085b33a61493739a481f5ac919db1e3a1803f642706ca3d85",
+    "kernels.config.json": "9cab74267dc74c7c47c726ac9bb562cec635234144d386157c9d2775a3f9621c",
+    "kernels.json": "8d625117244f2aa8604e97aa76ee4a2baa12247b6cc85effd5d6e63fb97eabc9"
+  },
+  "params": {
+    "DFF": 352,
+    "DModel": 128,
+    "Layers": 4,
+    "NumHeads": 8,
+    "SeqLen": 256
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "tlm.AttnOut",
+      "go_var": "b.dAttnOut",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.FF",
+      "go_var": "b.dFFBuf",
+      "bytes_expr": "uint64(seq * b.DFF * 4)",
+      "bytes": 360448,
+      "pages": 88,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Gate",
+      "go_var": "b.dGateBuf",
+      "bytes_expr": "uint64(seq * b.DFF * 4)",
+      "bytes": 360448,
+      "pages": 88,
+      "unified": false
+    },
+    {
+      "tag": "tlm.K",
+      "go_var": "b.dK",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Norm1",
+      "go_var": "b.dNorm1W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Norm2",
+      "go_var": "b.dNorm2W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.WDown",
+      "go_var": "b.dWDown[l]",
+      "bytes_expr": "wDownBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.WGate",
+      "go_var": "b.dWGate[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.WUp",
+      "go_var": "b.dWUp[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L0.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Norm1",
+      "go_var": "b.dNorm1W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Norm2",
+      "go_var": "b.dNorm2W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.WDown",
+      "go_var": "b.dWDown[l]",
+      "bytes_expr": "wDownBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.WGate",
+      "go_var": "b.dWGate[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.WUp",
+      "go_var": "b.dWUp[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L1.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Norm1",
+      "go_var": "b.dNorm1W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Norm2",
+      "go_var": "b.dNorm2W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.WDown",
+      "go_var": "b.dWDown[l]",
+      "bytes_expr": "wDownBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.WGate",
+      "go_var": "b.dWGate[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.WUp",
+      "go_var": "b.dWUp[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L2.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Norm1",
+      "go_var": "b.dNorm1W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Norm2",
+      "go_var": "b.dNorm2W[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.WDown",
+      "go_var": "b.dWDown[l]",
+      "bytes_expr": "wDownBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.WGate",
+      "go_var": "b.dWGate[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.WUp",
+      "go_var": "b.dWUp[l]",
+      "bytes_expr": "wUpBytes",
+      "bytes": 180224,
+      "pages": 44,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.L3.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Norm",
+      "go_var": "b.dNorm",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Probs",
+      "go_var": "b.dProbs",
+      "bytes_expr": "uint64(b.NumHeads * seq * seq * 4)",
+      "bytes": 2097152,
+      "pages": 512,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.RopeCos",
+      "go_var": "b.dRopeCos",
+      "bytes_expr": "uint64(seq * ropeHalf * 4)",
+      "bytes": 8192,
+      "pages": 2,
+      "unified": false
+    },
+    {
+      "tag": "tlm.RopeSin",
+      "go_var": "b.dRopeSin",
+      "bytes_expr": "uint64(seq * ropeHalf * 4)",
+      "bytes": 8192,
+      "pages": 2,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Scores",
+      "go_var": "b.dScores",
+      "bytes_expr": "uint64(b.NumHeads * seq * seq * 4)",
+      "bytes": 2097152,
+      "pages": 512,
+      "unified": false
+    },
+    {
+      "tag": "tlm.Up",
+      "go_var": "b.dUpBuf",
+      "bytes_expr": "uint64(seq * b.DFF * 4)",
+      "bytes": 360448,
+      "pages": 88,
+      "unified": false
+    },
+    {
+      "tag": "tlm.V",
+      "go_var": "b.dV",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.X",
+      "go_var": "b.dX",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "tlm.X2",
+      "go_var": "b.dX2",
+      "bytes_expr": "uint64(seq * dm * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "tlm_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_rope_q",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Cos",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Sin",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DModel",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 4,
+        "num_global_stores": 2,
+        "num_loads": 4,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 4,
+        "recorded_global_stores": 2,
+        "recorded_loads": 4,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "tlm_rope_k",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Cos",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Sin",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DModel",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 4,
+        "num_global_stores": 2,
+        "num_loads": 4,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 4,
+        "recorded_global_stores": 2,
+        "recorded_loads": 4,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "tlm_attention_scores_masked",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_softmax",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "SeqLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "NumHeads",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 5,
+        "num_global_loads": 3,
+        "num_global_stores": 2,
+        "num_loads": 3,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 2,
+        "recorded_loads": 3,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "tlm_attention_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "Probs",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Context",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_rmsnorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Weight",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DModel",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Eps",
+          "ir_name": "arg5",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_rmsnorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Weight",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DModel",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Eps",
+          "ir_name": "arg5",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_ff_gate",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_ff_up",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_swiglu",
+      "args": [
+        {
+          "index": 0,
+          "name": "Gate",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Up",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "tlm_ff_down",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "tlm_rmsnorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm1|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L0.Norm1,tlm.X|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L0.Norm1",
+          "expr": "b.dNorm1W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L0.Norm1",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L0.Norm1": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X": "read_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "tlm_q_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_q_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L0.Wq,tlm.Norm|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L0.Wq",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.L0.Wq": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Q": "write_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "tlm_k_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_k_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L0.Wk,tlm.Norm|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L0.Wk",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "write_only",
+        "tlm.L0.Wk": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "tlm_v_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_v_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L0.Wv,tlm.Norm|w=tlm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L0.Wv",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.V"
+      ],
+      "buffer_roles": {
+        "tlm.L0.Wv": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.V": "write_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "tlm_rope_q",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_q|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.Q,tlm.RopeCos,tlm.RopeSin|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Q",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.Q": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "tlm_rope_k",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_k|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.K,tlm.RopeCos,tlm.RopeSin|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "tlm_attention_scores_masked",
+      "global_size": [
+        256,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        256,
+        1
+      ],
+      "num_wg_total": 8192,
+      "launch_signature": "tlm_attention_scores_masked|g=256,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.K,tlm.Q|w=tlm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.Q"
+      ],
+      "writes": [
+        "tlm.Scores"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_only",
+        "tlm.Q": "read_only",
+        "tlm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "tlm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "tlm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=8|r=tlm.Probs,tlm.Scores|w=tlm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.Scores"
+      ],
+      "writes": [
+        "tlm.Probs"
+      ],
+      "buffer_roles": {
+        "tlm.Probs": "read_write",
+        "tlm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "tlm_attention_context",
+      "global_size": [
+        16,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        256,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_attention_context|g=16,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.Probs,tlm.V|w=tlm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.V"
+      ],
+      "writes": [
+        "tlm.Context"
+      ],
+      "buffer_roles": {
+        "tlm.Context": "write_only",
+        "tlm.Probs": "read_only",
+        "tlm.V": "read_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "tlm_o_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_o_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.Context,tlm.L0.Wo|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.Context",
+        "tlm.L0.Wo"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.Context": "read_only",
+        "tlm.L0.Wo": "read_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "tlm_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X|w=tlm.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.X2"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "read_only",
+        "tlm.X2": "write_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "tlm_rmsnorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm2|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L0.Norm2,tlm.X2|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L0.Norm2",
+          "expr": "b.dNorm2W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L0.Norm2",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L0.Norm2": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "tlm_ff_gate",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_gate|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L0.WGate,tlm.Norm|w=tlm.Gate",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.WGate",
+          "expr": "b.dWGate[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L0.WGate",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Gate"
+      ],
+      "buffer_roles": {
+        "tlm.Gate": "write_only",
+        "tlm.L0.WGate": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "tlm_ff_up",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_up|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L0.WUp,tlm.Norm|w=tlm.Up",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.WUp",
+          "expr": "b.dWUp[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L0.WUp",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Up"
+      ],
+      "buffer_roles": {
+        "tlm.L0.WUp": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Up": "write_only"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "tlm_swiglu",
+      "global_size": [
+        90112,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1408,
+        1,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_swiglu|g=90112,1,1|l=64,1,1|si=param_arg3=90112|r=tlm.Gate,tlm.Up|w=tlm.FF",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Gate",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Up",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 90112
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 90112
+      },
+      "reads": [
+        "tlm.Gate",
+        "tlm.Up"
+      ],
+      "writes": [
+        "tlm.FF"
+      ],
+      "buffer_roles": {
+        "tlm.FF": "write_only",
+        "tlm.Gate": "read_only",
+        "tlm.Up": "read_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "tlm_ff_down",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_ff_down|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=352|r=tlm.FF,tlm.L0.WDown|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L0.WDown",
+          "expr": "b.dWDown[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 352
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 352
+      },
+      "reads": [
+        "tlm.FF",
+        "tlm.L0.WDown"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.FF": "read_only",
+        "tlm.L0.WDown": "read_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "tlm_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X2|w=tlm.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.X"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "tlm_rmsnorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm1|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L1.Norm1,tlm.X|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L1.Norm1",
+          "expr": "b.dNorm1W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L1.Norm1",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L1.Norm1": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X": "read_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "tlm_q_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_q_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L1.Wq,tlm.Norm|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L1.Wq",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.L1.Wq": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Q": "write_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "tlm_k_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_k_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L1.Wk,tlm.Norm|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L1.Wk",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "write_only",
+        "tlm.L1.Wk": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "tlm_v_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_v_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L1.Wv,tlm.Norm|w=tlm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L1.Wv",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.V"
+      ],
+      "buffer_roles": {
+        "tlm.L1.Wv": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.V": "write_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "tlm_rope_q",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_q|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.Q,tlm.RopeCos,tlm.RopeSin|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Q",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.Q": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "tlm_rope_k",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_k|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.K,tlm.RopeCos,tlm.RopeSin|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "tlm_attention_scores_masked",
+      "global_size": [
+        256,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        256,
+        1
+      ],
+      "num_wg_total": 8192,
+      "launch_signature": "tlm_attention_scores_masked|g=256,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.K,tlm.Q|w=tlm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.Q"
+      ],
+      "writes": [
+        "tlm.Scores"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_only",
+        "tlm.Q": "read_only",
+        "tlm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "tlm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "tlm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=8|r=tlm.Probs,tlm.Scores|w=tlm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.Scores"
+      ],
+      "writes": [
+        "tlm.Probs"
+      ],
+      "buffer_roles": {
+        "tlm.Probs": "read_write",
+        "tlm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "tlm_attention_context",
+      "global_size": [
+        16,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        256,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_attention_context|g=16,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.Probs,tlm.V|w=tlm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.V"
+      ],
+      "writes": [
+        "tlm.Context"
+      ],
+      "buffer_roles": {
+        "tlm.Context": "write_only",
+        "tlm.Probs": "read_only",
+        "tlm.V": "read_only"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "tlm_o_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_o_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.Context,tlm.L1.Wo|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.Context",
+        "tlm.L1.Wo"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.Context": "read_only",
+        "tlm.L1.Wo": "read_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "tlm_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X|w=tlm.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.X2"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "read_only",
+        "tlm.X2": "write_only"
+      }
+    },
+    {
+      "id": 28,
+      "kernel": "tlm_rmsnorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm2|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L1.Norm2,tlm.X2|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L1.Norm2",
+          "expr": "b.dNorm2W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L1.Norm2",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L1.Norm2": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 29,
+      "kernel": "tlm_ff_gate",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_gate|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L1.WGate,tlm.Norm|w=tlm.Gate",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.WGate",
+          "expr": "b.dWGate[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L1.WGate",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Gate"
+      ],
+      "buffer_roles": {
+        "tlm.Gate": "write_only",
+        "tlm.L1.WGate": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 30,
+      "kernel": "tlm_ff_up",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_up|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L1.WUp,tlm.Norm|w=tlm.Up",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.WUp",
+          "expr": "b.dWUp[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L1.WUp",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Up"
+      ],
+      "buffer_roles": {
+        "tlm.L1.WUp": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Up": "write_only"
+      }
+    },
+    {
+      "id": 31,
+      "kernel": "tlm_swiglu",
+      "global_size": [
+        90112,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1408,
+        1,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_swiglu|g=90112,1,1|l=64,1,1|si=param_arg3=90112|r=tlm.Gate,tlm.Up|w=tlm.FF",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Gate",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Up",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 90112
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 90112
+      },
+      "reads": [
+        "tlm.Gate",
+        "tlm.Up"
+      ],
+      "writes": [
+        "tlm.FF"
+      ],
+      "buffer_roles": {
+        "tlm.FF": "write_only",
+        "tlm.Gate": "read_only",
+        "tlm.Up": "read_only"
+      }
+    },
+    {
+      "id": 32,
+      "kernel": "tlm_ff_down",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_ff_down|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=352|r=tlm.FF,tlm.L1.WDown|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L1.WDown",
+          "expr": "b.dWDown[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 352
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 352
+      },
+      "reads": [
+        "tlm.FF",
+        "tlm.L1.WDown"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.FF": "read_only",
+        "tlm.L1.WDown": "read_only"
+      }
+    },
+    {
+      "id": 33,
+      "kernel": "tlm_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X2|w=tlm.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.X"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 34,
+      "kernel": "tlm_rmsnorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm1|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L2.Norm1,tlm.X|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L2.Norm1",
+          "expr": "b.dNorm1W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L2.Norm1",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L2.Norm1": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X": "read_only"
+      }
+    },
+    {
+      "id": 35,
+      "kernel": "tlm_q_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_q_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L2.Wq,tlm.Norm|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L2.Wq",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.L2.Wq": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Q": "write_only"
+      }
+    },
+    {
+      "id": 36,
+      "kernel": "tlm_k_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_k_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L2.Wk,tlm.Norm|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L2.Wk",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "write_only",
+        "tlm.L2.Wk": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 37,
+      "kernel": "tlm_v_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_v_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L2.Wv,tlm.Norm|w=tlm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L2.Wv",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.V"
+      ],
+      "buffer_roles": {
+        "tlm.L2.Wv": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.V": "write_only"
+      }
+    },
+    {
+      "id": 38,
+      "kernel": "tlm_rope_q",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_q|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.Q,tlm.RopeCos,tlm.RopeSin|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Q",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.Q": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 39,
+      "kernel": "tlm_rope_k",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_k|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.K,tlm.RopeCos,tlm.RopeSin|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 40,
+      "kernel": "tlm_attention_scores_masked",
+      "global_size": [
+        256,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        256,
+        1
+      ],
+      "num_wg_total": 8192,
+      "launch_signature": "tlm_attention_scores_masked|g=256,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.K,tlm.Q|w=tlm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.Q"
+      ],
+      "writes": [
+        "tlm.Scores"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_only",
+        "tlm.Q": "read_only",
+        "tlm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 41,
+      "kernel": "tlm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "tlm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=8|r=tlm.Probs,tlm.Scores|w=tlm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.Scores"
+      ],
+      "writes": [
+        "tlm.Probs"
+      ],
+      "buffer_roles": {
+        "tlm.Probs": "read_write",
+        "tlm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 42,
+      "kernel": "tlm_attention_context",
+      "global_size": [
+        16,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        256,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_attention_context|g=16,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.Probs,tlm.V|w=tlm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.V"
+      ],
+      "writes": [
+        "tlm.Context"
+      ],
+      "buffer_roles": {
+        "tlm.Context": "write_only",
+        "tlm.Probs": "read_only",
+        "tlm.V": "read_only"
+      }
+    },
+    {
+      "id": 43,
+      "kernel": "tlm_o_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_o_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.Context,tlm.L2.Wo|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.Context",
+        "tlm.L2.Wo"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.Context": "read_only",
+        "tlm.L2.Wo": "read_only"
+      }
+    },
+    {
+      "id": 44,
+      "kernel": "tlm_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X|w=tlm.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.X2"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "read_only",
+        "tlm.X2": "write_only"
+      }
+    },
+    {
+      "id": 45,
+      "kernel": "tlm_rmsnorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm2|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L2.Norm2,tlm.X2|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L2.Norm2",
+          "expr": "b.dNorm2W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L2.Norm2",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L2.Norm2": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 46,
+      "kernel": "tlm_ff_gate",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_gate|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L2.WGate,tlm.Norm|w=tlm.Gate",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.WGate",
+          "expr": "b.dWGate[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L2.WGate",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Gate"
+      ],
+      "buffer_roles": {
+        "tlm.Gate": "write_only",
+        "tlm.L2.WGate": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 47,
+      "kernel": "tlm_ff_up",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_up|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L2.WUp,tlm.Norm|w=tlm.Up",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.WUp",
+          "expr": "b.dWUp[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L2.WUp",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Up"
+      ],
+      "buffer_roles": {
+        "tlm.L2.WUp": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Up": "write_only"
+      }
+    },
+    {
+      "id": 48,
+      "kernel": "tlm_swiglu",
+      "global_size": [
+        90112,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1408,
+        1,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_swiglu|g=90112,1,1|l=64,1,1|si=param_arg3=90112|r=tlm.Gate,tlm.Up|w=tlm.FF",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Gate",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Up",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 90112
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 90112
+      },
+      "reads": [
+        "tlm.Gate",
+        "tlm.Up"
+      ],
+      "writes": [
+        "tlm.FF"
+      ],
+      "buffer_roles": {
+        "tlm.FF": "write_only",
+        "tlm.Gate": "read_only",
+        "tlm.Up": "read_only"
+      }
+    },
+    {
+      "id": 49,
+      "kernel": "tlm_ff_down",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_ff_down|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=352|r=tlm.FF,tlm.L2.WDown|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L2.WDown",
+          "expr": "b.dWDown[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 352
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 352
+      },
+      "reads": [
+        "tlm.FF",
+        "tlm.L2.WDown"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.FF": "read_only",
+        "tlm.L2.WDown": "read_only"
+      }
+    },
+    {
+      "id": 50,
+      "kernel": "tlm_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X2|w=tlm.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.X"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 51,
+      "kernel": "tlm_rmsnorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm1|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L3.Norm1,tlm.X|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L3.Norm1",
+          "expr": "b.dNorm1W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L3.Norm1",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L3.Norm1": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X": "read_only"
+      }
+    },
+    {
+      "id": 52,
+      "kernel": "tlm_q_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_q_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L3.Wq,tlm.Norm|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L3.Wq",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.L3.Wq": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Q": "write_only"
+      }
+    },
+    {
+      "id": 53,
+      "kernel": "tlm_k_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_k_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L3.Wk,tlm.Norm|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L3.Wk",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "write_only",
+        "tlm.L3.Wk": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 54,
+      "kernel": "tlm_v_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_v_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.L3.Wv,tlm.Norm|w=tlm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L3.Wv",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.V"
+      ],
+      "buffer_roles": {
+        "tlm.L3.Wv": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.V": "write_only"
+      }
+    },
+    {
+      "id": 55,
+      "kernel": "tlm_rope_q",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_q|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.Q,tlm.RopeCos,tlm.RopeSin|w=tlm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Q",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.Q"
+      ],
+      "buffer_roles": {
+        "tlm.Q": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 56,
+      "kernel": "tlm_rope_k",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_rope_k|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=8|r=tlm.K,tlm.RopeCos,tlm.RopeSin|w=tlm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Cos",
+          "kind": "buffer",
+          "tag": "tlm.RopeCos",
+          "expr": "b.dRopeCos"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Sin",
+          "kind": "buffer",
+          "tag": "tlm.RopeSin",
+          "expr": "b.dRopeSin"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.RopeCos",
+        "tlm.RopeSin"
+      ],
+      "writes": [
+        "tlm.K"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_write",
+        "tlm.RopeCos": "read_only",
+        "tlm.RopeSin": "read_only"
+      }
+    },
+    {
+      "id": 57,
+      "kernel": "tlm_attention_scores_masked",
+      "global_size": [
+        256,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        256,
+        1
+      ],
+      "num_wg_total": 8192,
+      "launch_signature": "tlm_attention_scores_masked|g=256,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.K,tlm.Q|w=tlm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "tlm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "tlm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.K",
+        "tlm.Q"
+      ],
+      "writes": [
+        "tlm.Scores"
+      ],
+      "buffer_roles": {
+        "tlm.K": "read_only",
+        "tlm.Q": "read_only",
+        "tlm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 58,
+      "kernel": "tlm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "tlm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=8|r=tlm.Probs,tlm.Scores|w=tlm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.Scores"
+      ],
+      "writes": [
+        "tlm.Probs"
+      ],
+      "buffer_roles": {
+        "tlm.Probs": "read_write",
+        "tlm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 59,
+      "kernel": "tlm_attention_context",
+      "global_size": [
+        16,
+        2048,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        256,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_attention_context|g=16,2048,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=tlm.Probs,tlm.V|w=tlm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "tlm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "tlm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "tlm.Probs",
+        "tlm.V"
+      ],
+      "writes": [
+        "tlm.Context"
+      ],
+      "buffer_roles": {
+        "tlm.Context": "write_only",
+        "tlm.Probs": "read_only",
+        "tlm.V": "read_only"
+      }
+    },
+    {
+      "id": 60,
+      "kernel": "tlm_o_proj",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_o_proj|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=tlm.Context,tlm.L3.Wo|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.Context",
+        "tlm.L3.Wo"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.Context": "read_only",
+        "tlm.L3.Wo": "read_only"
+      }
+    },
+    {
+      "id": 61,
+      "kernel": "tlm_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X|w=tlm.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X"
+      ],
+      "writes": [
+        "tlm.X2"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "read_only",
+        "tlm.X2": "write_only"
+      }
+    },
+    {
+      "id": 62,
+      "kernel": "tlm_rmsnorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "tlm_rmsnorm2|g=256,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128|sf=param_arg5=1e-05|r=tlm.L3.Norm2,tlm.X2|w=tlm.Norm",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Weight",
+          "kind": "buffer",
+          "tag": "tlm.L3.Norm2",
+          "expr": "b.dNorm2W[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128
+      },
+      "float_scalar_map": {
+        "param_arg5": 0.00001
+      },
+      "reads": [
+        "tlm.L3.Norm2",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.Norm"
+      ],
+      "buffer_roles": {
+        "tlm.L3.Norm2": "read_only",
+        "tlm.Norm": "write_only",
+        "tlm.X2": "read_only"
+      }
+    },
+    {
+      "id": 63,
+      "kernel": "tlm_ff_gate",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_gate|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L3.WGate,tlm.Norm|w=tlm.Gate",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.WGate",
+          "expr": "b.dWGate[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L3.WGate",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Gate"
+      ],
+      "buffer_roles": {
+        "tlm.Gate": "write_only",
+        "tlm.L3.WGate": "read_only",
+        "tlm.Norm": "read_only"
+      }
+    },
+    {
+      "id": 64,
+      "kernel": "tlm_ff_up",
+      "global_size": [
+        352,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        44,
+        32,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_ff_up|g=352,256,1|l=8,8,1|si=param_arg3=256;param_arg4=352;param_arg5=128|r=tlm.L3.WUp,tlm.Norm|w=tlm.Up",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.Norm",
+          "expr": "b.dNorm"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.WUp",
+          "expr": "b.dWUp[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 352
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 352,
+        "param_arg5": 128
+      },
+      "reads": [
+        "tlm.L3.WUp",
+        "tlm.Norm"
+      ],
+      "writes": [
+        "tlm.Up"
+      ],
+      "buffer_roles": {
+        "tlm.L3.WUp": "read_only",
+        "tlm.Norm": "read_only",
+        "tlm.Up": "write_only"
+      }
+    },
+    {
+      "id": 65,
+      "kernel": "tlm_swiglu",
+      "global_size": [
+        90112,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1408,
+        1,
+        1
+      ],
+      "num_wg_total": 1408,
+      "launch_signature": "tlm_swiglu|g=90112,1,1|l=64,1,1|si=param_arg3=90112|r=tlm.Gate,tlm.Up|w=tlm.FF",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Gate",
+          "kind": "buffer",
+          "tag": "tlm.Gate",
+          "expr": "b.dGateBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Up",
+          "kind": "buffer",
+          "tag": "tlm.Up",
+          "expr": "b.dUpBuf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 90112
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 90112
+      },
+      "reads": [
+        "tlm.Gate",
+        "tlm.Up"
+      ],
+      "writes": [
+        "tlm.FF"
+      ],
+      "buffer_roles": {
+        "tlm.FF": "write_only",
+        "tlm.Gate": "read_only",
+        "tlm.Up": "read_only"
+      }
+    },
+    {
+      "id": 66,
+      "kernel": "tlm_ff_down",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_ff_down|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=352|r=tlm.FF,tlm.L3.WDown|w=tlm.AttnOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.FF",
+          "expr": "b.dFFBuf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.L3.WDown",
+          "expr": "b.dWDown[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 352
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 352
+      },
+      "reads": [
+        "tlm.FF",
+        "tlm.L3.WDown"
+      ],
+      "writes": [
+        "tlm.AttnOut"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "write_only",
+        "tlm.FF": "read_only",
+        "tlm.L3.WDown": "read_only"
+      }
+    },
+    {
+      "id": 67,
+      "kernel": "tlm_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "tlm_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=tlm.AttnOut,tlm.X2|w=tlm.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "tlm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "tlm.AttnOut",
+          "expr": "b.dAttnOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "tlm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "tlm.AttnOut",
+        "tlm.X2"
+      ],
+      "writes": [
+        "tlm.X"
+      ],
+      "buffer_roles": {
+        "tlm.AttnOut": "read_only",
+        "tlm.X": "write_only",
+        "tlm.X2": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 6,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "tlm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 8,
+        "buffer": "tlm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "tlm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 11,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 11,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 2,
+        "to": 11,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 3,
+        "to": 11,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 13,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 14,
+        "buffer": "tlm.Gate",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "tlm.Up",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "tlm.FF",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 15,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 15,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 16,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 16,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 16,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 17,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 17,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 17,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 17,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 18,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 18,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 18,
+        "buffer": "tlm.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 19,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 19,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 19,
+        "buffer": "tlm.K",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 20,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 20,
+        "buffer": "tlm.V",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 20,
+        "buffer": "tlm.V",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 21,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 18,
+        "to": 21,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 19,
+        "to": 22,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 22,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 22,
+        "to": 23,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 23,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 23,
+        "buffer": "tlm.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 23,
+        "buffer": "tlm.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 7,
+        "to": 24,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "tlm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 24,
+        "buffer": "tlm.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 24,
+        "buffer": "tlm.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 25,
+        "buffer": "tlm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 25,
+        "buffer": "tlm.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 25,
+        "buffer": "tlm.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "tlm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 26,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 16,
+        "to": 26,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 27,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 27,
+        "buffer": "tlm.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 27,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 27,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 28,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 28,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 18,
+        "to": 28,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 28,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 28,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 29,
+        "buffer": "tlm.Gate",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 29,
+        "buffer": "tlm.Gate",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 30,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 30,
+        "buffer": "tlm.Up",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 30,
+        "buffer": "tlm.Up",
+        "type": "WAR"
+      },
+      {
+        "from": 29,
+        "to": 31,
+        "buffer": "tlm.Gate",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 31,
+        "buffer": "tlm.Up",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 31,
+        "buffer": "tlm.FF",
+        "type": "WAW"
+      },
+      {
+        "from": 15,
+        "to": 31,
+        "buffer": "tlm.FF",
+        "type": "WAR"
+      },
+      {
+        "from": 31,
+        "to": 32,
+        "buffer": "tlm.FF",
+        "type": "RAW"
+      },
+      {
+        "from": 26,
+        "to": 32,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 27,
+        "to": 32,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 32,
+        "to": 33,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 27,
+        "to": 33,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 33,
+        "buffer": "tlm.X",
+        "type": "WAW"
+      },
+      {
+        "from": 17,
+        "to": 33,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 33,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 34,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 28,
+        "to": 34,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 29,
+        "to": 34,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 34,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 34,
+        "to": 35,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 35,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 23,
+        "to": 35,
+        "buffer": "tlm.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 34,
+        "to": 36,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 22,
+        "to": 36,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 23,
+        "to": 36,
+        "buffer": "tlm.K",
+        "type": "WAR"
+      },
+      {
+        "from": 34,
+        "to": 37,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 37,
+        "buffer": "tlm.V",
+        "type": "WAW"
+      },
+      {
+        "from": 25,
+        "to": 37,
+        "buffer": "tlm.V",
+        "type": "WAR"
+      },
+      {
+        "from": 35,
+        "to": 38,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 35,
+        "to": 38,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 36,
+        "to": 39,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 36,
+        "to": 39,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 39,
+        "to": 40,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 38,
+        "to": 40,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 40,
+        "buffer": "tlm.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 24,
+        "to": 40,
+        "buffer": "tlm.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 24,
+        "to": 41,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 40,
+        "to": 41,
+        "buffer": "tlm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 24,
+        "to": 41,
+        "buffer": "tlm.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 25,
+        "to": 41,
+        "buffer": "tlm.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 41,
+        "to": 42,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 37,
+        "to": 42,
+        "buffer": "tlm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 25,
+        "to": 42,
+        "buffer": "tlm.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 26,
+        "to": 42,
+        "buffer": "tlm.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 42,
+        "to": 43,
+        "buffer": "tlm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 32,
+        "to": 43,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 33,
+        "to": 43,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 43,
+        "to": 44,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 33,
+        "to": 44,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 27,
+        "to": 44,
+        "buffer": "tlm.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 28,
+        "to": 44,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 44,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 44,
+        "to": 45,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 34,
+        "to": 45,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 35,
+        "to": 45,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 36,
+        "to": 45,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 37,
+        "to": 45,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 45,
+        "to": 46,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 46,
+        "buffer": "tlm.Gate",
+        "type": "WAW"
+      },
+      {
+        "from": 31,
+        "to": 46,
+        "buffer": "tlm.Gate",
+        "type": "WAR"
+      },
+      {
+        "from": 45,
+        "to": 47,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 47,
+        "buffer": "tlm.Up",
+        "type": "WAW"
+      },
+      {
+        "from": 31,
+        "to": 47,
+        "buffer": "tlm.Up",
+        "type": "WAR"
+      },
+      {
+        "from": 46,
+        "to": 48,
+        "buffer": "tlm.Gate",
+        "type": "RAW"
+      },
+      {
+        "from": 47,
+        "to": 48,
+        "buffer": "tlm.Up",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 48,
+        "buffer": "tlm.FF",
+        "type": "WAW"
+      },
+      {
+        "from": 32,
+        "to": 48,
+        "buffer": "tlm.FF",
+        "type": "WAR"
+      },
+      {
+        "from": 48,
+        "to": 49,
+        "buffer": "tlm.FF",
+        "type": "RAW"
+      },
+      {
+        "from": 43,
+        "to": 49,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 44,
+        "to": 49,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 49,
+        "to": 50,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 44,
+        "to": 50,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 33,
+        "to": 50,
+        "buffer": "tlm.X",
+        "type": "WAW"
+      },
+      {
+        "from": 34,
+        "to": 50,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 44,
+        "to": 50,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 50,
+        "to": 51,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 45,
+        "to": 51,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 46,
+        "to": 51,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 47,
+        "to": 51,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 52,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 38,
+        "to": 52,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 40,
+        "to": 52,
+        "buffer": "tlm.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 53,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 39,
+        "to": 53,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 40,
+        "to": 53,
+        "buffer": "tlm.K",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 54,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 37,
+        "to": 54,
+        "buffer": "tlm.V",
+        "type": "WAW"
+      },
+      {
+        "from": 42,
+        "to": 54,
+        "buffer": "tlm.V",
+        "type": "WAR"
+      },
+      {
+        "from": 52,
+        "to": 55,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 52,
+        "to": 55,
+        "buffer": "tlm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 53,
+        "to": 56,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 53,
+        "to": 56,
+        "buffer": "tlm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 56,
+        "to": 57,
+        "buffer": "tlm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 55,
+        "to": 57,
+        "buffer": "tlm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 40,
+        "to": 57,
+        "buffer": "tlm.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 41,
+        "to": 57,
+        "buffer": "tlm.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 41,
+        "to": 58,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 57,
+        "to": 58,
+        "buffer": "tlm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 41,
+        "to": 58,
+        "buffer": "tlm.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 42,
+        "to": 58,
+        "buffer": "tlm.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 58,
+        "to": 59,
+        "buffer": "tlm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 54,
+        "to": 59,
+        "buffer": "tlm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 42,
+        "to": 59,
+        "buffer": "tlm.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 43,
+        "to": 59,
+        "buffer": "tlm.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 59,
+        "to": 60,
+        "buffer": "tlm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 49,
+        "to": 60,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 50,
+        "to": 60,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 60,
+        "to": 61,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 50,
+        "to": 61,
+        "buffer": "tlm.X",
+        "type": "RAW"
+      },
+      {
+        "from": 44,
+        "to": 61,
+        "buffer": "tlm.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 45,
+        "to": 61,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 50,
+        "to": 61,
+        "buffer": "tlm.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 61,
+        "to": 62,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 51,
+        "to": 62,
+        "buffer": "tlm.Norm",
+        "type": "WAW"
+      },
+      {
+        "from": 52,
+        "to": 62,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 53,
+        "to": 62,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 54,
+        "to": 62,
+        "buffer": "tlm.Norm",
+        "type": "WAR"
+      },
+      {
+        "from": 62,
+        "to": 63,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 46,
+        "to": 63,
+        "buffer": "tlm.Gate",
+        "type": "WAW"
+      },
+      {
+        "from": 48,
+        "to": 63,
+        "buffer": "tlm.Gate",
+        "type": "WAR"
+      },
+      {
+        "from": 62,
+        "to": 64,
+        "buffer": "tlm.Norm",
+        "type": "RAW"
+      },
+      {
+        "from": 47,
+        "to": 64,
+        "buffer": "tlm.Up",
+        "type": "WAW"
+      },
+      {
+        "from": 48,
+        "to": 64,
+        "buffer": "tlm.Up",
+        "type": "WAR"
+      },
+      {
+        "from": 63,
+        "to": 65,
+        "buffer": "tlm.Gate",
+        "type": "RAW"
+      },
+      {
+        "from": 64,
+        "to": 65,
+        "buffer": "tlm.Up",
+        "type": "RAW"
+      },
+      {
+        "from": 48,
+        "to": 65,
+        "buffer": "tlm.FF",
+        "type": "WAW"
+      },
+      {
+        "from": 49,
+        "to": 65,
+        "buffer": "tlm.FF",
+        "type": "WAR"
+      },
+      {
+        "from": 65,
+        "to": 66,
+        "buffer": "tlm.FF",
+        "type": "RAW"
+      },
+      {
+        "from": 60,
+        "to": 66,
+        "buffer": "tlm.AttnOut",
+        "type": "WAW"
+      },
+      {
+        "from": 61,
+        "to": 66,
+        "buffer": "tlm.AttnOut",
+        "type": "WAR"
+      },
+      {
+        "from": 66,
+        "to": 67,
+        "buffer": "tlm.AttnOut",
+        "type": "RAW"
+      },
+      {
+        "from": 61,
+        "to": 67,
+        "buffer": "tlm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 50,
+        "to": 67,
+        "buffer": "tlm.X",
+        "type": "WAW"
+      },
+      {
+        "from": 51,
+        "to": 67,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 61,
+        "to": 67,
+        "buffer": "tlm.X",
+        "type": "WAR"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

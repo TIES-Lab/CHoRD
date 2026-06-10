@@ -1,0 +1,30 @@
+{
+  "params": {
+    "EncSeq": 128,
+    "DecSeq": 32,
+    "DModel": 128,
+    "NumHeads": 8,
+    "DFF": 256,
+    "Layers": 2,
+    "Vocab": 64
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dEncX": "t5.EncX",
+    "b.dEncX2": "t5.EncX2",
+    "b.dDecX": "t5.DecX",
+    "b.dDecX2": "t5.DecX2",
+    "b.dQ": "t5.Q",
+    "b.dK": "t5.K",
+    "b.dV": "t5.V",
+    "b.dScores": "t5.Scores",
+    "b.dProbs": "t5.Probs",
+    "b.dContext": "t5.Context",
+    "b.dTmpOut": "t5.TmpOut",
+    "b.dFF1": "t5.FF1",
+    "b.dFF2": "t5.FF2",
+    "b.dLogits": "t5.Logits",
+    "b.dWlm": "t5.LMHead.W"
+  },
+  "benchmark": "t5_small"
+}

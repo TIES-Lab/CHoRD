@@ -1,0 +1,16 @@
+{
+  "chiplets": 4,
+  "page_bytes": 4096,
+  "sa_per_chiplet": 8,
+  "cu_per_sa": 4,
+  "banks_per_chiplet": 8,
+  "chiplet_cap_pages": 800,
+  "meta": {
+    "description": "Main planner hardware config for 4 chiplets x 8 SA/chiplet x 4 CU/SA. Total compute CUs remains 128, matching the previous 8x4x4 setup.",
+    "banks_note": "banks_per_chiplet is set to 8 so total memory banks remain 32, matching the previous 8 chiplets x 4 banks/chiplet setup. Use 4 only if you intentionally want total banks to drop to 16.",
+    "chiplet_cap_pages_note": "chiplet_cap_pages is doubled from 400 to 800 because chiplet count is reduced from 8 to 4; this keeps the planner's total normal placement capacity approximately unchanged.",
+    "chiplet_overflow_note": "Soft overflow pages are doubled from 1024 to 2048 per chiplet for the same reason: preserving approximate total soft overflow capacity after reducing chiplet count."
+  },
+  "chiplet_overflow_pages": 2048,
+  "chiplet_overflow_penalty": 1024
+}

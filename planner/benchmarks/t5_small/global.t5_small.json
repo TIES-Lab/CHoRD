@@ -1,0 +1,9051 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "t5_small",
+  "package": "t5_small",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "7717559ca98659a320c522028f2efe663d545bb6615038cbc1bafb2ff7b1feb1",
+    "kernels.cl": "35c3f6698481984e44fe97828653ac9c948534cbbbabefec8c13479b29d70af0",
+    "kernels.config.json": "99111642f001c03d88b305084963acd112ff99dcd69e19b90bf96df72e04e38f",
+    "kernels.json": "e66e4530b3dbb243d49087134cccb9991114914f13f107c3f9a3e880da786d60"
+  },
+  "params": {
+    "DFF": 256,
+    "DModel": 128,
+    "DecSeq": 32,
+    "EncSeq": 128,
+    "Layers": 2,
+    "NumHeads": 8,
+    "Vocab": 64
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "t5.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.B1",
+      "go_var": "d.dB1",
+      "bytes_expr": "uint64(len(b.decHost[l].B1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.B2",
+      "go_var": "d.dB2",
+      "bytes_expr": "uint64(len(b.decHost[l].B2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.Bx",
+      "go_var": "d.dBx",
+      "bytes_expr": "uint64(len(b.decHost[l].Bx) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.G1",
+      "go_var": "d.dG1",
+      "bytes_expr": "uint64(len(b.decHost[l].G1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.G2",
+      "go_var": "d.dG2",
+      "bytes_expr": "uint64(len(b.decHost[l].G2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.Gx",
+      "go_var": "d.dGx",
+      "bytes_expr": "uint64(len(b.decHost[l].Gx) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.SWo",
+      "go_var": "d.dSWo",
+      "bytes_expr": "uint64(len(b.decHost[l].SWo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.W1",
+      "go_var": "d.dW1",
+      "bytes_expr": "uint64(len(b.decHost[l].W1) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.W2",
+      "go_var": "d.dW2",
+      "bytes_expr": "uint64(len(b.decHost[l].W2) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WCk",
+      "go_var": "d.dWCk",
+      "bytes_expr": "uint64(len(b.decHost[l].WCk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WCo",
+      "go_var": "d.dWCo",
+      "bytes_expr": "uint64(len(b.decHost[l].WCo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WCq",
+      "go_var": "d.dWCq",
+      "bytes_expr": "uint64(len(b.decHost[l].WCq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WCv",
+      "go_var": "d.dWCv",
+      "bytes_expr": "uint64(len(b.decHost[l].WCv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WSk",
+      "go_var": "d.dWSk",
+      "bytes_expr": "uint64(len(b.decHost[l].WSk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WSq",
+      "go_var": "d.dWSq",
+      "bytes_expr": "uint64(len(b.decHost[l].WSq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D0.WSv",
+      "go_var": "d.dWSv",
+      "bytes_expr": "uint64(len(b.decHost[l].WSv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.B1",
+      "go_var": "d.dB1",
+      "bytes_expr": "uint64(len(b.decHost[l].B1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.B2",
+      "go_var": "d.dB2",
+      "bytes_expr": "uint64(len(b.decHost[l].B2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.Bx",
+      "go_var": "d.dBx",
+      "bytes_expr": "uint64(len(b.decHost[l].Bx) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.G1",
+      "go_var": "d.dG1",
+      "bytes_expr": "uint64(len(b.decHost[l].G1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.G2",
+      "go_var": "d.dG2",
+      "bytes_expr": "uint64(len(b.decHost[l].G2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.Gx",
+      "go_var": "d.dGx",
+      "bytes_expr": "uint64(len(b.decHost[l].Gx) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.SWo",
+      "go_var": "d.dSWo",
+      "bytes_expr": "uint64(len(b.decHost[l].SWo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.W1",
+      "go_var": "d.dW1",
+      "bytes_expr": "uint64(len(b.decHost[l].W1) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.W2",
+      "go_var": "d.dW2",
+      "bytes_expr": "uint64(len(b.decHost[l].W2) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WCk",
+      "go_var": "d.dWCk",
+      "bytes_expr": "uint64(len(b.decHost[l].WCk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WCo",
+      "go_var": "d.dWCo",
+      "bytes_expr": "uint64(len(b.decHost[l].WCo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WCq",
+      "go_var": "d.dWCq",
+      "bytes_expr": "uint64(len(b.decHost[l].WCq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WCv",
+      "go_var": "d.dWCv",
+      "bytes_expr": "uint64(len(b.decHost[l].WCv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WSk",
+      "go_var": "d.dWSk",
+      "bytes_expr": "uint64(len(b.decHost[l].WSk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WSq",
+      "go_var": "d.dWSq",
+      "bytes_expr": "uint64(len(b.decHost[l].WSq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.D1.WSv",
+      "go_var": "d.dWSv",
+      "bytes_expr": "uint64(len(b.decHost[l].WSv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.DecX",
+      "go_var": "b.dDecX",
+      "bytes_expr": "uint64(b.DecSeq * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "t5.DecX2",
+      "go_var": "b.dDecX2",
+      "bytes_expr": "uint64(b.DecSeq * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.B1",
+      "go_var": "d.dB1",
+      "bytes_expr": "uint64(len(b.encHost[l].B1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.B2",
+      "go_var": "d.dB2",
+      "bytes_expr": "uint64(len(b.encHost[l].B2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.G1",
+      "go_var": "d.dG1",
+      "bytes_expr": "uint64(len(b.encHost[l].G1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.G2",
+      "go_var": "d.dG2",
+      "bytes_expr": "uint64(len(b.encHost[l].G2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.W1",
+      "go_var": "d.dW1",
+      "bytes_expr": "uint64(len(b.encHost[l].W1) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.W2",
+      "go_var": "d.dW2",
+      "bytes_expr": "uint64(len(b.encHost[l].W2) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.Wk",
+      "go_var": "d.dWk",
+      "bytes_expr": "uint64(len(b.encHost[l].Wk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.Wo",
+      "go_var": "d.dWo",
+      "bytes_expr": "uint64(len(b.encHost[l].Wo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.Wq",
+      "go_var": "d.dWq",
+      "bytes_expr": "uint64(len(b.encHost[l].Wq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E0.Wv",
+      "go_var": "d.dWv",
+      "bytes_expr": "uint64(len(b.encHost[l].Wv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.B1",
+      "go_var": "d.dB1",
+      "bytes_expr": "uint64(len(b.encHost[l].B1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.B2",
+      "go_var": "d.dB2",
+      "bytes_expr": "uint64(len(b.encHost[l].B2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.G1",
+      "go_var": "d.dG1",
+      "bytes_expr": "uint64(len(b.encHost[l].G1) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.G2",
+      "go_var": "d.dG2",
+      "bytes_expr": "uint64(len(b.encHost[l].G2) * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.W1",
+      "go_var": "d.dW1",
+      "bytes_expr": "uint64(len(b.encHost[l].W1) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.W2",
+      "go_var": "d.dW2",
+      "bytes_expr": "uint64(len(b.encHost[l].W2) * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.Wk",
+      "go_var": "d.dWk",
+      "bytes_expr": "uint64(len(b.encHost[l].Wk) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.Wo",
+      "go_var": "d.dWo",
+      "bytes_expr": "uint64(len(b.encHost[l].Wo) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.Wq",
+      "go_var": "d.dWq",
+      "bytes_expr": "uint64(len(b.encHost[l].Wq) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.E1.Wv",
+      "go_var": "d.dWv",
+      "bytes_expr": "uint64(len(b.encHost[l].Wv) * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.EncX",
+      "go_var": "b.dEncX",
+      "bytes_expr": "uint64(b.EncSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.EncX2",
+      "go_var": "b.dEncX2",
+      "bytes_expr": "uint64(b.EncSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.FF1",
+      "go_var": "b.dFF1",
+      "bytes_expr": "uint64(maxSeq * b.DFF * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "t5.FF2",
+      "go_var": "b.dFF2",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.K",
+      "go_var": "b.dK",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.LMHead.W",
+      "go_var": "b.dWlm",
+      "bytes_expr": "uint64(len(b.hWlm) * 4)",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "t5.Logits",
+      "go_var": "b.dLogits",
+      "bytes_expr": "uint64(len(b.hostLogits) * 4)",
+      "bytes": 8192,
+      "pages": 2,
+      "unified": false
+    },
+    {
+      "tag": "t5.Probs",
+      "go_var": "b.dProbs",
+      "bytes_expr": "uint64(b.NumHeads * maxSeq * maxSeq * 4)",
+      "bytes": 524288,
+      "pages": 128,
+      "unified": false
+    },
+    {
+      "tag": "t5.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.Scores",
+      "go_var": "b.dScores",
+      "bytes_expr": "uint64(b.NumHeads * maxSeq * maxSeq * 4)",
+      "bytes": 524288,
+      "pages": 128,
+      "unified": false
+    },
+    {
+      "tag": "t5.TmpOut",
+      "go_var": "b.dTmpOut",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "t5.V",
+      "go_var": "b.dV",
+      "bytes_expr": "uint64(maxSeq * b.DModel * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "t5_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_attention_scores",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "QLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "KLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DHead",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "NumHeads",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_attention_scores_masked",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "QLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "KLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DHead",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "NumHeads",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_softmax",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "QLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "KLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "NumHeads",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 5,
+        "num_global_loads": 3,
+        "num_global_stores": 2,
+        "num_loads": 3,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 2,
+        "recorded_loads": 3,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "t5_attention_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "Probs",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Context",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "QLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "KLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DHead",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "NumHeads",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_add_resid_x",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_layernorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_layernorm_x",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_layernorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_ff1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_ff2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "t5_lm_head",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "t5_layernorm1",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "t5_layernorm1|g=128,1,1|l=64,1,1|si=param_arg4=128;param_arg5=128|sf=param_arg6=1e-05|r=t5.E0.B1,t5.E0.G1,t5.EncX|w=t5.EncX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.E0.G1",
+          "expr": "d.dG1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.E0.B1",
+          "expr": "d.dB1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.E0.B1",
+        "t5.E0.G1",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.EncX2"
+      ],
+      "buffer_roles": {
+        "t5.E0.B1": "read_only",
+        "t5.E0.G1": "read_only",
+        "t5.EncX": "read_only",
+        "t5.EncX2": "write_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_q_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E0.Wq,t5.EncX2|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.Wq",
+          "expr": "d.dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E0.Wq",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.E0.Wq": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_k_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E0.Wk,t5.EncX2|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.Wk",
+          "expr": "d.dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E0.Wk",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.E0.Wk": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_v_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E0.Wv,t5.EncX2|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.Wv",
+          "expr": "d.dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E0.Wv",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.E0.Wv": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "t5_attention_scores",
+      "global_size": [
+        128,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        128,
+        1
+      ],
+      "num_wg_total": 2048,
+      "launch_signature": "t5_attention_scores|g=128,1024,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "t5_softmax",
+      "global_size": [
+        128,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        1,
+        1
+      ],
+      "num_wg_total": 16,
+      "launch_signature": "t5_softmax|g=128,8,1|l=8,8,1|si=param_arg2=128;param_arg3=128;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 128,
+        "param_arg3": 128,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        128,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_attention_context|g=16,1024,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_o_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.Context,t5.E0.Wo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.Wo",
+          "expr": "d.dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.E0.Wo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.E0.Wo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "t5_add_resid1",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_add_resid1|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=t5.EncX,t5.TmpOut|w=t5.EncX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "t5.EncX",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.EncX2"
+      ],
+      "buffer_roles": {
+        "t5.EncX": "read_only",
+        "t5.EncX2": "write_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "t5_layernorm2",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "t5_layernorm2|g=128,1,1|l=64,1,1|si=param_arg4=128;param_arg5=128|sf=param_arg6=1e-05|r=t5.E0.B2,t5.E0.G2,t5.EncX2|w=t5.EncX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.E0.G2",
+          "expr": "d.dG2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.E0.B2",
+          "expr": "d.dB2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.E0.B2",
+        "t5.E0.G2",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.EncX"
+      ],
+      "buffer_roles": {
+        "t5.E0.B2": "read_only",
+        "t5.E0.G2": "read_only",
+        "t5.EncX": "write_only",
+        "t5.EncX2": "read_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "t5_ff1",
+      "global_size": [
+        256,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        16,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_ff1|g=256,128,1|l=8,8,1|si=param_arg3=128;param_arg4=256;param_arg5=128|r=t5.E0.W1,t5.EncX|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.W1",
+          "expr": "d.dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E0.W1",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.E0.W1": "read_only",
+        "t5.EncX": "read_only",
+        "t5.FF1": "write_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "t5_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=t5.FF1|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.FF1": "read_write"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "t5_ff2",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_ff2|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=256|r=t5.E0.W2,t5.FF1|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E0.W2",
+          "expr": "d.dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "t5.E0.W2",
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.E0.W2": "read_only",
+        "t5.FF1": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "t5_add_resid2",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_add_resid2|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=t5.EncX2,t5.TmpOut|w=t5.EncX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "t5.EncX2",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.EncX"
+      ],
+      "buffer_roles": {
+        "t5.EncX": "write_only",
+        "t5.EncX2": "read_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "t5_layernorm1",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "t5_layernorm1|g=128,1,1|l=64,1,1|si=param_arg4=128;param_arg5=128|sf=param_arg6=1e-05|r=t5.E1.B1,t5.E1.G1,t5.EncX|w=t5.EncX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.E1.G1",
+          "expr": "d.dG1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.E1.B1",
+          "expr": "d.dB1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.E1.B1",
+        "t5.E1.G1",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.EncX2"
+      ],
+      "buffer_roles": {
+        "t5.E1.B1": "read_only",
+        "t5.E1.G1": "read_only",
+        "t5.EncX": "read_only",
+        "t5.EncX2": "write_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_q_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E1.Wq,t5.EncX2|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.Wq",
+          "expr": "d.dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E1.Wq",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.E1.Wq": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_k_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E1.Wk,t5.EncX2|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.Wk",
+          "expr": "d.dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E1.Wk",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.E1.Wk": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_v_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.E1.Wv,t5.EncX2|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.Wv",
+          "expr": "d.dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E1.Wv",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.E1.Wv": "read_only",
+        "t5.EncX2": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "t5_attention_scores",
+      "global_size": [
+        128,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        128,
+        1
+      ],
+      "num_wg_total": 2048,
+      "launch_signature": "t5_attention_scores|g=128,1024,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "t5_softmax",
+      "global_size": [
+        128,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        1,
+        1
+      ],
+      "num_wg_total": 16,
+      "launch_signature": "t5_softmax|g=128,8,1|l=8,8,1|si=param_arg2=128;param_arg3=128;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 128,
+        "param_arg3": 128,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        128,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_attention_context|g=16,1024,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_o_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.Context,t5.E1.Wo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.Wo",
+          "expr": "d.dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.E1.Wo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.E1.Wo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "t5_add_resid1",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_add_resid1|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=t5.EncX,t5.TmpOut|w=t5.EncX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "t5.EncX",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.EncX2"
+      ],
+      "buffer_roles": {
+        "t5.EncX": "read_only",
+        "t5.EncX2": "write_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "t5_layernorm2",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "t5_layernorm2|g=128,1,1|l=64,1,1|si=param_arg4=128;param_arg5=128|sf=param_arg6=1e-05|r=t5.E1.B2,t5.E1.G2,t5.EncX2|w=t5.EncX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.E1.G2",
+          "expr": "d.dG2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.E1.B2",
+          "expr": "d.dB2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.E1.B2",
+        "t5.E1.G2",
+        "t5.EncX2"
+      ],
+      "writes": [
+        "t5.EncX"
+      ],
+      "buffer_roles": {
+        "t5.E1.B2": "read_only",
+        "t5.E1.G2": "read_only",
+        "t5.EncX": "write_only",
+        "t5.EncX2": "read_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "t5_ff1",
+      "global_size": [
+        256,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        16,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_ff1|g=256,128,1|l=8,8,1|si=param_arg3=128;param_arg4=256;param_arg5=128|r=t5.E1.W1,t5.EncX|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.W1",
+          "expr": "d.dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.E1.W1",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.E1.W1": "read_only",
+        "t5.EncX": "read_only",
+        "t5.FF1": "write_only"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "t5_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=t5.FF1|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.FF1": "read_write"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "t5_ff2",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_ff2|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=256|r=t5.E1.W2,t5.FF1|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.E1.W2",
+          "expr": "d.dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "t5.E1.W2",
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.E1.W2": "read_only",
+        "t5.FF1": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "t5_add_resid2",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_add_resid2|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=t5.EncX2,t5.TmpOut|w=t5.EncX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX2",
+          "expr": "b.dEncX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "t5.EncX2",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.EncX"
+      ],
+      "buffer_roles": {
+        "t5.EncX": "write_only",
+        "t5.EncX2": "read_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 28,
+      "kernel": "t5_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D0.B1,t5.D0.G1,t5.DecX|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D0.G1",
+          "expr": "d.dG1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D0.B1",
+          "expr": "d.dB1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D0.B1",
+        "t5.D0.G1",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.D0.B1": "read_only",
+        "t5.D0.G1": "read_only",
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only"
+      }
+    },
+    {
+      "id": 29,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_q_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D0.WSq,t5.DecX2|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WSq",
+          "expr": "d.dWSq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WSq",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.D0.WSq": "read_only",
+        "t5.DecX2": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 30,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_k_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D0.WSk,t5.DecX2|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WSk",
+          "expr": "d.dWSk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WSk",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.D0.WSk": "read_only",
+        "t5.DecX2": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 31,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_v_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D0.WSv,t5.DecX2|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WSv",
+          "expr": "d.dWSv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WSv",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.D0.WSv": "read_only",
+        "t5.DecX2": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 32,
+      "kernel": "t5_attention_scores_masked",
+      "global_size": [
+        32,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        32,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_attention_scores_masked|g=32,256,1|l=8,8,1|si=param_arg3=32;param_arg4=32;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 32,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 33,
+      "kernel": "t5_softmax",
+      "global_size": [
+        32,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "t5_softmax|g=32,8,1|l=8,8,1|si=param_arg2=32;param_arg3=32;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32,
+        "param_arg3": 32,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 34,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        32,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_attention_context|g=16,256,1|l=8,8,1|si=param_arg3=32;param_arg4=32;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 32,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 35,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_o_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.Context,t5.D0.SWo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.SWo",
+          "expr": "d.dSWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.D0.SWo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.D0.SWo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 36,
+      "kernel": "t5_add_resid1",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid1|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX,t5.TmpOut|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 37,
+      "kernel": "t5_layernorm_x",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm_x|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D0.Bx,t5.D0.Gx,t5.DecX2|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D0.Gx",
+          "expr": "d.dGx"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D0.Bx",
+          "expr": "d.dBx"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D0.Bx",
+        "t5.D0.Gx",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.D0.Bx": "read_only",
+        "t5.D0.Gx": "read_only",
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only"
+      }
+    },
+    {
+      "id": 38,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_q_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D0.WCq,t5.DecX|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WCq",
+          "expr": "d.dWCq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WCq",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.D0.WCq": "read_only",
+        "t5.DecX": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 39,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_k_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.D0.WCk,t5.EncX|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WCk",
+          "expr": "d.dWCk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WCk",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.D0.WCk": "read_only",
+        "t5.EncX": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 40,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_v_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.D0.WCv,t5.EncX|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WCv",
+          "expr": "d.dWCv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.WCv",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.D0.WCv": "read_only",
+        "t5.EncX": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 41,
+      "kernel": "t5_attention_scores",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_attention_scores|g=128,256,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 42,
+      "kernel": "t5_softmax",
+      "global_size": [
+        32,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "t5_softmax|g=32,8,1|l=8,8,1|si=param_arg2=32;param_arg3=128;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32,
+        "param_arg3": 128,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 43,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        32,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_attention_context|g=16,256,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 44,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_o_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.Context,t5.D0.WCo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.WCo",
+          "expr": "d.dWCo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.D0.WCo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.D0.WCo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 45,
+      "kernel": "t5_add_resid_x",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid_x|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX2,t5.TmpOut|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX2",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 46,
+      "kernel": "t5_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D0.B2,t5.D0.G2,t5.DecX|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D0.G2",
+          "expr": "d.dG2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D0.B2",
+          "expr": "d.dB2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D0.B2",
+        "t5.D0.G2",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.D0.B2": "read_only",
+        "t5.D0.G2": "read_only",
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only"
+      }
+    },
+    {
+      "id": 47,
+      "kernel": "t5_ff1",
+      "global_size": [
+        256,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        4,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_ff1|g=256,32,1|l=8,8,1|si=param_arg3=32;param_arg4=256;param_arg5=128|r=t5.D0.W1,t5.DecX2|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.W1",
+          "expr": "d.dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D0.W1",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.D0.W1": "read_only",
+        "t5.DecX2": "read_only",
+        "t5.FF1": "write_only"
+      }
+    },
+    {
+      "id": 48,
+      "kernel": "t5_relu",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_relu|g=8192,1,1|l=64,1,1|si=param_arg1=8192|r=t5.FF1|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 8192
+      },
+      "reads": [
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.FF1": "read_write"
+      }
+    },
+    {
+      "id": 49,
+      "kernel": "t5_ff2",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_ff2|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=256|r=t5.D0.W2,t5.FF1|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D0.W2",
+          "expr": "d.dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "t5.D0.W2",
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.D0.W2": "read_only",
+        "t5.FF1": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 50,
+      "kernel": "t5_add_resid2",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid2|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX,t5.TmpOut|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 51,
+      "kernel": "t5_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D1.B1,t5.D1.G1,t5.DecX2|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D1.G1",
+          "expr": "d.dG1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D1.B1",
+          "expr": "d.dB1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D1.B1",
+        "t5.D1.G1",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.D1.B1": "read_only",
+        "t5.D1.G1": "read_only",
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only"
+      }
+    },
+    {
+      "id": 52,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_q_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D1.WSq,t5.DecX|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WSq",
+          "expr": "d.dWSq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WSq",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.D1.WSq": "read_only",
+        "t5.DecX": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 53,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_k_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D1.WSk,t5.DecX|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WSk",
+          "expr": "d.dWSk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WSk",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.D1.WSk": "read_only",
+        "t5.DecX": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 54,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_v_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D1.WSv,t5.DecX|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WSv",
+          "expr": "d.dWSv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WSv",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.D1.WSv": "read_only",
+        "t5.DecX": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 55,
+      "kernel": "t5_attention_scores_masked",
+      "global_size": [
+        32,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        32,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_attention_scores_masked|g=32,256,1|l=8,8,1|si=param_arg3=32;param_arg4=32;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 32,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 56,
+      "kernel": "t5_softmax",
+      "global_size": [
+        32,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "t5_softmax|g=32,8,1|l=8,8,1|si=param_arg2=32;param_arg3=32;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32,
+        "param_arg3": 32,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 57,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        32,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_attention_context|g=16,256,1|l=8,8,1|si=param_arg3=32;param_arg4=32;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 32,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 58,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_o_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.Context,t5.D1.SWo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.SWo",
+          "expr": "d.dSWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.D1.SWo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.D1.SWo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 59,
+      "kernel": "t5_add_resid1",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid1|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX2,t5.TmpOut|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX2",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 60,
+      "kernel": "t5_layernorm_x",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm_x|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D1.Bx,t5.D1.Gx,t5.DecX|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D1.Gx",
+          "expr": "d.dGx"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D1.Bx",
+          "expr": "d.dBx"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D1.Bx",
+        "t5.D1.Gx",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.D1.Bx": "read_only",
+        "t5.D1.Gx": "read_only",
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only"
+      }
+    },
+    {
+      "id": 61,
+      "kernel": "t5_q_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_q_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.D1.WCq,t5.DecX2|w=t5.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WCq",
+          "expr": "d.dWCq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WCq",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.Q"
+      ],
+      "buffer_roles": {
+        "t5.D1.WCq": "read_only",
+        "t5.DecX2": "read_only",
+        "t5.Q": "write_only"
+      }
+    },
+    {
+      "id": 62,
+      "kernel": "t5_k_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_k_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.D1.WCk,t5.EncX|w=t5.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WCk",
+          "expr": "d.dWCk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WCk",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.K"
+      ],
+      "buffer_roles": {
+        "t5.D1.WCk": "read_only",
+        "t5.EncX": "read_only",
+        "t5.K": "write_only"
+      }
+    },
+    {
+      "id": 63,
+      "kernel": "t5_v_proj",
+      "global_size": [
+        128,
+        128,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        16,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "t5_v_proj|g=128,128,1|l=8,8,1|si=param_arg3=128;param_arg4=128;param_arg5=128|r=t5.D1.WCv,t5.EncX|w=t5.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.EncX",
+          "expr": "b.dEncX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WCv",
+          "expr": "d.dWCv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 128,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.WCv",
+        "t5.EncX"
+      ],
+      "writes": [
+        "t5.V"
+      ],
+      "buffer_roles": {
+        "t5.D1.WCv": "read_only",
+        "t5.EncX": "read_only",
+        "t5.V": "write_only"
+      }
+    },
+    {
+      "id": 64,
+      "kernel": "t5_attention_scores",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "t5_attention_scores|g=128,256,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.K,t5.Q|w=t5.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "t5.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "t5.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.K",
+        "t5.Q"
+      ],
+      "writes": [
+        "t5.Scores"
+      ],
+      "buffer_roles": {
+        "t5.K": "read_only",
+        "t5.Q": "read_only",
+        "t5.Scores": "write_only"
+      }
+    },
+    {
+      "id": 65,
+      "kernel": "t5_softmax",
+      "global_size": [
+        32,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "t5_softmax|g=32,8,1|l=8,8,1|si=param_arg2=32;param_arg3=128;param_arg4=8|r=t5.Probs,t5.Scores|w=t5.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32,
+        "param_arg3": 128,
+        "param_arg4": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.Scores"
+      ],
+      "writes": [
+        "t5.Probs"
+      ],
+      "buffer_roles": {
+        "t5.Probs": "read_write",
+        "t5.Scores": "read_only"
+      }
+    },
+    {
+      "id": 66,
+      "kernel": "t5_attention_context",
+      "global_size": [
+        16,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        32,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_attention_context|g=16,256,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=16;param_arg6=8|r=t5.Probs,t5.V|w=t5.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "t5.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "t5.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "QLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "KLen",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "t5.Probs",
+        "t5.V"
+      ],
+      "writes": [
+        "t5.Context"
+      ],
+      "buffer_roles": {
+        "t5.Context": "write_only",
+        "t5.Probs": "read_only",
+        "t5.V": "read_only"
+      }
+    },
+    {
+      "id": 67,
+      "kernel": "t5_o_proj",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_o_proj|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=128|r=t5.Context,t5.D1.WCo|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.WCo",
+          "expr": "d.dWCo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.Context",
+        "t5.D1.WCo"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.Context": "read_only",
+        "t5.D1.WCo": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 68,
+      "kernel": "t5_add_resid_x",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid_x|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX,t5.TmpOut|w=t5.DecX2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX2"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "read_only",
+        "t5.DecX2": "write_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 69,
+      "kernel": "t5_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "t5_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=128|sf=param_arg6=1e-05|r=t5.D1.B2,t5.D1.G2,t5.DecX2|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "t5.D1.G2",
+          "expr": "d.dG2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "t5.D1.B2",
+          "expr": "d.dB2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "t5.D1.B2",
+        "t5.D1.G2",
+        "t5.DecX2"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.D1.B2": "read_only",
+        "t5.D1.G2": "read_only",
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only"
+      }
+    },
+    {
+      "id": 70,
+      "kernel": "t5_ff1",
+      "global_size": [
+        256,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        4,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_ff1|g=256,32,1|l=8,8,1|si=param_arg3=32;param_arg4=256;param_arg5=128|r=t5.D1.W1,t5.DecX|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.W1",
+          "expr": "d.dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.D1.W1",
+        "t5.DecX"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.D1.W1": "read_only",
+        "t5.DecX": "read_only",
+        "t5.FF1": "write_only"
+      }
+    },
+    {
+      "id": 71,
+      "kernel": "t5_relu",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "t5_relu|g=8192,1,1|l=64,1,1|si=param_arg1=8192|r=t5.FF1|w=t5.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 8192
+      },
+      "reads": [
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.FF1"
+      ],
+      "buffer_roles": {
+        "t5.FF1": "read_write"
+      }
+    },
+    {
+      "id": 72,
+      "kernel": "t5_ff2",
+      "global_size": [
+        128,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        4,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_ff2|g=128,32,1|l=8,8,1|si=param_arg3=32;param_arg4=128;param_arg5=256|r=t5.D1.W2,t5.FF1|w=t5.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.D1.W2",
+          "expr": "d.dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "t5.D1.W2",
+        "t5.FF1"
+      ],
+      "writes": [
+        "t5.TmpOut"
+      ],
+      "buffer_roles": {
+        "t5.D1.W2": "read_only",
+        "t5.FF1": "read_only",
+        "t5.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 73,
+      "kernel": "t5_add_resid2",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "t5_add_resid2|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=t5.DecX2,t5.TmpOut|w=t5.DecX",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX2",
+          "expr": "b.dDecX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "t5.DecX2",
+        "t5.TmpOut"
+      ],
+      "writes": [
+        "t5.DecX"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "write_only",
+        "t5.DecX2": "read_only",
+        "t5.TmpOut": "read_only"
+      }
+    },
+    {
+      "id": 74,
+      "kernel": "t5_lm_head",
+      "global_size": [
+        64,
+        32,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        4,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "t5_lm_head|g=64,32,1|l=8,8,1|si=param_arg3=32;param_arg4=64;param_arg5=128|r=t5.DecX,t5.LMHead.W|w=t5.Logits",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "t5.DecX",
+          "expr": "b.dDecX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "t5.LMHead.W",
+          "expr": "b.dWlm"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "t5.Logits",
+          "expr": "b.dLogits"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32,
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "reads": [
+        "t5.DecX",
+        "t5.LMHead.W"
+      ],
+      "writes": [
+        "t5.Logits"
+      ],
+      "buffer_roles": {
+        "t5.DecX": "read_only",
+        "t5.LMHead.W": "read_only",
+        "t5.Logits": "write_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 4,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 6,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 8,
+        "buffer": "t5.EncX2",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 2,
+        "to": 8,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 3,
+        "to": 8,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 9,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 12,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 12,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 8,
+        "to": 13,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 13,
+        "buffer": "t5.EncX",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 13,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 14,
+        "buffer": "t5.EncX2",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 14,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 15,
+        "buffer": "t5.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 15,
+        "buffer": "t5.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 14,
+        "to": 16,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 16,
+        "buffer": "t5.K",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 16,
+        "buffer": "t5.K",
+        "type": "WAR"
+      },
+      {
+        "from": 14,
+        "to": 17,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 17,
+        "buffer": "t5.V",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 17,
+        "buffer": "t5.V",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 18,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 18,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 18,
+        "buffer": "t5.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 18,
+        "buffer": "t5.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 5,
+        "to": 19,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 18,
+        "to": 19,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 19,
+        "buffer": "t5.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 19,
+        "buffer": "t5.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 20,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 20,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 20,
+        "buffer": "t5.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 20,
+        "buffer": "t5.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 21,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 21,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 13,
+        "to": 21,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 22,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 22,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 22,
+        "buffer": "t5.EncX2",
+        "type": "WAW"
+      },
+      {
+        "from": 15,
+        "to": 22,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 22,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 22,
+        "buffer": "t5.EncX2",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 23,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 23,
+        "buffer": "t5.EncX",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 23,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 23,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 24,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 24,
+        "buffer": "t5.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 26,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 22,
+        "to": 26,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 27,
+        "buffer": "t5.EncX2",
+        "type": "RAW"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 27,
+        "buffer": "t5.EncX",
+        "type": "WAW"
+      },
+      {
+        "from": 24,
+        "to": 27,
+        "buffer": "t5.EncX",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 29,
+        "buffer": "t5.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 18,
+        "to": 29,
+        "buffer": "t5.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 30,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 30,
+        "buffer": "t5.K",
+        "type": "WAW"
+      },
+      {
+        "from": 18,
+        "to": 30,
+        "buffer": "t5.K",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 31,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 31,
+        "buffer": "t5.V",
+        "type": "WAW"
+      },
+      {
+        "from": 20,
+        "to": 31,
+        "buffer": "t5.V",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 32,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 32,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 18,
+        "to": 32,
+        "buffer": "t5.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 19,
+        "to": 32,
+        "buffer": "t5.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 33,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 32,
+        "to": 33,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 33,
+        "buffer": "t5.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 20,
+        "to": 33,
+        "buffer": "t5.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 34,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 34,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 34,
+        "buffer": "t5.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 21,
+        "to": 34,
+        "buffer": "t5.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 34,
+        "to": 35,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 26,
+        "to": 35,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 27,
+        "to": 35,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 35,
+        "to": 36,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 28,
+        "to": 36,
+        "buffer": "t5.DecX2",
+        "type": "WAW"
+      },
+      {
+        "from": 29,
+        "to": 36,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 36,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 31,
+        "to": 36,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 36,
+        "to": 37,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 28,
+        "to": 37,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 36,
+        "to": 37,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 37,
+        "to": 38,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 38,
+        "buffer": "t5.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 32,
+        "to": 38,
+        "buffer": "t5.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 39,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 39,
+        "buffer": "t5.K",
+        "type": "WAW"
+      },
+      {
+        "from": 32,
+        "to": 39,
+        "buffer": "t5.K",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 40,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 40,
+        "buffer": "t5.V",
+        "type": "WAW"
+      },
+      {
+        "from": 34,
+        "to": 40,
+        "buffer": "t5.V",
+        "type": "WAR"
+      },
+      {
+        "from": 39,
+        "to": 41,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 38,
+        "to": 41,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 32,
+        "to": 41,
+        "buffer": "t5.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 33,
+        "to": 41,
+        "buffer": "t5.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 42,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 41,
+        "to": 42,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 33,
+        "to": 42,
+        "buffer": "t5.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 34,
+        "to": 42,
+        "buffer": "t5.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 42,
+        "to": 43,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 40,
+        "to": 43,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 34,
+        "to": 43,
+        "buffer": "t5.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 35,
+        "to": 43,
+        "buffer": "t5.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 43,
+        "to": 44,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 35,
+        "to": 44,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 36,
+        "to": 44,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 36,
+        "to": 45,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 44,
+        "to": 45,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 37,
+        "to": 45,
+        "buffer": "t5.DecX",
+        "type": "WAW"
+      },
+      {
+        "from": 38,
+        "to": 45,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 45,
+        "to": 46,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 36,
+        "to": 46,
+        "buffer": "t5.DecX2",
+        "type": "WAW"
+      },
+      {
+        "from": 37,
+        "to": 46,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 45,
+        "to": 46,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 46,
+        "to": 47,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 25,
+        "to": 47,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 26,
+        "to": 47,
+        "buffer": "t5.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 47,
+        "to": 48,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 47,
+        "to": 48,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 48,
+        "to": 49,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 44,
+        "to": 49,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 45,
+        "to": 49,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 45,
+        "to": 50,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 49,
+        "to": 50,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 46,
+        "to": 50,
+        "buffer": "t5.DecX2",
+        "type": "WAW"
+      },
+      {
+        "from": 47,
+        "to": 50,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 50,
+        "to": 51,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 45,
+        "to": 51,
+        "buffer": "t5.DecX",
+        "type": "WAW"
+      },
+      {
+        "from": 46,
+        "to": 51,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 50,
+        "to": 51,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 52,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 38,
+        "to": 52,
+        "buffer": "t5.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 41,
+        "to": 52,
+        "buffer": "t5.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 53,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 39,
+        "to": 53,
+        "buffer": "t5.K",
+        "type": "WAW"
+      },
+      {
+        "from": 41,
+        "to": 53,
+        "buffer": "t5.K",
+        "type": "WAR"
+      },
+      {
+        "from": 51,
+        "to": 54,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 40,
+        "to": 54,
+        "buffer": "t5.V",
+        "type": "WAW"
+      },
+      {
+        "from": 43,
+        "to": 54,
+        "buffer": "t5.V",
+        "type": "WAR"
+      },
+      {
+        "from": 53,
+        "to": 55,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 52,
+        "to": 55,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 41,
+        "to": 55,
+        "buffer": "t5.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 42,
+        "to": 55,
+        "buffer": "t5.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 42,
+        "to": 56,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 55,
+        "to": 56,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 42,
+        "to": 56,
+        "buffer": "t5.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 43,
+        "to": 56,
+        "buffer": "t5.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 56,
+        "to": 57,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 54,
+        "to": 57,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 43,
+        "to": 57,
+        "buffer": "t5.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 44,
+        "to": 57,
+        "buffer": "t5.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 57,
+        "to": 58,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 49,
+        "to": 58,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 50,
+        "to": 58,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 50,
+        "to": 59,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 58,
+        "to": 59,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 51,
+        "to": 59,
+        "buffer": "t5.DecX",
+        "type": "WAW"
+      },
+      {
+        "from": 52,
+        "to": 59,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 53,
+        "to": 59,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 54,
+        "to": 59,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 59,
+        "to": 60,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 50,
+        "to": 60,
+        "buffer": "t5.DecX2",
+        "type": "WAW"
+      },
+      {
+        "from": 51,
+        "to": 60,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 59,
+        "to": 60,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 60,
+        "to": 61,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 52,
+        "to": 61,
+        "buffer": "t5.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 55,
+        "to": 61,
+        "buffer": "t5.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 62,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 53,
+        "to": 62,
+        "buffer": "t5.K",
+        "type": "WAW"
+      },
+      {
+        "from": 55,
+        "to": 62,
+        "buffer": "t5.K",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 63,
+        "buffer": "t5.EncX",
+        "type": "RAW"
+      },
+      {
+        "from": 54,
+        "to": 63,
+        "buffer": "t5.V",
+        "type": "WAW"
+      },
+      {
+        "from": 57,
+        "to": 63,
+        "buffer": "t5.V",
+        "type": "WAR"
+      },
+      {
+        "from": 62,
+        "to": 64,
+        "buffer": "t5.K",
+        "type": "RAW"
+      },
+      {
+        "from": 61,
+        "to": 64,
+        "buffer": "t5.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 55,
+        "to": 64,
+        "buffer": "t5.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 56,
+        "to": 64,
+        "buffer": "t5.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 56,
+        "to": 65,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 64,
+        "to": 65,
+        "buffer": "t5.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 56,
+        "to": 65,
+        "buffer": "t5.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 57,
+        "to": 65,
+        "buffer": "t5.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 65,
+        "to": 66,
+        "buffer": "t5.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 63,
+        "to": 66,
+        "buffer": "t5.V",
+        "type": "RAW"
+      },
+      {
+        "from": 57,
+        "to": 66,
+        "buffer": "t5.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 58,
+        "to": 66,
+        "buffer": "t5.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 66,
+        "to": 67,
+        "buffer": "t5.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 58,
+        "to": 67,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 59,
+        "to": 67,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 59,
+        "to": 68,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 67,
+        "to": 68,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 60,
+        "to": 68,
+        "buffer": "t5.DecX2",
+        "type": "WAW"
+      },
+      {
+        "from": 61,
+        "to": 68,
+        "buffer": "t5.DecX2",
+        "type": "WAR"
+      },
+      {
+        "from": 68,
+        "to": 69,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 59,
+        "to": 69,
+        "buffer": "t5.DecX",
+        "type": "WAW"
+      },
+      {
+        "from": 60,
+        "to": 69,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 68,
+        "to": 69,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 69,
+        "to": 70,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      },
+      {
+        "from": 48,
+        "to": 70,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 49,
+        "to": 70,
+        "buffer": "t5.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 70,
+        "to": 71,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 70,
+        "to": 71,
+        "buffer": "t5.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 71,
+        "to": 72,
+        "buffer": "t5.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 67,
+        "to": 72,
+        "buffer": "t5.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 68,
+        "to": 72,
+        "buffer": "t5.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 68,
+        "to": 73,
+        "buffer": "t5.DecX2",
+        "type": "RAW"
+      },
+      {
+        "from": 72,
+        "to": 73,
+        "buffer": "t5.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 69,
+        "to": 73,
+        "buffer": "t5.DecX",
+        "type": "WAW"
+      },
+      {
+        "from": 70,
+        "to": 73,
+        "buffer": "t5.DecX",
+        "type": "WAR"
+      },
+      {
+        "from": 73,
+        "to": 74,
+        "buffer": "t5.DecX",
+        "type": "RAW"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

@@ -1,0 +1,4320 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "bert_tiny",
+  "package": "bert_tiny",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "09a4be84448568722f7f484b357c4eba111f9bf24e344905691a15987e193c1a",
+    "kernels.cl": "444ffaa89f26acf278d5d7148a745ce64375e2e9cc0f8ec6986cc560def13712",
+    "kernels.config.json": "d6083cc5b600b0e7e9053c317f6e3ca6e863e5411d09db9fa03035cf4ed7bb3e",
+    "kernels.json": "0122cd337b938968dbe9cd1496d4d39e1ff41d4e84cec10f1a4a6e14b30180f7"
+  },
+  "params": {
+    "DFF": 512,
+    "DModel": 128,
+    "Layers": 2,
+    "NumClass": 2,
+    "NumHeads": 8,
+    "SeqLen": 64
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "bt.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.EmbBeta",
+      "go_var": "b.dEmbBeta",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.EmbGamma",
+      "go_var": "b.dEmbGamma",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.EmbSum",
+      "go_var": "b.dEmbSum",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.EmbTmp",
+      "go_var": "b.dEmbTmp",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.FF1",
+      "go_var": "b.dFF1Buf",
+      "bytes_expr": "bytesFF1",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "bt.FF2",
+      "go_var": "b.dFF2Buf",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.K",
+      "go_var": "b.dK",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Beta1",
+      "go_var": "b.layersDev[l].dBeta1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Beta2",
+      "go_var": "b.layersDev[l].dBeta2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Gamma1",
+      "go_var": "b.layersDev[l].dGamma1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Gamma2",
+      "go_var": "b.layersDev[l].dGamma2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.W1",
+      "go_var": "b.layersDev[l].dW1",
+      "bytes_expr": "uint64(dm * b.DFF * 4)",
+      "bytes": 262144,
+      "pages": 64,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.W2",
+      "go_var": "b.layersDev[l].dW2",
+      "bytes_expr": "uint64(b.DFF * dm * 4)",
+      "bytes": 262144,
+      "pages": 64,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Wk",
+      "go_var": "b.layersDev[l].dWk",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Wo",
+      "go_var": "b.layersDev[l].dWo",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Wq",
+      "go_var": "b.layersDev[l].dWq",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L0.Wv",
+      "go_var": "b.layersDev[l].dWv",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Beta1",
+      "go_var": "b.layersDev[l].dBeta1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Beta2",
+      "go_var": "b.layersDev[l].dBeta2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Gamma1",
+      "go_var": "b.layersDev[l].dGamma1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Gamma2",
+      "go_var": "b.layersDev[l].dGamma2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.W1",
+      "go_var": "b.layersDev[l].dW1",
+      "bytes_expr": "uint64(dm * b.DFF * 4)",
+      "bytes": 262144,
+      "pages": 64,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.W2",
+      "go_var": "b.layersDev[l].dW2",
+      "bytes_expr": "uint64(b.DFF * dm * 4)",
+      "bytes": 262144,
+      "pages": 64,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Wk",
+      "go_var": "b.layersDev[l].dWk",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Wo",
+      "go_var": "b.layersDev[l].dWo",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Wq",
+      "go_var": "b.layersDev[l].dWq",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.L1.Wv",
+      "go_var": "b.layersDev[l].dWv",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.Logits",
+      "go_var": "b.dLogits",
+      "bytes_expr": "uint64(b.NumClass * 4)",
+      "bytes": 8,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.Out",
+      "go_var": "b.dOut",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Pool",
+      "go_var": "b.dPool",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.PosEmb",
+      "go_var": "b.dPosEmb",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Probs",
+      "go_var": "b.dProbs",
+      "bytes_expr": "bytesScores",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "bt.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Scores",
+      "go_var": "b.dScores",
+      "bytes_expr": "bytesScores",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "bt.TokEmb",
+      "go_var": "b.dTokEmb",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.TypeEmb",
+      "go_var": "b.dTypeEmb",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.V",
+      "go_var": "b.dV",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.WCls",
+      "go_var": "b.dWCls",
+      "bytes_expr": "uint64(dm * b.NumClass * 4)",
+      "bytes": 1024,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "bt.WPool",
+      "go_var": "b.dWPool",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "bt.X",
+      "go_var": "b.dX",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.X2",
+      "go_var": "b.dX2",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Y1",
+      "go_var": "b.dY1",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Y1n",
+      "go_var": "b.dY1n",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "bt.Y2",
+      "go_var": "b.dY2",
+      "bytes_expr": "bytesX",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "bt_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_attention_scores",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_softmax",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "SeqLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "NumHeads",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 5,
+        "num_global_loads": 3,
+        "num_global_stores": 2,
+        "num_loads": 3,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 2,
+        "recorded_loads": 3,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "bt_attention_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "Probs",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Context",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_layernorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_layernorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_ff1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "bt_ff2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "bt_add_resid1",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid1|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.PosEmb,bt.TokEmb|w=bt.EmbTmp",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.TokEmb",
+          "expr": "b.dTokEmb"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.PosEmb",
+          "expr": "b.dPosEmb"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.EmbTmp",
+          "expr": "b.dEmbTmp"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.PosEmb",
+        "bt.TokEmb"
+      ],
+      "writes": [
+        "bt.EmbTmp"
+      ],
+      "buffer_roles": {
+        "bt.EmbTmp": "write_only",
+        "bt.PosEmb": "read_only",
+        "bt.TokEmb": "read_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "bt_add_resid2",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid2|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.EmbTmp,bt.TypeEmb|w=bt.EmbSum",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.EmbTmp",
+          "expr": "b.dEmbTmp"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.TypeEmb",
+          "expr": "b.dTypeEmb"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.EmbSum",
+          "expr": "b.dEmbSum"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.EmbTmp",
+        "bt.TypeEmb"
+      ],
+      "writes": [
+        "bt.EmbSum"
+      ],
+      "buffer_roles": {
+        "bt.EmbSum": "write_only",
+        "bt.EmbTmp": "read_only",
+        "bt.TypeEmb": "read_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "bt_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=128|sf=param_arg6=1e-05|r=bt.EmbBeta,bt.EmbGamma,bt.EmbSum|w=bt.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.EmbSum",
+          "expr": "b.dEmbSum"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "bt.EmbGamma",
+          "expr": "b.dEmbGamma"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "bt.EmbBeta",
+          "expr": "b.dEmbBeta"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "bt.EmbBeta",
+        "bt.EmbGamma",
+        "bt.EmbSum"
+      ],
+      "writes": [
+        "bt.X"
+      ],
+      "buffer_roles": {
+        "bt.EmbBeta": "read_only",
+        "bt.EmbGamma": "read_only",
+        "bt.EmbSum": "read_only",
+        "bt.X": "write_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "bt_q_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_q_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L1.Wq,bt.X|w=bt.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.Wq",
+          "expr": "b.layersDev[l].dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L1.Wq",
+        "bt.X"
+      ],
+      "writes": [
+        "bt.Q"
+      ],
+      "buffer_roles": {
+        "bt.L1.Wq": "read_only",
+        "bt.Q": "write_only",
+        "bt.X": "read_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "bt_k_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_k_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L0.Wk,bt.X|w=bt.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wk",
+          "expr": "b.layersDev[l].dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L0.Wk",
+        "bt.X"
+      ],
+      "writes": [
+        "bt.K"
+      ],
+      "buffer_roles": {
+        "bt.K": "write_only",
+        "bt.L0.Wk": "read_only",
+        "bt.X": "read_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "bt_v_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_v_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L0.Wv,bt.X|w=bt.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wv",
+          "expr": "b.layersDev[l].dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L0.Wv",
+        "bt.X"
+      ],
+      "writes": [
+        "bt.V"
+      ],
+      "buffer_roles": {
+        "bt.L0.Wv": "read_only",
+        "bt.V": "write_only",
+        "bt.X": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "bt_attention_scores",
+      "global_size": [
+        64,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        64,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_attention_scores|g=64,512,1|l=8,8,1|si=param_arg3=64;param_arg4=16;param_arg5=8|r=bt.K,bt.Q|w=bt.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "bt.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "bt.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "bt.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "bt.K",
+        "bt.Q"
+      ],
+      "writes": [
+        "bt.Scores"
+      ],
+      "buffer_roles": {
+        "bt.K": "read_only",
+        "bt.Q": "read_only",
+        "bt.Scores": "write_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "bt_softmax",
+      "global_size": [
+        64,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        1,
+        1
+      ],
+      "num_wg_total": 8,
+      "launch_signature": "bt_softmax|g=64,8,1|l=8,8,1|si=param_arg2=64;param_arg3=8|r=bt.Probs,bt.Scores|w=bt.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 64,
+        "param_arg3": 8
+      },
+      "reads": [
+        "bt.Probs",
+        "bt.Scores"
+      ],
+      "writes": [
+        "bt.Probs"
+      ],
+      "buffer_roles": {
+        "bt.Probs": "read_write",
+        "bt.Scores": "read_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "bt_attention_context",
+      "global_size": [
+        16,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        64,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_attention_context|g=16,512,1|l=8,8,1|si=param_arg3=64;param_arg4=16;param_arg5=8|r=bt.Probs,bt.V|w=bt.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "bt.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "bt.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "bt.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "bt.Probs",
+        "bt.V"
+      ],
+      "writes": [
+        "bt.Context"
+      ],
+      "buffer_roles": {
+        "bt.Context": "write_only",
+        "bt.Probs": "read_only",
+        "bt.V": "read_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "bt_o_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_o_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.Context,bt.L0.Wo|w=bt.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wo",
+          "expr": "b.layersDev[l].dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.Context",
+        "bt.L0.Wo"
+      ],
+      "writes": [
+        "bt.Out"
+      ],
+      "buffer_roles": {
+        "bt.Context": "read_only",
+        "bt.L0.Wo": "read_only",
+        "bt.Out": "write_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "bt_add_resid1",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid1|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.Out,bt.X|w=bt.Y1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.Out",
+        "bt.X"
+      ],
+      "writes": [
+        "bt.Y1"
+      ],
+      "buffer_roles": {
+        "bt.Out": "read_only",
+        "bt.X": "read_only",
+        "bt.Y1": "write_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "bt_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=128|sf=param_arg6=1e-05|r=bt.L1.Beta1,bt.L1.Gamma1,bt.Y1|w=bt.Y1n",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "bt.L1.Gamma1",
+          "expr": "b.layersDev[l].dGamma1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "bt.L1.Beta1",
+          "expr": "b.layersDev[l].dBeta1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "bt.L1.Beta1",
+        "bt.L1.Gamma1",
+        "bt.Y1"
+      ],
+      "writes": [
+        "bt.Y1n"
+      ],
+      "buffer_roles": {
+        "bt.L1.Beta1": "read_only",
+        "bt.L1.Gamma1": "read_only",
+        "bt.Y1": "read_only",
+        "bt.Y1n": "write_only"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "bt_ff1",
+      "global_size": [
+        512,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        64,
+        8,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_ff1|g=512,64,1|l=8,8,1|si=param_arg3=64;param_arg4=512;param_arg5=128|r=bt.L1.W1,bt.Y1n|w=bt.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.W1",
+          "expr": "b.layersDev[l].dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 512
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 512,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L1.W1",
+        "bt.Y1n"
+      ],
+      "writes": [
+        "bt.FF1"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "write_only",
+        "bt.L1.W1": "read_only",
+        "bt.Y1n": "read_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "bt_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=bt.FF1|w=bt.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "bt.FF1"
+      ],
+      "writes": [
+        "bt.FF1"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "read_write"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "bt_ff2",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_ff2|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=512|r=bt.FF1,bt.L1.W2|w=bt.FF2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.W2",
+          "expr": "b.layersDev[l].dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 512
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 512
+      },
+      "reads": [
+        "bt.FF1",
+        "bt.L1.W2"
+      ],
+      "writes": [
+        "bt.FF2"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "read_only",
+        "bt.FF2": "write_only",
+        "bt.L1.W2": "read_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "bt_add_resid2",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid2|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.FF2,bt.Y1|w=bt.Y2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.FF2",
+        "bt.Y1"
+      ],
+      "writes": [
+        "bt.Y2"
+      ],
+      "buffer_roles": {
+        "bt.FF2": "read_only",
+        "bt.Y1": "read_only",
+        "bt.Y2": "write_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "bt_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=128|sf=param_arg6=1e-05|r=bt.L0.Beta2,bt.L0.Gamma2,bt.Y2|w=bt.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "bt.L0.Gamma2",
+          "expr": "b.layersDev[l].dGamma2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "bt.L0.Beta2",
+          "expr": "b.layersDev[l].dBeta2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "bt.L0.Beta2",
+        "bt.L0.Gamma2",
+        "bt.Y2"
+      ],
+      "writes": [
+        "bt.X2"
+      ],
+      "buffer_roles": {
+        "bt.L0.Beta2": "read_only",
+        "bt.L0.Gamma2": "read_only",
+        "bt.X2": "write_only",
+        "bt.Y2": "read_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "bt_q_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_q_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L1.Wq,bt.X2|w=bt.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.Wq",
+          "expr": "b.layersDev[l].dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L1.Wq",
+        "bt.X2"
+      ],
+      "writes": [
+        "bt.Q"
+      ],
+      "buffer_roles": {
+        "bt.L1.Wq": "read_only",
+        "bt.Q": "write_only",
+        "bt.X2": "read_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "bt_k_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_k_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L0.Wk,bt.X2|w=bt.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wk",
+          "expr": "b.layersDev[l].dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L0.Wk",
+        "bt.X2"
+      ],
+      "writes": [
+        "bt.K"
+      ],
+      "buffer_roles": {
+        "bt.K": "write_only",
+        "bt.L0.Wk": "read_only",
+        "bt.X2": "read_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "bt_v_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_v_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.L0.Wv,bt.X2|w=bt.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wv",
+          "expr": "b.layersDev[l].dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L0.Wv",
+        "bt.X2"
+      ],
+      "writes": [
+        "bt.V"
+      ],
+      "buffer_roles": {
+        "bt.L0.Wv": "read_only",
+        "bt.V": "write_only",
+        "bt.X2": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "bt_attention_scores",
+      "global_size": [
+        64,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        64,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_attention_scores|g=64,512,1|l=8,8,1|si=param_arg3=64;param_arg4=16;param_arg5=8|r=bt.K,bt.Q|w=bt.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "bt.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "bt.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "bt.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "bt.K",
+        "bt.Q"
+      ],
+      "writes": [
+        "bt.Scores"
+      ],
+      "buffer_roles": {
+        "bt.K": "read_only",
+        "bt.Q": "read_only",
+        "bt.Scores": "write_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "bt_softmax",
+      "global_size": [
+        64,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        1,
+        1
+      ],
+      "num_wg_total": 8,
+      "launch_signature": "bt_softmax|g=64,8,1|l=8,8,1|si=param_arg2=64;param_arg3=8|r=bt.Probs,bt.Scores|w=bt.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 64,
+        "param_arg3": 8
+      },
+      "reads": [
+        "bt.Probs",
+        "bt.Scores"
+      ],
+      "writes": [
+        "bt.Probs"
+      ],
+      "buffer_roles": {
+        "bt.Probs": "read_write",
+        "bt.Scores": "read_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "bt_attention_context",
+      "global_size": [
+        16,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        64,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_attention_context|g=16,512,1|l=8,8,1|si=param_arg3=64;param_arg4=16;param_arg5=8|r=bt.Probs,bt.V|w=bt.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "bt.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "bt.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "bt.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "bt.Probs",
+        "bt.V"
+      ],
+      "writes": [
+        "bt.Context"
+      ],
+      "buffer_roles": {
+        "bt.Context": "write_only",
+        "bt.Probs": "read_only",
+        "bt.V": "read_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "bt_o_proj",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_o_proj|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=128|r=bt.Context,bt.L0.Wo|w=bt.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L0.Wo",
+          "expr": "b.layersDev[l].dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.Context",
+        "bt.L0.Wo"
+      ],
+      "writes": [
+        "bt.Out"
+      ],
+      "buffer_roles": {
+        "bt.Context": "read_only",
+        "bt.L0.Wo": "read_only",
+        "bt.Out": "write_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "bt_add_resid1",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid1|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.Out,bt.X2|w=bt.Y1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.Out",
+        "bt.X2"
+      ],
+      "writes": [
+        "bt.Y1"
+      ],
+      "buffer_roles": {
+        "bt.Out": "read_only",
+        "bt.X2": "read_only",
+        "bt.Y1": "write_only"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "bt_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=128|sf=param_arg6=1e-05|r=bt.L1.Beta1,bt.L1.Gamma1,bt.Y1|w=bt.Y1n",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "bt.L1.Gamma1",
+          "expr": "b.layersDev[l].dGamma1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "bt.L1.Beta1",
+          "expr": "b.layersDev[l].dBeta1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "bt.L1.Beta1",
+        "bt.L1.Gamma1",
+        "bt.Y1"
+      ],
+      "writes": [
+        "bt.Y1n"
+      ],
+      "buffer_roles": {
+        "bt.L1.Beta1": "read_only",
+        "bt.L1.Gamma1": "read_only",
+        "bt.Y1": "read_only",
+        "bt.Y1n": "write_only"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "bt_ff1",
+      "global_size": [
+        512,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        64,
+        8,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_ff1|g=512,64,1|l=8,8,1|si=param_arg3=64;param_arg4=512;param_arg5=128|r=bt.L1.W1,bt.Y1n|w=bt.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.W1",
+          "expr": "b.layersDev[l].dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 512
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 512,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.L1.W1",
+        "bt.Y1n"
+      ],
+      "writes": [
+        "bt.FF1"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "write_only",
+        "bt.L1.W1": "read_only",
+        "bt.Y1n": "read_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "bt_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "bt_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=bt.FF1|w=bt.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "bt.FF1"
+      ],
+      "writes": [
+        "bt.FF1"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "read_write"
+      }
+    },
+    {
+      "id": 28,
+      "kernel": "bt_ff2",
+      "global_size": [
+        128,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        8,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_ff2|g=128,64,1|l=8,8,1|si=param_arg3=64;param_arg4=128;param_arg5=512|r=bt.FF1,bt.L1.W2|w=bt.FF2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.L1.W2",
+          "expr": "b.layersDev[l].dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 512
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 128,
+        "param_arg5": 512
+      },
+      "reads": [
+        "bt.FF1",
+        "bt.L1.W2"
+      ],
+      "writes": [
+        "bt.FF2"
+      ],
+      "buffer_roles": {
+        "bt.FF1": "read_only",
+        "bt.FF2": "write_only",
+        "bt.L1.W2": "read_only"
+      }
+    },
+    {
+      "id": 29,
+      "kernel": "bt_add_resid2",
+      "global_size": [
+        8192,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        128,
+        1,
+        1
+      ],
+      "num_wg_total": 128,
+      "launch_signature": "bt_add_resid2|g=8192,1,1|l=64,1,1|si=param_arg3=8192|r=bt.FF2,bt.Y1|w=bt.Y2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 8192
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 8192
+      },
+      "reads": [
+        "bt.FF2",
+        "bt.Y1"
+      ],
+      "writes": [
+        "bt.Y2"
+      ],
+      "buffer_roles": {
+        "bt.FF2": "read_only",
+        "bt.Y1": "read_only",
+        "bt.Y2": "write_only"
+      }
+    },
+    {
+      "id": 30,
+      "kernel": "bt_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=128|sf=param_arg6=1e-05|r=bt.L0.Beta2,bt.L0.Gamma2,bt.Y2|w=bt.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "bt.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "bt.L0.Gamma2",
+          "expr": "b.layersDev[l].dGamma2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "bt.L0.Beta2",
+          "expr": "b.layersDev[l].dBeta2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "bt.L0.Beta2",
+        "bt.L0.Gamma2",
+        "bt.Y2"
+      ],
+      "writes": [
+        "bt.X"
+      ],
+      "buffer_roles": {
+        "bt.L0.Beta2": "read_only",
+        "bt.L0.Gamma2": "read_only",
+        "bt.X": "write_only",
+        "bt.Y2": "read_only"
+      }
+    },
+    {
+      "id": 31,
+      "kernel": "bt_o_proj",
+      "global_size": [
+        128,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        1,
+        1
+      ],
+      "num_wg_total": 16,
+      "launch_signature": "bt_o_proj|g=128,8,1|l=8,8,1|si=param_arg3=1;param_arg4=128;param_arg5=128|r=bt.WPool,bt.X|w=bt.Pool",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.WPool",
+          "expr": "b.dWPool"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Pool",
+          "expr": "b.dPool"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 1,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.WPool",
+        "bt.X"
+      ],
+      "writes": [
+        "bt.Pool"
+      ],
+      "buffer_roles": {
+        "bt.Pool": "write_only",
+        "bt.WPool": "read_only",
+        "bt.X": "read_only"
+      }
+    },
+    {
+      "id": 32,
+      "kernel": "bt_relu",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "bt_relu|g=128,1,1|l=64,1,1|si=param_arg1=128|r=bt.Pool|w=bt.Pool",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "bt.Pool",
+          "expr": "b.dPool"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 128
+      },
+      "reads": [
+        "bt.Pool"
+      ],
+      "writes": [
+        "bt.Pool"
+      ],
+      "buffer_roles": {
+        "bt.Pool": "read_write"
+      }
+    },
+    {
+      "id": 33,
+      "kernel": "bt_ff1",
+      "global_size": [
+        8,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "bt_ff1|g=8,8,1|l=8,8,1|si=param_arg3=1;param_arg4=2;param_arg5=128|r=bt.Pool,bt.WCls|w=bt.Logits",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "bt.Pool",
+          "expr": "b.dPool"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "bt.WCls",
+          "expr": "b.dWCls"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "bt.Logits",
+          "expr": "b.dLogits"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 2
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 1,
+        "param_arg4": 2,
+        "param_arg5": 128
+      },
+      "reads": [
+        "bt.Pool",
+        "bt.WCls"
+      ],
+      "writes": [
+        "bt.Logits"
+      ],
+      "buffer_roles": {
+        "bt.Logits": "write_only",
+        "bt.Pool": "read_only",
+        "bt.WCls": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "bt.EmbTmp",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "buffer": "bt.EmbSum",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "buffer": "bt.X",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 4,
+        "buffer": "bt.X",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "buffer": "bt.X",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 6,
+        "buffer": "bt.K",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 6,
+        "buffer": "bt.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "bt.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "bt.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 8,
+        "buffer": "bt.V",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "bt.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "bt.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 10,
+        "buffer": "bt.X",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "bt.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "bt.Y1n",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "bt.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "bt.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "bt.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "bt.FF2",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 15,
+        "buffer": "bt.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "bt.Y2",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 17,
+        "buffer": "bt.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 17,
+        "buffer": "bt.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 17,
+        "buffer": "bt.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 18,
+        "buffer": "bt.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 18,
+        "buffer": "bt.K",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 18,
+        "buffer": "bt.K",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 19,
+        "buffer": "bt.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 19,
+        "buffer": "bt.V",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 19,
+        "buffer": "bt.V",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 20,
+        "buffer": "bt.K",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 20,
+        "buffer": "bt.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 20,
+        "buffer": "bt.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 20,
+        "buffer": "bt.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 7,
+        "to": 21,
+        "buffer": "bt.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 21,
+        "buffer": "bt.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 21,
+        "buffer": "bt.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 21,
+        "buffer": "bt.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 21,
+        "to": 22,
+        "buffer": "bt.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 22,
+        "buffer": "bt.V",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 22,
+        "buffer": "bt.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 22,
+        "buffer": "bt.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 23,
+        "buffer": "bt.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 23,
+        "buffer": "bt.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 23,
+        "buffer": "bt.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "bt.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 24,
+        "buffer": "bt.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 24,
+        "buffer": "bt.Y1",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 24,
+        "buffer": "bt.Y1",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 24,
+        "buffer": "bt.Y1",
+        "type": "WAR"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "bt.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 25,
+        "buffer": "bt.Y1n",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 25,
+        "buffer": "bt.Y1n",
+        "type": "WAR"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "bt.Y1n",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 26,
+        "buffer": "bt.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 26,
+        "buffer": "bt.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "bt.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "bt.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 27,
+        "to": 28,
+        "buffer": "bt.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 28,
+        "buffer": "bt.FF2",
+        "type": "WAW"
+      },
+      {
+        "from": 15,
+        "to": 28,
+        "buffer": "bt.FF2",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "bt.FF2",
+        "type": "RAW"
+      },
+      {
+        "from": 24,
+        "to": 29,
+        "buffer": "bt.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 29,
+        "buffer": "bt.Y2",
+        "type": "WAW"
+      },
+      {
+        "from": 16,
+        "to": 29,
+        "buffer": "bt.Y2",
+        "type": "WAR"
+      },
+      {
+        "from": 29,
+        "to": 30,
+        "buffer": "bt.Y2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 30,
+        "buffer": "bt.X",
+        "type": "WAW"
+      },
+      {
+        "from": 3,
+        "to": 30,
+        "buffer": "bt.X",
+        "type": "WAR"
+      },
+      {
+        "from": 4,
+        "to": 30,
+        "buffer": "bt.X",
+        "type": "WAR"
+      },
+      {
+        "from": 5,
+        "to": 30,
+        "buffer": "bt.X",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 30,
+        "buffer": "bt.X",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 31,
+        "buffer": "bt.X",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 32,
+        "buffer": "bt.Pool",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 32,
+        "buffer": "bt.Pool",
+        "type": "WAW"
+      },
+      {
+        "from": 32,
+        "to": 33,
+        "buffer": "bt.Pool",
+        "type": "RAW"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

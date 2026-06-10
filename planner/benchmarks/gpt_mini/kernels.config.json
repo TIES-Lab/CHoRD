@@ -1,0 +1,27 @@
+{
+  "params": {
+    "SeqLen": 256,
+    "DModel": 64,
+    "NumHeads": 4,
+    "DFF": 128,
+    "Layers": 2
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dX": "gm.X",
+    "b.dX2": "gm.X2",
+    "b.dQ": "gm.Q",
+    "b.dK": "gm.K",
+    "b.dV": "gm.V",
+    "b.dScores": "gm.Scores",
+    "b.dProbs": "gm.Probs",
+    "b.dContext": "gm.Context",
+    "b.dOut": "gm.Out",
+    "b.dY1": "gm.Y1",
+    "b.dY1n": "gm.Y1n",
+    "b.dFF1Buf": "gm.FF1",
+    "b.dFF2Buf": "gm.FF2",
+    "b.dY2": "gm.Y2"
+  },
+  "benchmark": "gpt_mini"
+}

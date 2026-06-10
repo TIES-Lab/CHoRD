@@ -1,0 +1,30 @@
+{
+  "chiplets": 8,
+  "page_bytes": 4096,
+  "chiplet_cap_pages": 400,
+  "overflow_pages": 64,
+  "banks_per_chiplet": 4,
+  "require_contiguous_regions": true,
+  "max_contiguous_group_pages": 4,
+  "candidate_group_pages": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "purity_threshold": 1.0,
+  "diffuse_threshold": 0.45,
+  "meta": {
+    "description": "Standalone CLAP line for the current mgpusim-chiplet simulator",
+    "workflow": [
+      "1) baseline RR run with no plan to generate profile.json",
+      "2) planner consumes profile.json and emits placement-only explicit plan",
+      "3) final run uses the explicit plan while keeping simulator RR scheduling"
+    ],
+    "note": "This config belongs to the independent CLAP branch only. It does not depend on the ILP planner / seed / freeze workflow. max_contiguous_group_pages is clamped to banks_per_chiplet so grouped decisions remain realizable as contiguous page groups in the current simulator allocator.",
+    "selection_note": "Use per-buffer page-group selection by default to better match CLAP's per-data-structure suitable page-size selection."
+  },
+  "group_selection_mode": "per-buffer"
+}

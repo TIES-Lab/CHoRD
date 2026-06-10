@@ -1,0 +1,2416 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "resnet",
+  "package": "resnet",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "8b78b18f01cc9ec5b27080926ae068ac2dd9431772624ac62b8564e08d21262c",
+    "kernels.cl": "6773cfbf9a8ce7cac47dd77cb699ca0967ec91088cc96ff56d7c99348f24e745",
+    "kernels.config.json": "e1722369797673880583b392729801c6a886c59e12ed35f4b71f136d3007e759",
+    "kernels.json": "65fe54c361e20f720f182b2aa3062f53546a3359524d4863ffb63fe7cb51c821"
+  },
+  "params": {
+    "Blocks": 3,
+    "C": 16,
+    "Cin": 3,
+    "GapTiles": 64,
+    "InH": 256,
+    "InW": 256,
+    "K": 3,
+    "NumClass": 10,
+    "Pad": 1
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "rn.Blk.Out",
+      "go_var": "b.dBlockOut",
+      "bytes_expr": "actBytes",
+      "bytes": 4194304,
+      "pages": 1024,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk.T1",
+      "go_var": "b.dTmp1",
+      "bytes_expr": "actBytes",
+      "bytes": 4194304,
+      "pages": 1024,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk.T2",
+      "go_var": "b.dTmp2",
+      "bytes_expr": "actBytes",
+      "bytes": 4194304,
+      "pages": 1024,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk0.B1",
+      "go_var": "b.dBlkB1[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk0.B2",
+      "go_var": "b.dBlkB2[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk0.W1",
+      "go_var": "b.dBlkW1[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk0.W2",
+      "go_var": "b.dBlkW2[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk1.B1",
+      "go_var": "b.dBlkB1[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk1.B2",
+      "go_var": "b.dBlkB2[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk1.W1",
+      "go_var": "b.dBlkW1[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk1.W2",
+      "go_var": "b.dBlkW2[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk2.B1",
+      "go_var": "b.dBlkB1[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk2.B2",
+      "go_var": "b.dBlkB2[i]",
+      "bytes_expr": "blkBBytes",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk2.W1",
+      "go_var": "b.dBlkW1[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.Blk2.W2",
+      "go_var": "b.dBlkW2[i]",
+      "bytes_expr": "blkWBytes",
+      "bytes": 9216,
+      "pages": 3,
+      "unified": false
+    },
+    {
+      "tag": "rn.FC.B",
+      "go_var": "b.dBfc",
+      "bytes_expr": "uint64(b.NumClass * 4)",
+      "bytes": 40,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.FC.Out",
+      "go_var": "b.dOut",
+      "bytes_expr": "uint64(b.NumClass * 4)",
+      "bytes": 40,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.FC.W",
+      "go_var": "b.dWfc",
+      "bytes_expr": "uint64(b.NumClass * b.C * 4)",
+      "bytes": 640,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.GAP.Out",
+      "go_var": "b.dGAP",
+      "bytes_expr": "uint64(b.C * 4)",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.GAP.Partial",
+      "go_var": "b.dGapPartial",
+      "bytes_expr": "uint64(b.C * b.GapTiles * 4)",
+      "bytes": 4096,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Input",
+      "go_var": "b.dIn",
+      "bytes_expr": "uint64(nIn * 4)",
+      "bytes": 786432,
+      "pages": 192,
+      "unified": false
+    },
+    {
+      "tag": "rn.Stem.B",
+      "go_var": "b.dB0",
+      "bytes_expr": "uint64(b.C * 4)",
+      "bytes": 64,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "rn.Stem.Out",
+      "go_var": "b.dStem",
+      "bytes_expr": "actBytes",
+      "bytes": 4194304,
+      "pages": 1024,
+      "unified": false
+    },
+    {
+      "tag": "rn.Stem.W",
+      "go_var": "b.dW0",
+      "bytes_expr": "uint64(b.C * b.Cin * b.K * b.K * 4)",
+      "bytes": 1728,
+      "pages": 1,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "rn_conv2d",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "W",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "B",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "Cin",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Hin",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Win",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 7,
+          "name": "Cout",
+          "ir_name": "arg7",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 8,
+          "name": "K",
+          "ir_name": "arg8",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 9,
+          "name": "Stride",
+          "ir_name": "arg9",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 10,
+          "name": "Pad",
+          "ir_name": "arg10",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 11,
+          "name": "Hout",
+          "ir_name": "arg11",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 12,
+          "name": "Wout",
+          "ir_name": "arg12",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "rn_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "rn_add_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "rn_gap_partial",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Partial",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "H",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "W",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Tiles",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "rn_gap_finalize",
+      "args": [
+        {
+          "index": 0,
+          "name": "Partial",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Tiles",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "Denom",
+          "ir_name": "arg4",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "rn_fc",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "W",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "B",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "InDim",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "OutDim",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=3;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Input,rn.Stem.B,rn.Stem.W|w=rn.Stem.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Input",
+          "expr": "b.dIn"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Stem.W",
+          "expr": "b.dW0"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Stem.B",
+          "expr": "b.dB0"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dStem"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 3,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Input",
+        "rn.Stem.B",
+        "rn.Stem.W"
+      ],
+      "writes": [
+        "rn.Stem.Out"
+      ],
+      "buffer_roles": {
+        "rn.Input": "read_only",
+        "rn.Stem.B": "read_only",
+        "rn.Stem.Out": "write_only",
+        "rn.Stem.W": "read_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "rn_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_relu|g=1048576,1,1|l=64,1,1|si=param_arg1=1048576|r=rn.Stem.Out|w=rn.Stem.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dStem"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 1048576
+      },
+      "reads": [
+        "rn.Stem.Out"
+      ],
+      "writes": [
+        "rn.Stem.Out"
+      ],
+      "buffer_roles": {
+        "rn.Stem.Out": "read_write"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk0.B1,rn.Blk0.W1,rn.Stem.Out|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dStem"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk0.W1",
+          "expr": "b.dBlkW1[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk0.B1",
+          "expr": "b.dBlkB1[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk0.B1",
+        "rn.Blk0.W1",
+        "rn.Stem.Out"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "write_only",
+        "rn.Blk0.B1": "read_only",
+        "rn.Blk0.W1": "read_only",
+        "rn.Stem.Out": "read_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "rn_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_relu|g=1048576,1,1|l=64,1,1|si=param_arg1=1048576|r=rn.Blk.T1|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 1048576
+      },
+      "reads": [
+        "rn.Blk.T1"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_write"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk.T1,rn.Blk0.B2,rn.Blk0.W2|w=rn.Blk.T2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk0.W2",
+          "expr": "b.dBlkW2[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk0.B2",
+          "expr": "b.dBlkB2[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk.T1",
+        "rn.Blk0.B2",
+        "rn.Blk0.W2"
+      ],
+      "writes": [
+        "rn.Blk.T2"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_only",
+        "rn.Blk.T2": "write_only",
+        "rn.Blk0.B2": "read_only",
+        "rn.Blk0.W2": "read_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "rn_add_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_add_relu|g=1048576,1,1|l=64,1,1|si=param_arg3=1048576|r=rn.Blk.T2,rn.Stem.Out|w=rn.Blk.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dStem"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 1048576
+      },
+      "reads": [
+        "rn.Blk.T2",
+        "rn.Stem.Out"
+      ],
+      "writes": [
+        "rn.Blk.Out"
+      ],
+      "buffer_roles": {
+        "rn.Blk.Out": "write_only",
+        "rn.Blk.T2": "read_only",
+        "rn.Stem.Out": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk.Out,rn.Blk1.B1,rn.Blk1.W1|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Blk.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk1.W1",
+          "expr": "b.dBlkW1[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk1.B1",
+          "expr": "b.dBlkB1[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk.Out",
+        "rn.Blk1.B1",
+        "rn.Blk1.W1"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.Out": "read_only",
+        "rn.Blk.T1": "write_only",
+        "rn.Blk1.B1": "read_only",
+        "rn.Blk1.W1": "read_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "rn_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_relu|g=1048576,1,1|l=64,1,1|si=param_arg1=1048576|r=rn.Blk.T1|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 1048576
+      },
+      "reads": [
+        "rn.Blk.T1"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_write"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk.T1,rn.Blk1.B2,rn.Blk1.W2|w=rn.Blk.T2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk1.W2",
+          "expr": "b.dBlkW2[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk1.B2",
+          "expr": "b.dBlkB2[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk.T1",
+        "rn.Blk1.B2",
+        "rn.Blk1.W2"
+      ],
+      "writes": [
+        "rn.Blk.T2"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_only",
+        "rn.Blk.T2": "write_only",
+        "rn.Blk1.B2": "read_only",
+        "rn.Blk1.W2": "read_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "rn_add_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_add_relu|g=1048576,1,1|l=64,1,1|si=param_arg3=1048576|r=rn.Blk.Out,rn.Blk.T2|w=rn.Stem.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 1048576
+      },
+      "reads": [
+        "rn.Blk.Out",
+        "rn.Blk.T2"
+      ],
+      "writes": [
+        "rn.Stem.Out"
+      ],
+      "buffer_roles": {
+        "rn.Blk.Out": "read_only",
+        "rn.Blk.T2": "read_only",
+        "rn.Stem.Out": "write_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk2.B1,rn.Blk2.W1,rn.Stem.Out|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk2.W1",
+          "expr": "b.dBlkW1[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk2.B1",
+          "expr": "b.dBlkB1[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk2.B1",
+        "rn.Blk2.W1",
+        "rn.Stem.Out"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "write_only",
+        "rn.Blk2.B1": "read_only",
+        "rn.Blk2.W1": "read_only",
+        "rn.Stem.Out": "read_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "rn_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_relu|g=1048576,1,1|l=64,1,1|si=param_arg1=1048576|r=rn.Blk.T1|w=rn.Blk.T1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 1048576
+      },
+      "reads": [
+        "rn.Blk.T1"
+      ],
+      "writes": [
+        "rn.Blk.T1"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_write"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "rn_conv2d",
+      "global_size": [
+        256,
+        4096,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        512,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_conv2d|g=256,4096,1|l=8,8,1|si=param_arg10=1;param_arg11=256;param_arg12=256;param_arg4=16;param_arg5=256;param_arg6=256;param_arg7=16;param_arg8=3;param_arg9=1|r=rn.Blk.T1,rn.Blk2.B2,rn.Blk2.W2|w=rn.Blk.T2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Blk.T1",
+          "expr": "b.dTmp1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.Blk2.W2",
+          "expr": "b.dBlkW2[i]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Blk2.B2",
+          "expr": "b.dBlkB2[i]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 3
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 1,
+        "param_arg11": 256,
+        "param_arg12": 256,
+        "param_arg4": 16,
+        "param_arg5": 256,
+        "param_arg6": 256,
+        "param_arg7": 16,
+        "param_arg8": 3,
+        "param_arg9": 1
+      },
+      "reads": [
+        "rn.Blk.T1",
+        "rn.Blk2.B2",
+        "rn.Blk2.W2"
+      ],
+      "writes": [
+        "rn.Blk.T2"
+      ],
+      "buffer_roles": {
+        "rn.Blk.T1": "read_only",
+        "rn.Blk.T2": "write_only",
+        "rn.Blk2.B2": "read_only",
+        "rn.Blk2.W2": "read_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "rn_add_relu",
+      "global_size": [
+        1048576,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16384,
+        1,
+        1
+      ],
+      "num_wg_total": 16384,
+      "launch_signature": "rn_add_relu|g=1048576,1,1|l=64,1,1|si=param_arg3=1048576|r=rn.Blk.T2,rn.Stem.Out|w=rn.Blk.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "rn.Blk.T2",
+          "expr": "b.dTmp2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.Stem.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.Blk.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1048576
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 1048576
+      },
+      "reads": [
+        "rn.Blk.T2",
+        "rn.Stem.Out"
+      ],
+      "writes": [
+        "rn.Blk.Out"
+      ],
+      "buffer_roles": {
+        "rn.Blk.Out": "write_only",
+        "rn.Blk.T2": "read_only",
+        "rn.Stem.Out": "read_only"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "rn_gap_partial",
+      "global_size": [
+        64,
+        16,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        2,
+        1
+      ],
+      "num_wg_total": 16,
+      "launch_signature": "rn_gap_partial|g=64,16,1|l=8,8,1|si=param_arg2=16;param_arg3=256;param_arg4=256;param_arg5=64|r=rn.Blk.Out|w=rn.GAP.Partial",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.Blk.Out",
+          "expr": "b.dBlockOut"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Partial",
+          "kind": "buffer",
+          "tag": "rn.GAP.Partial",
+          "expr": "b.dGapPartial"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "H",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "W",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Tiles",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 16,
+        "param_arg3": 256,
+        "param_arg4": 256,
+        "param_arg5": 64
+      },
+      "reads": [
+        "rn.Blk.Out"
+      ],
+      "writes": [
+        "rn.GAP.Partial"
+      ],
+      "buffer_roles": {
+        "rn.Blk.Out": "read_only",
+        "rn.GAP.Partial": "write_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "rn_gap_finalize",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "rn_gap_finalize|g=64,1,1|l=64,1,1|si=param_arg2=16;param_arg3=64|sf=param_arg4=65536|r=rn.GAP.Partial|w=rn.GAP.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Partial",
+          "kind": "buffer",
+          "tag": "rn.GAP.Partial",
+          "expr": "b.dGapPartial"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.GAP.Out",
+          "expr": "b.dGAP"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Tiles",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Denom",
+          "kind": "scalar_float",
+          "float_value": 65536
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 16,
+        "param_arg3": 64
+      },
+      "float_scalar_map": {
+        "param_arg4": 65536
+      },
+      "reads": [
+        "rn.GAP.Partial"
+      ],
+      "writes": [
+        "rn.GAP.Out"
+      ],
+      "buffer_roles": {
+        "rn.GAP.Out": "write_only",
+        "rn.GAP.Partial": "read_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "rn_fc",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "rn_fc|g=64,1,1|l=64,1,1|si=param_arg4=16;param_arg5=10|r=rn.FC.B,rn.FC.W,rn.GAP.Out|w=rn.FC.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "rn.GAP.Out",
+          "expr": "b.dGAP"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "rn.FC.W",
+          "expr": "b.dWfc"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "rn.FC.B",
+          "expr": "b.dBfc"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "rn.FC.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "InDim",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "OutDim",
+          "kind": "scalar",
+          "value": 10
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 16,
+        "param_arg5": 10
+      },
+      "reads": [
+        "rn.FC.B",
+        "rn.FC.W",
+        "rn.GAP.Out"
+      ],
+      "writes": [
+        "rn.FC.Out"
+      ],
+      "buffer_roles": {
+        "rn.FC.B": "read_only",
+        "rn.FC.Out": "write_only",
+        "rn.FC.W": "read_only",
+        "rn.GAP.Out": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "rn.Stem.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "rn.Stem.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "buffer": "rn.Stem.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "buffer": "rn.Blk.T1",
+        "type": "WAW"
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "buffer": "rn.Blk.T2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 5,
+        "buffer": "rn.Stem.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "rn.Blk.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 6,
+        "buffer": "rn.Blk.T1",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 6,
+        "buffer": "rn.Blk.T1",
+        "type": "WAR"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "rn.Blk.T1",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 8,
+        "buffer": "rn.Blk.T2",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 8,
+        "buffer": "rn.Blk.T2",
+        "type": "WAR"
+      },
+      {
+        "from": 5,
+        "to": 9,
+        "buffer": "rn.Blk.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "rn.Blk.T2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 9,
+        "buffer": "rn.Stem.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 2,
+        "to": 9,
+        "buffer": "rn.Stem.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 5,
+        "to": 9,
+        "buffer": "rn.Stem.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "rn.Stem.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 10,
+        "buffer": "rn.Blk.T1",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 10,
+        "buffer": "rn.Blk.T1",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "rn.Blk.T1",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "rn.Blk.T1",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 12,
+        "buffer": "rn.Blk.T2",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 12,
+        "buffer": "rn.Blk.T2",
+        "type": "WAR"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "rn.Blk.T2",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 13,
+        "buffer": "rn.Stem.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 13,
+        "buffer": "rn.Blk.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 13,
+        "buffer": "rn.Blk.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 9,
+        "to": 13,
+        "buffer": "rn.Blk.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "rn.Blk.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "rn.GAP.Partial",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "rn.GAP.Out",
+        "type": "RAW"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

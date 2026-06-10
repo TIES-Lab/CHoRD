@@ -1,0 +1,3739 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "gpt_mini",
+  "package": "gpt_mini",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "71baaf580c8a6554a45749f753bb0b317a57b91cb532ae5cc4d6c61092aa330c",
+    "kernels.cl": "52e36d6cb1003a0182691d2c71282d440a03cb01bd9706afdee2e9dce88a83e1",
+    "kernels.config.json": "af83b498d580fe625fd8eb898f7aaf667d59cd76812090ee51d7b4c550ff1417",
+    "kernels.json": "577e4caba493ed448c23e09557a73aab4f31c39c92a4f19e52dd106ec0819e50"
+  },
+  "params": {
+    "DFF": 128,
+    "DModel": 64,
+    "Layers": 2,
+    "NumHeads": 4,
+    "SeqLen": 256
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "gm.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.FF1",
+      "go_var": "b.dFF1Buf",
+      "bytes_expr": "bytesFF1",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "gm.FF2",
+      "go_var": "b.dFF2Buf",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.K",
+      "go_var": "b.dK",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Beta1",
+      "go_var": "b.layersDev[l].dBeta1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Beta2",
+      "go_var": "b.layersDev[l].dBeta2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Gamma1",
+      "go_var": "b.layersDev[l].dGamma1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Gamma2",
+      "go_var": "b.layersDev[l].dGamma2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.W1",
+      "go_var": "b.layersDev[l].dW1",
+      "bytes_expr": "uint64(dm * b.DFF * 4)",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.W2",
+      "go_var": "b.layersDev[l].dW2",
+      "bytes_expr": "uint64(b.DFF * dm * 4)",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Wk",
+      "go_var": "b.layersDev[l].dWk",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Wo",
+      "go_var": "b.layersDev[l].dWo",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Wq",
+      "go_var": "b.layersDev[l].dWq",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L0.Wv",
+      "go_var": "b.layersDev[l].dWv",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Beta1",
+      "go_var": "b.layersDev[l].dBeta1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Beta2",
+      "go_var": "b.layersDev[l].dBeta2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Gamma1",
+      "go_var": "b.layersDev[l].dGamma1",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Gamma2",
+      "go_var": "b.layersDev[l].dGamma2",
+      "bytes_expr": "uint64(dm * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.W1",
+      "go_var": "b.layersDev[l].dW1",
+      "bytes_expr": "uint64(dm * b.DFF * 4)",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.W2",
+      "go_var": "b.layersDev[l].dW2",
+      "bytes_expr": "uint64(b.DFF * dm * 4)",
+      "bytes": 32768,
+      "pages": 8,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Wk",
+      "go_var": "b.layersDev[l].dWk",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Wo",
+      "go_var": "b.layersDev[l].dWo",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Wq",
+      "go_var": "b.layersDev[l].dWq",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.L1.Wv",
+      "go_var": "b.layersDev[l].dWv",
+      "bytes_expr": "uint64(dm * dm * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "gm.Out",
+      "go_var": "b.dOut",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.Probs",
+      "go_var": "b.dProbs",
+      "bytes_expr": "bytesScores",
+      "bytes": 1048576,
+      "pages": 256,
+      "unified": false
+    },
+    {
+      "tag": "gm.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.Scores",
+      "go_var": "b.dScores",
+      "bytes_expr": "bytesScores",
+      "bytes": 1048576,
+      "pages": 256,
+      "unified": false
+    },
+    {
+      "tag": "gm.V",
+      "go_var": "b.dV",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.X",
+      "go_var": "b.dX",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.X2",
+      "go_var": "b.dX2",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.Y1",
+      "go_var": "b.dY1",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.Y1n",
+      "go_var": "b.dY1n",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "gm.Y2",
+      "go_var": "b.dY2",
+      "bytes_expr": "bytesX",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "gm_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_attention_scores_masked",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_softmax",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "SeqLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "NumHeads",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 5,
+        "num_global_loads": 3,
+        "num_global_stores": 2,
+        "num_loads": 3,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 2,
+        "recorded_loads": 3,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "gm_attention_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "Probs",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Context",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_layernorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_layernorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_ff1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "gm_ff2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "gm_q_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_q_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wq,gm.X|w=gm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wq",
+          "expr": "b.layersDev[l].dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wq",
+        "gm.X"
+      ],
+      "writes": [
+        "gm.Q"
+      ],
+      "buffer_roles": {
+        "gm.L0.Wq": "read_only",
+        "gm.Q": "write_only",
+        "gm.X": "read_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "gm_k_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_k_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wk,gm.X|w=gm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wk",
+          "expr": "b.layersDev[l].dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wk",
+        "gm.X"
+      ],
+      "writes": [
+        "gm.K"
+      ],
+      "buffer_roles": {
+        "gm.K": "write_only",
+        "gm.L0.Wk": "read_only",
+        "gm.X": "read_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "gm_v_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_v_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wv,gm.X|w=gm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wv",
+          "expr": "b.layersDev[l].dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wv",
+        "gm.X"
+      ],
+      "writes": [
+        "gm.V"
+      ],
+      "buffer_roles": {
+        "gm.L0.Wv": "read_only",
+        "gm.V": "write_only",
+        "gm.X": "read_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "gm_attention_scores_masked",
+      "global_size": [
+        256,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        128,
+        1
+      ],
+      "num_wg_total": 4096,
+      "launch_signature": "gm_attention_scores_masked|g=256,1024,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=4|r=gm.K,gm.Q|w=gm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "gm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "gm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "gm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 4
+      },
+      "reads": [
+        "gm.K",
+        "gm.Q"
+      ],
+      "writes": [
+        "gm.Scores"
+      ],
+      "buffer_roles": {
+        "gm.K": "read_only",
+        "gm.Q": "read_only",
+        "gm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "gm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "gm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=4|r=gm.Probs,gm.Scores|w=gm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 4
+      },
+      "reads": [
+        "gm.Probs",
+        "gm.Scores"
+      ],
+      "writes": [
+        "gm.Probs"
+      ],
+      "buffer_roles": {
+        "gm.Probs": "read_write",
+        "gm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "gm_attention_context",
+      "global_size": [
+        16,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        128,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_attention_context|g=16,1024,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=4|r=gm.Probs,gm.V|w=gm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "gm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "gm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "gm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 4
+      },
+      "reads": [
+        "gm.Probs",
+        "gm.V"
+      ],
+      "writes": [
+        "gm.Context"
+      ],
+      "buffer_roles": {
+        "gm.Context": "write_only",
+        "gm.Probs": "read_only",
+        "gm.V": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "gm_o_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_o_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.Context,gm.L0.Wo|w=gm.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wo",
+          "expr": "b.layersDev[l].dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.Context",
+        "gm.L0.Wo"
+      ],
+      "writes": [
+        "gm.Out"
+      ],
+      "buffer_roles": {
+        "gm.Context": "read_only",
+        "gm.L0.Wo": "read_only",
+        "gm.Out": "write_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "gm_add_resid1",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_add_resid1|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=gm.Out,gm.X|w=gm.Y1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "gm.Out",
+        "gm.X"
+      ],
+      "writes": [
+        "gm.Y1"
+      ],
+      "buffer_roles": {
+        "gm.Out": "read_only",
+        "gm.X": "read_only",
+        "gm.Y1": "write_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "gm_layernorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "gm_layernorm1|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=64|sf=param_arg6=1e-05|r=gm.L0.Beta1,gm.L1.Gamma1,gm.Y1|w=gm.Y1n",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "gm.L1.Gamma1",
+          "expr": "b.layersDev[l].dGamma1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "gm.L0.Beta1",
+          "expr": "b.layersDev[l].dBeta1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "gm.L0.Beta1",
+        "gm.L1.Gamma1",
+        "gm.Y1"
+      ],
+      "writes": [
+        "gm.Y1n"
+      ],
+      "buffer_roles": {
+        "gm.L0.Beta1": "read_only",
+        "gm.L1.Gamma1": "read_only",
+        "gm.Y1": "read_only",
+        "gm.Y1n": "write_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "gm_ff1",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "gm_ff1|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=64|r=gm.L0.W1,gm.Y1n|w=gm.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.W1",
+          "expr": "b.layersDev[l].dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.W1",
+        "gm.Y1n"
+      ],
+      "writes": [
+        "gm.FF1"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "write_only",
+        "gm.L0.W1": "read_only",
+        "gm.Y1n": "read_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "gm_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "gm_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=gm.FF1|w=gm.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "gm.FF1"
+      ],
+      "writes": [
+        "gm.FF1"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "read_write"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "gm_ff2",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_ff2|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=128|r=gm.FF1,gm.L1.W2|w=gm.FF2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L1.W2",
+          "expr": "b.layersDev[l].dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "reads": [
+        "gm.FF1",
+        "gm.L1.W2"
+      ],
+      "writes": [
+        "gm.FF2"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "read_only",
+        "gm.FF2": "write_only",
+        "gm.L1.W2": "read_only"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "gm_add_resid2",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_add_resid2|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=gm.FF2,gm.Y1|w=gm.Y2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "gm.FF2",
+        "gm.Y1"
+      ],
+      "writes": [
+        "gm.Y2"
+      ],
+      "buffer_roles": {
+        "gm.FF2": "read_only",
+        "gm.Y1": "read_only",
+        "gm.Y2": "write_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "gm_layernorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "gm_layernorm2|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=64|sf=param_arg6=1e-05|r=gm.L1.Beta2,gm.L1.Gamma2,gm.Y2|w=gm.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "gm.L1.Gamma2",
+          "expr": "b.layersDev[l].dGamma2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "gm.L1.Beta2",
+          "expr": "b.layersDev[l].dBeta2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "gm.L1.Beta2",
+        "gm.L1.Gamma2",
+        "gm.Y2"
+      ],
+      "writes": [
+        "gm.X2"
+      ],
+      "buffer_roles": {
+        "gm.L1.Beta2": "read_only",
+        "gm.L1.Gamma2": "read_only",
+        "gm.X2": "write_only",
+        "gm.Y2": "read_only"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "gm_q_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_q_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wq,gm.X2|w=gm.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wq",
+          "expr": "b.layersDev[l].dWq"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wq",
+        "gm.X2"
+      ],
+      "writes": [
+        "gm.Q"
+      ],
+      "buffer_roles": {
+        "gm.L0.Wq": "read_only",
+        "gm.Q": "write_only",
+        "gm.X2": "read_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "gm_k_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_k_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wk,gm.X2|w=gm.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wk",
+          "expr": "b.layersDev[l].dWk"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wk",
+        "gm.X2"
+      ],
+      "writes": [
+        "gm.K"
+      ],
+      "buffer_roles": {
+        "gm.K": "write_only",
+        "gm.L0.Wk": "read_only",
+        "gm.X2": "read_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "gm_v_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_v_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.L0.Wv,gm.X2|w=gm.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wv",
+          "expr": "b.layersDev[l].dWv"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.Wv",
+        "gm.X2"
+      ],
+      "writes": [
+        "gm.V"
+      ],
+      "buffer_roles": {
+        "gm.L0.Wv": "read_only",
+        "gm.V": "write_only",
+        "gm.X2": "read_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "gm_attention_scores_masked",
+      "global_size": [
+        256,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        128,
+        1
+      ],
+      "num_wg_total": 4096,
+      "launch_signature": "gm_attention_scores_masked|g=256,1024,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=4|r=gm.K,gm.Q|w=gm.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "gm.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "gm.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "gm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 4
+      },
+      "reads": [
+        "gm.K",
+        "gm.Q"
+      ],
+      "writes": [
+        "gm.Scores"
+      ],
+      "buffer_roles": {
+        "gm.K": "read_only",
+        "gm.Q": "read_only",
+        "gm.Scores": "write_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "gm_softmax",
+      "global_size": [
+        256,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "gm_softmax|g=256,8,1|l=8,8,1|si=param_arg2=256;param_arg3=4|r=gm.Probs,gm.Scores|w=gm.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 4
+      },
+      "reads": [
+        "gm.Probs",
+        "gm.Scores"
+      ],
+      "writes": [
+        "gm.Probs"
+      ],
+      "buffer_roles": {
+        "gm.Probs": "read_write",
+        "gm.Scores": "read_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "gm_attention_context",
+      "global_size": [
+        16,
+        1024,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        2,
+        128,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_attention_context|g=16,1024,1|l=8,8,1|si=param_arg3=256;param_arg4=16;param_arg5=4|r=gm.Probs,gm.V|w=gm.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "gm.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "gm.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "gm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 4
+      },
+      "reads": [
+        "gm.Probs",
+        "gm.V"
+      ],
+      "writes": [
+        "gm.Context"
+      ],
+      "buffer_roles": {
+        "gm.Context": "write_only",
+        "gm.Probs": "read_only",
+        "gm.V": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "gm_o_proj",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_o_proj|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=64|r=gm.Context,gm.L0.Wo|w=gm.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.Wo",
+          "expr": "b.layersDev[l].dWo"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.Context",
+        "gm.L0.Wo"
+      ],
+      "writes": [
+        "gm.Out"
+      ],
+      "buffer_roles": {
+        "gm.Context": "read_only",
+        "gm.L0.Wo": "read_only",
+        "gm.Out": "write_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "gm_add_resid1",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_add_resid1|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=gm.Out,gm.X2|w=gm.Y1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "gm.Out",
+        "gm.X2"
+      ],
+      "writes": [
+        "gm.Y1"
+      ],
+      "buffer_roles": {
+        "gm.Out": "read_only",
+        "gm.X2": "read_only",
+        "gm.Y1": "write_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "gm_layernorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "gm_layernorm1|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=64|sf=param_arg6=1e-05|r=gm.L0.Beta1,gm.L1.Gamma1,gm.Y1|w=gm.Y1n",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "gm.L1.Gamma1",
+          "expr": "b.layersDev[l].dGamma1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "gm.L0.Beta1",
+          "expr": "b.layersDev[l].dBeta1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "gm.L0.Beta1",
+        "gm.L1.Gamma1",
+        "gm.Y1"
+      ],
+      "writes": [
+        "gm.Y1n"
+      ],
+      "buffer_roles": {
+        "gm.L0.Beta1": "read_only",
+        "gm.L1.Gamma1": "read_only",
+        "gm.Y1": "read_only",
+        "gm.Y1n": "write_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "gm_ff1",
+      "global_size": [
+        128,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        32,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "gm_ff1|g=128,256,1|l=8,8,1|si=param_arg3=256;param_arg4=128;param_arg5=64|r=gm.L0.W1,gm.Y1n|w=gm.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Y1n",
+          "expr": "b.dY1n"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L0.W1",
+          "expr": "b.layersDev[l].dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 64
+      },
+      "reads": [
+        "gm.L0.W1",
+        "gm.Y1n"
+      ],
+      "writes": [
+        "gm.FF1"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "write_only",
+        "gm.L0.W1": "read_only",
+        "gm.Y1n": "read_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "gm_relu",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "gm_relu|g=32768,1,1|l=64,1,1|si=param_arg1=32768|r=gm.FF1|w=gm.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32768
+      },
+      "reads": [
+        "gm.FF1"
+      ],
+      "writes": [
+        "gm.FF1"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "read_write"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "gm_ff2",
+      "global_size": [
+        64,
+        256,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        32,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_ff2|g=64,256,1|l=8,8,1|si=param_arg3=256;param_arg4=64;param_arg5=128|r=gm.FF1,gm.L1.W2|w=gm.FF2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.FF1",
+          "expr": "b.dFF1Buf"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.L1.W2",
+          "expr": "b.layersDev[l].dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "gm.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 64,
+        "param_arg5": 128
+      },
+      "reads": [
+        "gm.FF1",
+        "gm.L1.W2"
+      ],
+      "writes": [
+        "gm.FF2"
+      ],
+      "buffer_roles": {
+        "gm.FF1": "read_only",
+        "gm.FF2": "write_only",
+        "gm.L1.W2": "read_only"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "gm_add_resid2",
+      "global_size": [
+        16384,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        256,
+        1,
+        1
+      ],
+      "num_wg_total": 256,
+      "launch_signature": "gm_add_resid2|g=16384,1,1|l=64,1,1|si=param_arg3=16384|r=gm.FF2,gm.Y1|w=gm.Y2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "gm.Y1",
+          "expr": "b.dY1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "gm.FF2",
+          "expr": "b.dFF2Buf"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 16384
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 16384
+      },
+      "reads": [
+        "gm.FF2",
+        "gm.Y1"
+      ],
+      "writes": [
+        "gm.Y2"
+      ],
+      "buffer_roles": {
+        "gm.FF2": "read_only",
+        "gm.Y1": "read_only",
+        "gm.Y2": "write_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "gm_layernorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "gm_layernorm2|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=64|sf=param_arg6=1e-05|r=gm.L1.Beta2,gm.L1.Gamma2,gm.Y2|w=gm.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "gm.Y2",
+          "expr": "b.dY2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "gm.L1.Gamma2",
+          "expr": "b.layersDev[l].dGamma2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "gm.L1.Beta2",
+          "expr": "b.layersDev[l].dBeta2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "gm.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "gm.L1.Beta2",
+        "gm.L1.Gamma2",
+        "gm.Y2"
+      ],
+      "writes": [
+        "gm.X"
+      ],
+      "buffer_roles": {
+        "gm.L1.Beta2": "read_only",
+        "gm.L1.Gamma2": "read_only",
+        "gm.X": "write_only",
+        "gm.Y2": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 1,
+        "to": 3,
+        "buffer": "gm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "buffer": "gm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "buffer": "gm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "buffer": "gm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "buffer": "gm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "gm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "gm.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "gm.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "gm.Y1n",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "gm.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "gm.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "gm.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "gm.FF2",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 12,
+        "buffer": "gm.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "gm.Y2",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "gm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 14,
+        "buffer": "gm.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 3,
+        "to": 14,
+        "buffer": "gm.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 15,
+        "buffer": "gm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 15,
+        "buffer": "gm.K",
+        "type": "WAW"
+      },
+      {
+        "from": 3,
+        "to": 15,
+        "buffer": "gm.K",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 16,
+        "buffer": "gm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 16,
+        "buffer": "gm.V",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 16,
+        "buffer": "gm.V",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 17,
+        "buffer": "gm.K",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 17,
+        "buffer": "gm.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 17,
+        "buffer": "gm.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 17,
+        "buffer": "gm.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 4,
+        "to": 18,
+        "buffer": "gm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 18,
+        "buffer": "gm.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 18,
+        "buffer": "gm.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 18,
+        "buffer": "gm.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 19,
+        "buffer": "gm.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 19,
+        "buffer": "gm.V",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 19,
+        "buffer": "gm.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 19,
+        "buffer": "gm.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 20,
+        "buffer": "gm.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 20,
+        "buffer": "gm.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 20,
+        "buffer": "gm.Out",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 21,
+        "buffer": "gm.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 21,
+        "buffer": "gm.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 21,
+        "buffer": "gm.Y1",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 21,
+        "buffer": "gm.Y1",
+        "type": "WAR"
+      },
+      {
+        "from": 12,
+        "to": 21,
+        "buffer": "gm.Y1",
+        "type": "WAR"
+      },
+      {
+        "from": 21,
+        "to": 22,
+        "buffer": "gm.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 22,
+        "buffer": "gm.Y1n",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 22,
+        "buffer": "gm.Y1n",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 23,
+        "buffer": "gm.Y1n",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 23,
+        "buffer": "gm.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 23,
+        "buffer": "gm.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "gm.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "gm.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "gm.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 25,
+        "buffer": "gm.FF2",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 25,
+        "buffer": "gm.FF2",
+        "type": "WAR"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "gm.FF2",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 26,
+        "buffer": "gm.Y1",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 26,
+        "buffer": "gm.Y2",
+        "type": "WAW"
+      },
+      {
+        "from": 13,
+        "to": 26,
+        "buffer": "gm.Y2",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "gm.Y2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 27,
+        "buffer": "gm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 1,
+        "to": 27,
+        "buffer": "gm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 2,
+        "to": 27,
+        "buffer": "gm.X",
+        "type": "WAR"
+      },
+      {
+        "from": 7,
+        "to": 27,
+        "buffer": "gm.X",
+        "type": "WAR"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

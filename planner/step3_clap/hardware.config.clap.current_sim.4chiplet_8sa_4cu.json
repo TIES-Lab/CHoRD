@@ -1,0 +1,34 @@
+{
+  "chiplets": 4,
+  "page_bytes": 4096,
+  "sa_per_chiplet": 8,
+  "cu_per_sa": 4,
+  "chiplet_cap_pages": 800,
+  "overflow_pages": 128,
+  "banks_per_chiplet": 8,
+  "require_contiguous_regions": true,
+  "max_contiguous_group_pages": 8,
+  "candidate_group_pages": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "purity_threshold": 1.0,
+  "diffuse_threshold": 0.45,
+  "meta": {
+    "description": "Standalone CLAP-style placement-only config for the current mgpusim-chiplet simulator, using 4 chiplets x 8 SA/chiplet x 4 CU/SA.",
+    "workflow": [
+      "1) baseline RR run with 4-chiplet simulator flags to generate profile.json",
+      "2) standalone CLAP planner consumes the 4-chiplet profile.json and emits placement-only explicit plan",
+      "3) final run uses RR scheduling with the explicit CLAP-style page placement"
+    ],
+    "banks_note": "banks_per_chiplet is set to 8 so total memory banks remain 32, matching the previous 8 chiplets x 4 banks/chiplet setup.",
+    "capacity_note": "chiplet_cap_pages is doubled from 400 to 800 to preserve approximate total normal placement capacity after reducing chiplets from 8 to 4. overflow_pages is doubled from 64 to 128 for the same reason.",
+    "note": "This config belongs to the independent standalone CLAP branch. The CLAP planner clamps grouped contiguous decisions by max_contiguous_group_pages, which is set to banks_per_chiplet=8 here.",
+    "selection_note": "Use per-buffer page-group selection by default to better match CLAP's per-data-structure suitable page-size selection."
+  },
+  "group_selection_mode": "per-buffer"
+}

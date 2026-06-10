@@ -1,0 +1,1329 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "lenet",
+  "package": "lenet",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "08f886a0f68b1a9c5f3cc61dc13c0023c4d126ea739d6f1963e1d8ebeba00c96",
+    "kernels.cl": "895a6102d58cb83ac4eba6283402bfec0bb9a1e83e135313a4ae783a880cfdab",
+    "kernels.config.json": "770afb55e10341f91bbcdbb3778b4a7149e34ddd36f25b8082544d550be030ab",
+    "kernels.json": "47e7b3c4c2437ed340395ad997cf33d1de3f3171857620396ea54c711d114082"
+  },
+  "params": {
+    "Cin": 1,
+    "Conv1Out": 4,
+    "Conv2Out": 8,
+    "FC1Out": 32,
+    "InH": 512,
+    "InW": 512,
+    "NumClass": 10
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "ln.Conv1.B",
+      "go_var": "b.dB1",
+      "bytes_expr": "uint64(b.Conv1Out * 4)",
+      "bytes": 16,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.Conv1.Out",
+      "go_var": "b.dConv1",
+      "bytes_expr": "uint64(b.Conv1Out * h1 * w1 * 4)",
+      "bytes": 4129024,
+      "pages": 1009,
+      "unified": false
+    },
+    {
+      "tag": "ln.Conv1.W",
+      "go_var": "b.dW1",
+      "bytes_expr": "uint64(w1Size * 4)",
+      "bytes": 400,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.Conv2.B",
+      "go_var": "b.dB2",
+      "bytes_expr": "uint64(b.Conv2Out * 4)",
+      "bytes": 32,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.Conv2.Out",
+      "go_var": "b.dConv2",
+      "bytes_expr": "uint64(b.Conv2Out * h2 * w2 * 4)",
+      "bytes": 2000000,
+      "pages": 489,
+      "unified": false
+    },
+    {
+      "tag": "ln.Conv2.W",
+      "go_var": "b.dW2",
+      "bytes_expr": "uint64(w2Size * 4)",
+      "bytes": 3200,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC1.B",
+      "go_var": "b.dBfc1",
+      "bytes_expr": "uint64(b.FC1Out * 4)",
+      "bytes": 128,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC1.Out",
+      "go_var": "b.dFC1",
+      "bytes_expr": "uint64(b.FC1Out * 4)",
+      "bytes": 128,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC1.W",
+      "go_var": "b.dWfc1",
+      "bytes_expr": "uint64(b.FC1Out * flat * 4)",
+      "bytes": 16000000,
+      "pages": 3907,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC2.B",
+      "go_var": "b.dBfc2",
+      "bytes_expr": "uint64(b.NumClass * 4)",
+      "bytes": 40,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC2.Out",
+      "go_var": "b.dOut",
+      "bytes_expr": "uint64(b.NumClass * 4)",
+      "bytes": 40,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.FC2.W",
+      "go_var": "b.dWfc2",
+      "bytes_expr": "uint64(b.NumClass * b.FC1Out * 4)",
+      "bytes": 1280,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "ln.Input",
+      "go_var": "b.dIn",
+      "bytes_expr": "uint64(b.Cin * b.InH * b.InW * 4)",
+      "bytes": 1048576,
+      "pages": 256,
+      "unified": false
+    },
+    {
+      "tag": "ln.Pool1.Out",
+      "go_var": "b.dPool1",
+      "bytes_expr": "uint64(b.Conv1Out * h1p * w1p * 4)",
+      "bytes": 1032256,
+      "pages": 253,
+      "unified": false
+    },
+    {
+      "tag": "ln.Pool2.Out",
+      "go_var": "b.dPool2",
+      "bytes_expr": "uint64(b.Conv2Out * h2p * w2p * 4)",
+      "bytes": 500000,
+      "pages": 123,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "ln_conv2d",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "W",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "B",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "Cin",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Hin",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Win",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 7,
+          "name": "Cout",
+          "ir_name": "arg7",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 8,
+          "name": "K",
+          "ir_name": "arg8",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 9,
+          "name": "Stride",
+          "ir_name": "arg9",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 10,
+          "name": "Pad",
+          "ir_name": "arg10",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 11,
+          "name": "Hout",
+          "ir_name": "arg11",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 12,
+          "name": "Wout",
+          "ir_name": "arg12",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "ln_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "ln_maxpool2d",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Hin",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "Win",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Pool",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Stride",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 7,
+          "name": "Hout",
+          "ir_name": "arg7",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 8,
+          "name": "Wout",
+          "ir_name": "arg8",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "ln_fc",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "W",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "B",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "InDim",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "OutDim",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "ln_conv2d",
+      "global_size": [
+        512,
+        2032,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        64,
+        254,
+        1
+      ],
+      "num_wg_total": 16256,
+      "launch_signature": "ln_conv2d|g=512,2032,1|l=8,8,1|si=param_arg10=0;param_arg11=508;param_arg12=508;param_arg4=1;param_arg5=512;param_arg6=512;param_arg7=4;param_arg8=5;param_arg9=1|r=ln.Conv1.B,ln.Conv1.W,ln.Input|w=ln.Conv1.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.Input",
+          "expr": "b.dIn"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "ln.Conv1.W",
+          "expr": "b.dW1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "ln.Conv1.B",
+          "expr": "b.dB1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.Conv1.Out",
+          "expr": "b.dConv1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 512
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 512
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 4
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 5
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar"
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 508
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 508
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 0,
+        "param_arg11": 508,
+        "param_arg12": 508,
+        "param_arg4": 1,
+        "param_arg5": 512,
+        "param_arg6": 512,
+        "param_arg7": 4,
+        "param_arg8": 5,
+        "param_arg9": 1
+      },
+      "reads": [
+        "ln.Conv1.B",
+        "ln.Conv1.W",
+        "ln.Input"
+      ],
+      "writes": [
+        "ln.Conv1.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv1.B": "read_only",
+        "ln.Conv1.Out": "write_only",
+        "ln.Conv1.W": "read_only",
+        "ln.Input": "read_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "ln_relu",
+      "global_size": [
+        1032256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        16129,
+        1,
+        1
+      ],
+      "num_wg_total": 16129,
+      "launch_signature": "ln_relu|g=1032256,1,1|l=64,1,1|si=param_arg1=1032256|r=ln.Conv1.Out|w=ln.Conv1.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "ln.Conv1.Out",
+          "expr": "b.dConv1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 1032256
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 1032256
+      },
+      "reads": [
+        "ln.Conv1.Out"
+      ],
+      "writes": [
+        "ln.Conv1.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv1.Out": "read_write"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "ln_maxpool2d",
+      "global_size": [
+        256,
+        1016,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        127,
+        1
+      ],
+      "num_wg_total": 4064,
+      "launch_signature": "ln_maxpool2d|g=256,1016,1|l=8,8,1|si=param_arg2=4;param_arg3=508;param_arg4=508;param_arg5=2;param_arg6=2;param_arg7=254;param_arg8=254|r=ln.Conv1.Out|w=ln.Pool1.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.Conv1.Out",
+          "expr": "b.dConv1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.Pool1.Out",
+          "expr": "b.dPool1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "scalar",
+          "value": 4
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 508
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 508
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Pool",
+          "kind": "scalar",
+          "value": 2
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 2
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 254
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 254
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 4,
+        "param_arg3": 508,
+        "param_arg4": 508,
+        "param_arg5": 2,
+        "param_arg6": 2,
+        "param_arg7": 254,
+        "param_arg8": 254
+      },
+      "reads": [
+        "ln.Conv1.Out"
+      ],
+      "writes": [
+        "ln.Pool1.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv1.Out": "read_only",
+        "ln.Pool1.Out": "write_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "ln_conv2d",
+      "global_size": [
+        256,
+        2000,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        32,
+        250,
+        1
+      ],
+      "num_wg_total": 8000,
+      "launch_signature": "ln_conv2d|g=256,2000,1|l=8,8,1|si=param_arg10=0;param_arg11=250;param_arg12=250;param_arg4=4;param_arg5=254;param_arg6=254;param_arg7=8;param_arg8=5;param_arg9=1|r=ln.Conv2.B,ln.Conv2.W,ln.Pool1.Out|w=ln.Conv2.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.Pool1.Out",
+          "expr": "b.dPool1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "ln.Conv2.W",
+          "expr": "b.dW2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "ln.Conv2.B",
+          "expr": "b.dB2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.Conv2.Out",
+          "expr": "b.dConv2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Cin",
+          "kind": "scalar",
+          "value": 4
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 254
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 254
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Cout",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 5
+        },
+        {
+          "arg_index": 9,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 1
+        },
+        {
+          "arg_index": 10,
+          "arg_name": "Pad",
+          "kind": "scalar"
+        },
+        {
+          "arg_index": 11,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 250
+        },
+        {
+          "arg_index": 12,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 250
+        }
+      ],
+      "scalar_map": {
+        "param_arg10": 0,
+        "param_arg11": 250,
+        "param_arg12": 250,
+        "param_arg4": 4,
+        "param_arg5": 254,
+        "param_arg6": 254,
+        "param_arg7": 8,
+        "param_arg8": 5,
+        "param_arg9": 1
+      },
+      "reads": [
+        "ln.Conv2.B",
+        "ln.Conv2.W",
+        "ln.Pool1.Out"
+      ],
+      "writes": [
+        "ln.Conv2.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv2.B": "read_only",
+        "ln.Conv2.Out": "write_only",
+        "ln.Conv2.W": "read_only",
+        "ln.Pool1.Out": "read_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "ln_relu",
+      "global_size": [
+        500032,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        7813,
+        1,
+        1
+      ],
+      "num_wg_total": 7813,
+      "launch_signature": "ln_relu|g=500032,1,1|l=64,1,1|si=param_arg1=500000|r=ln.Conv2.Out|w=ln.Conv2.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "ln.Conv2.Out",
+          "expr": "b.dConv2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 500000
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 500000
+      },
+      "reads": [
+        "ln.Conv2.Out"
+      ],
+      "writes": [
+        "ln.Conv2.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv2.Out": "read_write"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "ln_maxpool2d",
+      "global_size": [
+        128,
+        1000,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        16,
+        125,
+        1
+      ],
+      "num_wg_total": 2000,
+      "launch_signature": "ln_maxpool2d|g=128,1000,1|l=8,8,1|si=param_arg2=8;param_arg3=250;param_arg4=250;param_arg5=2;param_arg6=2;param_arg7=125;param_arg8=125|r=ln.Conv2.Out|w=ln.Pool2.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.Conv2.Out",
+          "expr": "b.dConv2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.Pool2.Out",
+          "expr": "b.dPool2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Hin",
+          "kind": "scalar",
+          "value": 250
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "Win",
+          "kind": "scalar",
+          "value": 250
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Pool",
+          "kind": "scalar",
+          "value": 2
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Stride",
+          "kind": "scalar",
+          "value": 2
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "Hout",
+          "kind": "scalar",
+          "value": 125
+        },
+        {
+          "arg_index": 8,
+          "arg_name": "Wout",
+          "kind": "scalar",
+          "value": 125
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 8,
+        "param_arg3": 250,
+        "param_arg4": 250,
+        "param_arg5": 2,
+        "param_arg6": 2,
+        "param_arg7": 125,
+        "param_arg8": 125
+      },
+      "reads": [
+        "ln.Conv2.Out"
+      ],
+      "writes": [
+        "ln.Pool2.Out"
+      ],
+      "buffer_roles": {
+        "ln.Conv2.Out": "read_only",
+        "ln.Pool2.Out": "write_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "ln_fc",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "ln_fc|g=64,1,1|l=64,1,1|si=param_arg4=125000;param_arg5=32|r=ln.FC1.B,ln.FC1.W,ln.Pool2.Out|w=ln.FC1.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.Pool2.Out",
+          "expr": "b.dPool2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "ln.FC1.W",
+          "expr": "b.dWfc1"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "ln.FC1.B",
+          "expr": "b.dBfc1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.FC1.Out",
+          "expr": "b.dFC1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "InDim",
+          "kind": "scalar",
+          "value": 125000
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "OutDim",
+          "kind": "scalar",
+          "value": 32
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 125000,
+        "param_arg5": 32
+      },
+      "reads": [
+        "ln.FC1.B",
+        "ln.FC1.W",
+        "ln.Pool2.Out"
+      ],
+      "writes": [
+        "ln.FC1.Out"
+      ],
+      "buffer_roles": {
+        "ln.FC1.B": "read_only",
+        "ln.FC1.Out": "write_only",
+        "ln.FC1.W": "read_only",
+        "ln.Pool2.Out": "read_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "ln_relu",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "ln_relu|g=64,1,1|l=64,1,1|si=param_arg1=32|r=ln.FC1.Out|w=ln.FC1.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "ln.FC1.Out",
+          "expr": "b.dFC1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 32
+      },
+      "reads": [
+        "ln.FC1.Out"
+      ],
+      "writes": [
+        "ln.FC1.Out"
+      ],
+      "buffer_roles": {
+        "ln.FC1.Out": "read_write"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "ln_fc",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "ln_fc|g=64,1,1|l=64,1,1|si=param_arg4=32;param_arg5=10|r=ln.FC1.Out,ln.FC2.B,ln.FC2.W|w=ln.FC2.Out",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "ln.FC1.Out",
+          "expr": "b.dFC1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "ln.FC2.W",
+          "expr": "b.dWfc2"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "ln.FC2.B",
+          "expr": "b.dBfc2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "ln.FC2.Out",
+          "expr": "b.dOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "InDim",
+          "kind": "scalar",
+          "value": 32
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "OutDim",
+          "kind": "scalar",
+          "value": 10
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 32,
+        "param_arg5": 10
+      },
+      "reads": [
+        "ln.FC1.Out",
+        "ln.FC2.B",
+        "ln.FC2.W"
+      ],
+      "writes": [
+        "ln.FC2.Out"
+      ],
+      "buffer_roles": {
+        "ln.FC1.Out": "read_only",
+        "ln.FC2.B": "read_only",
+        "ln.FC2.Out": "write_only",
+        "ln.FC2.W": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "ln.Conv1.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "ln.Conv1.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 2,
+        "buffer": "ln.Conv1.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 3,
+        "buffer": "ln.Pool1.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "buffer": "ln.Conv2.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 4,
+        "buffer": "ln.Conv2.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "buffer": "ln.Conv2.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "ln.Pool2.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "ln.FC1.Out",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "ln.FC1.Out",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "ln.FC1.Out",
+        "type": "RAW"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

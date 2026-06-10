@@ -1,0 +1,5606 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "switch_tiny",
+  "package": "switch_tiny",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "aff1dcd0e0caf36ff2f3d33b755bc5107dec5ea86afc6ee7aca811d32649adb4",
+    "kernels.cl": "75bba48c22bd3c8d82daf2e9e760444441ca1f54f13259e3e89c82d48168f30a",
+    "kernels.config.json": "c67430ab7090ec7e9e60dfc78db51ec3c64b21d9cedab72e636003496c52294b",
+    "kernels.json": "09f6868f2b6e1d40d2b6c188492f1b5517bb64b46b9300f332c61e15445c0c61"
+  },
+  "params": {
+    "DFF": 64,
+    "DModel": 64,
+    "Experts": 4,
+    "Layers": 2,
+    "NumHeads": 8,
+    "SeqLen": 64
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "sw.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.FF1",
+      "go_var": "b.dFF1",
+      "bytes_expr": "uint64(b.SeqLen * b.DFF * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.K",
+      "go_var": "b.dK",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.B1",
+      "go_var": "b.dB1[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.B2",
+      "go_var": "b.dB2[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E0.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E0.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E1.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E1.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E2.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E2.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E3.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.E3.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.G1",
+      "go_var": "b.dG1[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.G2",
+      "go_var": "b.dG2[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.Wrouter",
+      "go_var": "b.dWrouter[l]",
+      "bytes_expr": "wRouterBytes",
+      "bytes": 1024,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L0.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.B1",
+      "go_var": "b.dB1[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.B2",
+      "go_var": "b.dB2[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E0.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E0.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E1.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E1.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E2.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E2.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E3.W1",
+      "go_var": "b.dExpertW1[idx]",
+      "bytes_expr": "expertW1Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.E3.W2",
+      "go_var": "b.dExpertW2[idx]",
+      "bytes_expr": "expertW2Bytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.G1",
+      "go_var": "b.dG1[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.G2",
+      "go_var": "b.dG2[l]",
+      "bytes_expr": "normVecBytes",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.Wrouter",
+      "go_var": "b.dWrouter[l]",
+      "bytes_expr": "wRouterBytes",
+      "bytes": 1024,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.L1.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.Probs",
+      "go_var": "b.dProbs",
+      "bytes_expr": "uint64(b.NumHeads * b.SeqLen * b.SeqLen * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "sw.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.Routes",
+      "go_var": "b.dRoutes",
+      "bytes_expr": "uint64(b.SeqLen * 4)",
+      "bytes": 256,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "sw.Scores",
+      "go_var": "b.dScores",
+      "bytes_expr": "uint64(b.NumHeads * b.SeqLen * b.SeqLen * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "sw.TmpOut",
+      "go_var": "b.dTmpOut",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.V",
+      "go_var": "b.dV",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.X",
+      "go_var": "b.dX",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    },
+    {
+      "tag": "sw.X2",
+      "go_var": "b.dX2",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 16384,
+      "pages": 4,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "sw_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_attention_scores",
+      "args": [
+        {
+          "index": 0,
+          "name": "Q",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "K",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Scores",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_softmax",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "SeqLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "NumHeads",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 5,
+        "num_global_loads": 3,
+        "num_global_stores": 2,
+        "num_loads": 3,
+        "num_stores": 2,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 2,
+        "recorded_loads": 3,
+        "recorded_stores": 2
+      }
+    },
+    {
+      "name": "sw_attention_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "Probs",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Context",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_layernorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_layernorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_router",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "W",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Routes",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DModel",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "Experts",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_expert_ff1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Routes",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "W",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "DFF",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 7,
+          "name": "ExpertID",
+          "ir_name": "arg7",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "sw_expert_ff2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Routes",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "W",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DFF",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "DModel",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 7,
+          "name": "ExpertID",
+          "ir_name": "arg7",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "sw_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=64|sf=param_arg6=1e-05|r=sw.L0.B1,sw.L0.G1,sw.X|w=sw.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "sw.L0.G1",
+          "expr": "b.dG1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "sw.L0.B1",
+          "expr": "b.dB1[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "sw.L0.B1",
+        "sw.L0.G1",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.X2"
+      ],
+      "buffer_roles": {
+        "sw.L0.B1": "read_only",
+        "sw.L0.G1": "read_only",
+        "sw.X": "read_only",
+        "sw.X2": "write_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "sw_q_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_q_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L0.Wq,sw.X2|w=sw.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L0.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L0.Wq",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.Q"
+      ],
+      "buffer_roles": {
+        "sw.L0.Wq": "read_only",
+        "sw.Q": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "sw_k_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_k_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L0.Wk,sw.X2|w=sw.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L0.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L0.Wk",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.K"
+      ],
+      "buffer_roles": {
+        "sw.K": "write_only",
+        "sw.L0.Wk": "read_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "sw_v_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_v_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L0.Wv,sw.X2|w=sw.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L0.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L0.Wv",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.V"
+      ],
+      "buffer_roles": {
+        "sw.L0.Wv": "read_only",
+        "sw.V": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "sw_attention_scores",
+      "global_size": [
+        64,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        64,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "sw_attention_scores|g=64,512,1|l=8,8,1|si=param_arg3=64;param_arg4=8;param_arg5=8|r=sw.K,sw.Q|w=sw.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "sw.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "sw.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "sw.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 8,
+        "param_arg5": 8
+      },
+      "reads": [
+        "sw.K",
+        "sw.Q"
+      ],
+      "writes": [
+        "sw.Scores"
+      ],
+      "buffer_roles": {
+        "sw.K": "read_only",
+        "sw.Q": "read_only",
+        "sw.Scores": "write_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "sw_softmax",
+      "global_size": [
+        64,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        1,
+        1
+      ],
+      "num_wg_total": 8,
+      "launch_signature": "sw_softmax|g=64,8,1|l=8,8,1|si=param_arg2=64;param_arg3=8|r=sw.Probs,sw.Scores|w=sw.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 64,
+        "param_arg3": 8
+      },
+      "reads": [
+        "sw.Probs",
+        "sw.Scores"
+      ],
+      "writes": [
+        "sw.Probs"
+      ],
+      "buffer_roles": {
+        "sw.Probs": "read_write",
+        "sw.Scores": "read_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "sw_attention_context",
+      "global_size": [
+        8,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        1,
+        64,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_attention_context|g=8,512,1|l=8,8,1|si=param_arg3=64;param_arg4=8;param_arg5=8|r=sw.Probs,sw.V|w=sw.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "sw.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "sw.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "sw.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 8,
+        "param_arg5": 8
+      },
+      "reads": [
+        "sw.Probs",
+        "sw.V"
+      ],
+      "writes": [
+        "sw.Context"
+      ],
+      "buffer_roles": {
+        "sw.Context": "write_only",
+        "sw.Probs": "read_only",
+        "sw.V": "read_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "sw_o_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_o_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.Context,sw.L0.Wo|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L0.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.Context",
+        "sw.L0.Wo"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.Context": "read_only",
+        "sw.L0.Wo": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "sw_add_resid1",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_add_resid1|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=sw.TmpOut,sw.X|w=sw.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "sw.TmpOut",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.X2"
+      ],
+      "buffer_roles": {
+        "sw.TmpOut": "read_only",
+        "sw.X": "read_only",
+        "sw.X2": "write_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "sw_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=64|sf=param_arg6=1e-05|r=sw.L0.B2,sw.L0.G2,sw.X2|w=sw.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "sw.L0.G2",
+          "expr": "b.dG2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "sw.L0.B2",
+          "expr": "b.dB2[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "sw.L0.B2",
+        "sw.L0.G2",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.X"
+      ],
+      "buffer_roles": {
+        "sw.L0.B2": "read_only",
+        "sw.L0.G2": "read_only",
+        "sw.X": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "sw_router",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_router|g=64,1,1|l=64,1,1|si=param_arg3=64;param_arg4=64;param_arg5=4|r=sw.L0.Wrouter,sw.X|w=sw.Routes",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.Wrouter",
+          "expr": "b.dWrouter[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Experts",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 4
+      },
+      "reads": [
+        "sw.L0.Wrouter",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.Routes"
+      ],
+      "buffer_roles": {
+        "sw.L0.Wrouter": "read_only",
+        "sw.Routes": "write_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=0|r=sw.L0.E0.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E0.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar"
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 0
+      },
+      "reads": [
+        "sw.L0.E0.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L0.E0.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=0|r=sw.FF1,sw.L0.E0.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E0.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar"
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 0
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L0.E0.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L0.E0.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=1|r=sw.L0.E1.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E1.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 1
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 1
+      },
+      "reads": [
+        "sw.L0.E1.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L0.E1.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=1|r=sw.FF1,sw.L0.E1.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E1.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 1
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 1
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L0.E1.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L0.E1.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=2|r=sw.L0.E2.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E2.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 2
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 2
+      },
+      "reads": [
+        "sw.L0.E2.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L0.E2.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=2|r=sw.FF1,sw.L0.E2.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E2.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 2
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 2
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L0.E2.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L0.E2.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=3|r=sw.L0.E3.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E3.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 3
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 3
+      },
+      "reads": [
+        "sw.L0.E3.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L0.E3.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=3|r=sw.FF1,sw.L0.E3.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L0.E3.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 3
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 3
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L0.E3.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L0.E3.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "sw_add_resid2",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_add_resid2|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=sw.TmpOut,sw.X2|w=sw.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "sw.TmpOut",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.X"
+      ],
+      "buffer_roles": {
+        "sw.TmpOut": "read_only",
+        "sw.X": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "sw_layernorm1",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_layernorm1|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=64|sf=param_arg6=1e-05|r=sw.L1.B1,sw.L1.G1,sw.X|w=sw.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "sw.L1.G1",
+          "expr": "b.dG1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "sw.L1.B1",
+          "expr": "b.dB1[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "sw.L1.B1",
+        "sw.L1.G1",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.X2"
+      ],
+      "buffer_roles": {
+        "sw.L1.B1": "read_only",
+        "sw.L1.G1": "read_only",
+        "sw.X": "read_only",
+        "sw.X2": "write_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "sw_q_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_q_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L1.Wq,sw.X2|w=sw.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L1.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L1.Wq",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.Q"
+      ],
+      "buffer_roles": {
+        "sw.L1.Wq": "read_only",
+        "sw.Q": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "sw_k_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_k_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L1.Wk,sw.X2|w=sw.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L1.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L1.Wk",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.K"
+      ],
+      "buffer_roles": {
+        "sw.K": "write_only",
+        "sw.L1.Wk": "read_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "sw_v_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_v_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.L1.Wv,sw.X2|w=sw.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L1.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.L1.Wv",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.V"
+      ],
+      "buffer_roles": {
+        "sw.L1.Wv": "read_only",
+        "sw.V": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "sw_attention_scores",
+      "global_size": [
+        64,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        64,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "sw_attention_scores|g=64,512,1|l=8,8,1|si=param_arg3=64;param_arg4=8;param_arg5=8|r=sw.K,sw.Q|w=sw.Scores",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Q",
+          "kind": "buffer",
+          "tag": "sw.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "K",
+          "kind": "buffer",
+          "tag": "sw.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Scores",
+          "kind": "buffer",
+          "tag": "sw.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 8,
+        "param_arg5": 8
+      },
+      "reads": [
+        "sw.K",
+        "sw.Q"
+      ],
+      "writes": [
+        "sw.Scores"
+      ],
+      "buffer_roles": {
+        "sw.K": "read_only",
+        "sw.Q": "read_only",
+        "sw.Scores": "write_only"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "sw_softmax",
+      "global_size": [
+        64,
+        8,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        1,
+        1
+      ],
+      "num_wg_total": 8,
+      "launch_signature": "sw_softmax|g=64,8,1|l=8,8,1|si=param_arg2=64;param_arg3=8|r=sw.Probs,sw.Scores|w=sw.Probs",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.Scores",
+          "expr": "b.dScores"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 64,
+        "param_arg3": 8
+      },
+      "reads": [
+        "sw.Probs",
+        "sw.Scores"
+      ],
+      "writes": [
+        "sw.Probs"
+      ],
+      "buffer_roles": {
+        "sw.Probs": "read_write",
+        "sw.Scores": "read_only"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "sw_attention_context",
+      "global_size": [
+        8,
+        512,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        1,
+        64,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_attention_context|g=8,512,1|l=8,8,1|si=param_arg3=64;param_arg4=8;param_arg5=8|r=sw.Probs,sw.V|w=sw.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "Probs",
+          "kind": "buffer",
+          "tag": "sw.Probs",
+          "expr": "b.dProbs"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "sw.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "sw.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 8
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 8,
+        "param_arg5": 8
+      },
+      "reads": [
+        "sw.Probs",
+        "sw.V"
+      ],
+      "writes": [
+        "sw.Context"
+      ],
+      "buffer_roles": {
+        "sw.Context": "write_only",
+        "sw.Probs": "read_only",
+        "sw.V": "read_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "sw_o_proj",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_o_proj|g=64,64,1|l=8,8,1|si=param_arg3=64;param_arg4=64;param_arg5=64|r=sw.Context,sw.L1.Wo|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.L1.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 64
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "reads": [
+        "sw.Context",
+        "sw.L1.Wo"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.Context": "read_only",
+        "sw.L1.Wo": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 28,
+      "kernel": "sw_add_resid1",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_add_resid1|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=sw.TmpOut,sw.X|w=sw.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "sw.TmpOut",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.X2"
+      ],
+      "buffer_roles": {
+        "sw.TmpOut": "read_only",
+        "sw.X": "read_only",
+        "sw.X2": "write_only"
+      }
+    },
+    {
+      "id": 29,
+      "kernel": "sw_layernorm2",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_layernorm2|g=64,1,1|l=64,1,1|si=param_arg4=64;param_arg5=64|sf=param_arg6=1e-05|r=sw.L1.B2,sw.L1.G2,sw.X2|w=sw.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "sw.L1.G2",
+          "expr": "b.dG2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "sw.L1.B2",
+          "expr": "b.dB2[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "sw.L1.B2",
+        "sw.L1.G2",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.X"
+      ],
+      "buffer_roles": {
+        "sw.L1.B2": "read_only",
+        "sw.L1.G2": "read_only",
+        "sw.X": "write_only",
+        "sw.X2": "read_only"
+      }
+    },
+    {
+      "id": 30,
+      "kernel": "sw_router",
+      "global_size": [
+        64,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1,
+        1,
+        1
+      ],
+      "num_wg_total": 1,
+      "launch_signature": "sw_router|g=64,1,1|l=64,1,1|si=param_arg3=64;param_arg4=64;param_arg5=4|r=sw.L1.Wrouter,sw.X|w=sw.Routes",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.Wrouter",
+          "expr": "b.dWrouter[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "Experts",
+          "kind": "scalar",
+          "value": 4
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 64,
+        "param_arg4": 64,
+        "param_arg5": 4
+      },
+      "reads": [
+        "sw.L1.Wrouter",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.Routes"
+      ],
+      "buffer_roles": {
+        "sw.L1.Wrouter": "read_only",
+        "sw.Routes": "write_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 31,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=0|r=sw.L1.E0.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E0.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar"
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 0
+      },
+      "reads": [
+        "sw.L1.E0.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L1.E0.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 32,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=0|r=sw.FF1,sw.L1.E0.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E0.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar"
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 0
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L1.E0.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L1.E0.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 33,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=1|r=sw.L1.E1.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E1.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 1
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 1
+      },
+      "reads": [
+        "sw.L1.E1.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L1.E1.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 34,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=1|r=sw.FF1,sw.L1.E1.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E1.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 1
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 1
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L1.E1.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L1.E1.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 35,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=2|r=sw.L1.E2.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E2.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 2
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 2
+      },
+      "reads": [
+        "sw.L1.E2.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L1.E2.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 36,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=2|r=sw.FF1,sw.L1.E2.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E2.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 2
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 2
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L1.E2.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L1.E2.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 37,
+      "kernel": "sw_expert_ff1",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff1|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=3|r=sw.L1.E3.W1,sw.Routes,sw.X|w=sw.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E3.W1",
+          "expr": "b.dExpertW1[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 3
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 3
+      },
+      "reads": [
+        "sw.L1.E3.W1",
+        "sw.Routes",
+        "sw.X"
+      ],
+      "writes": [
+        "sw.FF1"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "write_only",
+        "sw.L1.E3.W1": "read_only",
+        "sw.Routes": "read_only",
+        "sw.X": "read_only"
+      }
+    },
+    {
+      "id": 38,
+      "kernel": "sw_expert_ff2",
+      "global_size": [
+        64,
+        64,
+        1
+      ],
+      "local_size": [
+        8,
+        8,
+        1
+      ],
+      "num_wg": [
+        8,
+        8,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_expert_ff2|g=64,64,1|l=8,8,1|si=param_arg4=64;param_arg5=64;param_arg6=64;param_arg7=3|r=sw.FF1,sw.L1.E3.W2,sw.Routes|w=sw.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "sw.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Routes",
+          "kind": "buffer",
+          "tag": "sw.Routes",
+          "expr": "b.dRoutes"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "W",
+          "kind": "buffer",
+          "tag": "sw.L1.E3.W2",
+          "expr": "b.dExpertW2[idx]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DFF",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 64
+        },
+        {
+          "arg_index": 7,
+          "arg_name": "ExpertID",
+          "kind": "scalar",
+          "value": 3
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 64,
+        "param_arg5": 64,
+        "param_arg6": 64,
+        "param_arg7": 3
+      },
+      "reads": [
+        "sw.FF1",
+        "sw.L1.E3.W2",
+        "sw.Routes"
+      ],
+      "writes": [
+        "sw.TmpOut"
+      ],
+      "buffer_roles": {
+        "sw.FF1": "read_only",
+        "sw.L1.E3.W2": "read_only",
+        "sw.Routes": "read_only",
+        "sw.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 39,
+      "kernel": "sw_add_resid2",
+      "global_size": [
+        4096,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        64,
+        1,
+        1
+      ],
+      "num_wg_total": 64,
+      "launch_signature": "sw_add_resid2|g=4096,1,1|l=64,1,1|si=param_arg3=4096|r=sw.TmpOut,sw.X2|w=sw.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "sw.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "sw.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "sw.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 4096
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 4096
+      },
+      "reads": [
+        "sw.TmpOut",
+        "sw.X2"
+      ],
+      "writes": [
+        "sw.X"
+      ],
+      "buffer_roles": {
+        "sw.TmpOut": "read_only",
+        "sw.X": "write_only",
+        "sw.X2": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 4,
+        "buffer": "sw.K",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "buffer": "sw.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 5,
+        "buffer": "sw.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "sw.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 6,
+        "buffer": "sw.V",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 7,
+        "buffer": "sw.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "sw.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 8,
+        "buffer": "sw.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 2,
+        "to": 8,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 3,
+        "to": 8,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 9,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 11,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 12,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 12,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 12,
+        "buffer": "sw.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 13,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 13,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 13,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 14,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 14,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 15,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 15,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 15,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 16,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 16,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 17,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 17,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 17,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 16,
+        "to": 17,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 18,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 18,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 18,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 18,
+        "to": 19,
+        "buffer": "sw.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 19,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 11,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 19,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 20,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 20,
+        "buffer": "sw.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 20,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 20,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 21,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 21,
+        "buffer": "sw.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 21,
+        "buffer": "sw.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 22,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 22,
+        "buffer": "sw.K",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 22,
+        "buffer": "sw.K",
+        "type": "WAR"
+      },
+      {
+        "from": 20,
+        "to": 23,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 23,
+        "buffer": "sw.V",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 23,
+        "buffer": "sw.V",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 24,
+        "buffer": "sw.K",
+        "type": "RAW"
+      },
+      {
+        "from": 21,
+        "to": 24,
+        "buffer": "sw.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 24,
+        "buffer": "sw.Scores",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 24,
+        "buffer": "sw.Scores",
+        "type": "WAR"
+      },
+      {
+        "from": 5,
+        "to": 25,
+        "buffer": "sw.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "sw.Scores",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 25,
+        "buffer": "sw.Probs",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 25,
+        "buffer": "sw.Probs",
+        "type": "WAR"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "sw.Probs",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 26,
+        "buffer": "sw.V",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 26,
+        "buffer": "sw.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 7,
+        "to": 26,
+        "buffer": "sw.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "sw.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 18,
+        "to": 27,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 19,
+        "to": 27,
+        "buffer": "sw.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 28,
+        "buffer": "sw.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 28,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 28,
+        "buffer": "sw.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 21,
+        "to": 28,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 28,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 23,
+        "to": 28,
+        "buffer": "sw.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 29,
+        "buffer": "sw.X",
+        "type": "WAW"
+      },
+      {
+        "from": 20,
+        "to": 29,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 29,
+        "to": 30,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 12,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 13,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 14,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 30,
+        "buffer": "sw.Routes",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 31,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 31,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 17,
+        "to": 31,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 18,
+        "to": 31,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 31,
+        "to": 32,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 32,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 27,
+        "to": 32,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 28,
+        "to": 32,
+        "buffer": "sw.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 33,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 33,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 31,
+        "to": 33,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 32,
+        "to": 33,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 34,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 34,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 32,
+        "to": 34,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 30,
+        "to": 35,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 35,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 33,
+        "to": 35,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 34,
+        "to": 35,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 35,
+        "to": 36,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 36,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 34,
+        "to": 36,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 30,
+        "to": 37,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 37,
+        "buffer": "sw.X",
+        "type": "RAW"
+      },
+      {
+        "from": 35,
+        "to": 37,
+        "buffer": "sw.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 36,
+        "to": 37,
+        "buffer": "sw.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 37,
+        "to": 38,
+        "buffer": "sw.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 30,
+        "to": 38,
+        "buffer": "sw.Routes",
+        "type": "RAW"
+      },
+      {
+        "from": 36,
+        "to": 38,
+        "buffer": "sw.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 38,
+        "to": 39,
+        "buffer": "sw.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 28,
+        "to": 39,
+        "buffer": "sw.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 29,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAW"
+      },
+      {
+        "from": 30,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 31,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 33,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 35,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAR"
+      },
+      {
+        "from": 37,
+        "to": 39,
+        "buffer": "sw.X",
+        "type": "WAR"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

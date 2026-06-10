@@ -1,0 +1,43 @@
+./convolution2d -timing -verify -report-all \
+  -platform-type privatetlb \
+  -num-chiplets-per-gpu 4 \
+  -num-sa-per-chiplet 1 \
+  -scheduling round-robin \
+  -plan-json conv2d_ni1024_nj1024_div4_Xdiv.plan.json \
+  -ni=1024 -nj=1024 \
+  -metric-file-name conv2d_xdiv
+  
+./convolution2d -timing -verify -report-all \
+  -platform-type privatetlb \
+  -num-chiplets-per-gpu 4 \
+  -num-sa-per-chiplet 1 \
+  -scheduling round-robin \
+  -plan-json conv2d_ni1024_nj1024_div4_Ydiv.plan.json \
+  -ni=1024 -nj=1024 \
+  -metric-file-name conv2d_Ydiv
+ 
+./convolution2d -timing -verify -report-all \
+  -platform-type privatetlb \
+  -num-chiplets-per-gpu 4 \
+  -num-sa-per-chiplet 1 \
+  -mem-allocator-type interleaved \
+  -scheduling round-robin \
+  -ni=1024 -nj=1024 \
+  -metric-file-name conv2d_bsseline1
+
+./convolution2d -timing -verify -report-all \
+  -platform-type privatetlb \
+  -num-chiplets-per-gpu 4 \
+  -scheduling lasp -sched-partition Ydiv \
+  -num-sa-per-chiplet 1 \
+  -ni=1024 -nj=1024 \
+  -metric-file-name conv2d_lasp_sa1
+
+./convolution2d -timing -verify -report-all \
+  -platform-type privatetlb \
+  -num-chiplets-per-gpu 4 \
+  -scheduling lasp -sched-partition Ydiv \
+  -num-sa-per-chiplet 4 \
+  -ni=1024 -nj=1024 \
+  -metric-file-name conv2d_lasp_sa4
+

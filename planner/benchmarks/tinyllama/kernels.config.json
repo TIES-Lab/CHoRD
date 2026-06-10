@@ -1,0 +1,28 @@
+{
+  "params": {
+    "SeqLen": 256,
+    "DModel": 128,
+    "NumHeads": 8,
+    "DFF": 352,
+    "Layers": 4
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dX": "tlm.X",
+    "b.dX2": "tlm.X2",
+    "b.dNorm": "tlm.Norm",
+    "b.dQ": "tlm.Q",
+    "b.dK": "tlm.K",
+    "b.dV": "tlm.V",
+    "b.dScores": "tlm.Scores",
+    "b.dProbs": "tlm.Probs",
+    "b.dContext": "tlm.Context",
+    "b.dAttnOut": "tlm.AttnOut",
+    "b.dGateBuf": "tlm.Gate",
+    "b.dUpBuf": "tlm.Up",
+    "b.dFFBuf": "tlm.FF",
+    "b.dRopeCos": "tlm.RopeCos",
+    "b.dRopeSin": "tlm.RopeSin"
+  },
+  "benchmark": "tinyllama"
+}

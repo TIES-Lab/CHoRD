@@ -1,0 +1,2438 @@
+{
+  "input": "kernels.hsaco.orig.bc",
+  "kernels": [
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_q_proj",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_k_proj",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_v_proj",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": false,
+          "name": "arg2",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        }
+      ],
+      "name": "pf_phi_q",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": false,
+          "name": "arg2",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %4 to i32) to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        }
+      ],
+      "name": "pf_phi_k",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((%4 * %14) + %18)<nsw>,+,(%4 * %5)}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((%4 * %14) + %18)<nsw>,+,(%4 * %5)}<%.lr.ph> to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((%4 * %14) + %18)<nsw>,+,(%4 * %5)}<%.lr.ph>"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (((-1 * %18) + ((1 + (-1 * %4)) * %14)) * %4)),+,(%4 * %5)}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (((-1 * %18) + ((1 + (-1 * %4)) * %14)) * %4)),+,(%4 * %5)}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (((-1 * %18) + ((1 + (-1 * %4)) * %14)) * %4)),+,(%4 * %5)}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_kv_reduce",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": false,
+          "name": "arg2",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %6 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %6 to i32) to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {(trunc i64 %6 to i32),+,(%3 * %4)}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {(trunc i64 %6 to i32),+,(%3 * %4)}<%.lr.ph> to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{(trunc i64 %6 to i32),+,(%3 * %4)}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_z_reduce",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": true,
+          "name": "arg3",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 6,
+          "is_pointer": false,
+          "name": "arg6",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %8 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %8 to i32) to i64))<nsw> + %3)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg3",
+          "buffer_arg_index": 3,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %8 to i32) + (-1 * %15)),+,1}<nw><%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %8 to i32) + (-1 * %15)),+,1}<nw><%.lr.ph> to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %8 to i32) + (-1 * %15)),+,1}<nw><%.lr.ph>"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((((-1 * %15) + %14) * %5) + %15)<nsw>,+,%5}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((((-1 * %15) + %14) * %5) + %15)<nsw>,+,%5}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((((-1 * %15) + %14) * %5) + %15)<nsw>,+,%5}<%.lr.ph>"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((-1 * %15) + %14),+,1}<nw><%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((-1 * %15) + %14),+,1}<nw><%.lr.ph> to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((-1 * %15) + %14),+,1}<nw><%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_linear_context",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_o_proj",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        }
+      ],
+      "name": "pf_add_resid1",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %5 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        }
+      ],
+      "name": "pf_add_resid2",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": true,
+          "name": "arg3",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 6,
+          "is_pointer": false,
+          "name": "arg6",
+          "type": "float"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph71>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph71>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph71",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph67>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph67>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph67",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{0,+,4}<nuw><nsw><%.lr.ph>",
+          "addr_scev": "{%1,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 0,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "start_scev": "0",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{0,+,4}<nuw><nsw><%.lr.ph>",
+          "addr_scev": "{%2,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 0,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "start_scev": "0",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %3)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg3",
+          "buffer_arg_index": 3,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        }
+      ],
+      "name": "pf_layernorm1",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": true,
+          "name": "arg3",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 6,
+          "is_pointer": false,
+          "name": "arg6",
+          "type": "float"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph71>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph71>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph71",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph67>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph67>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph67",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        },
+        {
+          "addr_offset_scev": "{0,+,4}<nuw><nsw><%.lr.ph>",
+          "addr_scev": "{%1,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 0,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "start_scev": "0",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{0,+,4}<nuw><nsw><%.lr.ph>",
+          "addr_scev": "{%2,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 0,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "start_scev": "0",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw> + %3)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "gid_x": 0,
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "((trunc i64 %8 to i32) * %5)"
+              ],
+              "var_refs": [
+                "gid_x",
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 ((trunc i64 %8 to i32) * %5) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg3",
+          "buffer_arg_index": 3,
+          "coeffs": {
+            "gid_x": 0,
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": [
+            "((trunc i64 %8 to i32) * %5)"
+          ]
+        }
+      ],
+      "name": "pf_layernorm2",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_ff1",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": false,
+          "name": "arg1",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %3 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %3 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %3 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %3 to i32) to i64))<nsw> + %0)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        }
+      ],
+      "name": "pf_relu",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "args": [
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 0,
+          "is_pointer": true,
+          "name": "arg0",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 1,
+          "is_pointer": true,
+          "name": "arg1",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": 1,
+          "elem_bytes": -1,
+          "index": 2,
+          "is_pointer": true,
+          "name": "arg2",
+          "type": "float addrspace(1)*"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 3,
+          "is_pointer": false,
+          "name": "arg3",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 4,
+          "is_pointer": false,
+          "name": "arg4",
+          "type": "i32"
+        },
+        {
+          "addrspace": -1,
+          "elem_bytes": -1,
+          "index": 5,
+          "is_pointer": false,
+          "name": "arg5",
+          "type": "i32"
+        }
+      ],
+      "mem_accesses": [
+        {
+          "addr_offset_scev": "(4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 (trunc i64 %7 to i32) to i64))<nsw> + %2)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg2",
+          "buffer_arg_index": 2,
+          "coeffs": {
+            "gid_x": 4
+          },
+          "complete_linear": true,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "store",
+          "is_global": true,
+          "kind": "store",
+          "unknown_terms": []
+        },
+        {
+          "addr_offset_scev": "{(4 * (sext i32 (%5 * %12) to i64))<nsw>,+,4}<nsw><%.lr.ph>",
+          "addr_scev": "{((4 * (sext i32 (%5 * %12) to i64))<nsw> + %0)<nsw>,+,4}<nsw><%.lr.ph>",
+          "addrec": {
+            "backedge_taken_count_scev": "(-1 + %5)",
+            "is_affine": true,
+            "loop_depth": 1,
+            "loop_header": ".lr.ph",
+            "start_linear": {
+              "coeffs": {
+                "param_arg5": 0
+              },
+              "complete_linear": false,
+              "constant": 0,
+              "unknown_terms": [
+                "%12",
+                "(%5 * %12)"
+              ],
+              "var_refs": [
+                "param_arg5"
+              ]
+            },
+            "start_scev": "(4 * (sext i32 (%5 * %12) to i64))<nsw>",
+            "step_linear": {
+              "coeffs": {},
+              "complete_linear": true,
+              "constant": 4,
+              "unknown_terms": [],
+              "var_refs": []
+            },
+            "step_scev": "4",
+            "trip_count_const": -1,
+            "trip_count_scev": "%5"
+          },
+          "addrspace": 1,
+          "buffer": "arg0",
+          "buffer_arg_index": 0,
+          "coeffs": {
+            "param_arg5": 0
+          },
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "%12",
+            "(%5 * %12)"
+          ]
+        },
+        {
+          "addr_offset_scev": "(4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw>",
+          "addr_scev": "((4 * (sext i32 {((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph> to i64))<nsw> + %1)<nsw>",
+          "addrspace": 1,
+          "buffer": "arg1",
+          "buffer_arg_index": 1,
+          "coeffs": {},
+          "complete_linear": false,
+          "constant": 0,
+          "elem_bytes": 4,
+          "inst": "load",
+          "is_global": true,
+          "kind": "load",
+          "unknown_terms": [
+            "{((trunc i64 %7 to i32) + (-1 * %4 * %12)),+,%4}<%.lr.ph>"
+          ]
+        }
+      ],
+      "name": "pf_ff2",
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "tool": "mgvm-kernel-analyzer",
+  "version": 2
+}

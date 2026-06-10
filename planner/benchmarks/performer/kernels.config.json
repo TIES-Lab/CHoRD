@@ -1,0 +1,25 @@
+{
+  "params": {
+    "SeqLen": 256,
+    "DModel": 128,
+    "NumHeads": 8,
+    "DFF": 256,
+    "Layers": 2
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dX": "pf.X",
+    "b.dX2": "pf.X2",
+    "b.dQ": "pf.Q",
+    "b.dK": "pf.K",
+    "b.dV": "pf.V",
+    "b.dPhiQ": "pf.PhiQ",
+    "b.dPhiK": "pf.PhiK",
+    "b.dKV": "pf.KV",
+    "b.dZ": "pf.Z",
+    "b.dContext": "pf.Context",
+    "b.dTmpOut": "pf.TmpOut",
+    "b.dFF1": "pf.FF1"
+  },
+  "benchmark": "performer"
+}

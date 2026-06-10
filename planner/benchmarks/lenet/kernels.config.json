@@ -1,0 +1,30 @@
+{
+  "params": {
+    "InH": 512,
+    "InW": 512,
+    "Cin": 1,
+    "Conv1Out": 4,
+    "Conv2Out": 8,
+    "FC1Out": 32,
+    "NumClass": 10
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dIn": "ln.Input",
+    "b.dConv1": "ln.Conv1.Out",
+    "b.dPool1": "ln.Pool1.Out",
+    "b.dConv2": "ln.Conv2.Out",
+    "b.dPool2": "ln.Pool2.Out",
+    "b.dFC1": "ln.FC1.Out",
+    "b.dOut": "ln.FC2.Out",
+    "b.dW1": "ln.Conv1.W",
+    "b.dB1": "ln.Conv1.B",
+    "b.dW2": "ln.Conv2.W",
+    "b.dB2": "ln.Conv2.B",
+    "b.dWfc1": "ln.FC1.W",
+    "b.dBfc1": "ln.FC1.B",
+    "b.dWfc2": "ln.FC2.W",
+    "b.dBfc2": "ln.FC2.B"
+  },
+  "benchmark": "lenet"
+}

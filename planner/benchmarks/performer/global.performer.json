@@ -1,0 +1,4223 @@
+{
+  "tool": "mgvm-host-analyzer",
+  "version": 4,
+  "benchmark": "performer",
+  "package": "performer",
+  "source_files": [
+    "benchmark.go",
+    "kernels.cl",
+    "kernels.config.json",
+    "kernels.json"
+  ],
+  "source_digests": {
+    "benchmark.go": "f8dc4a6ee94bfcdf91056692b0a5ee493149a7397bfca1bdacc7992b4c4770ad",
+    "kernels.cl": "606090b7c90a3eaec08bb8598624e68d2c18295722382b40be694594543884f6",
+    "kernels.config.json": "7ef18a1917ab9443fea58be8fd84dc9d7bb5fe7b680d61263f4b6d773faefce5",
+    "kernels.json": "6acd9c4237bcda4ab0e5a3b1eda3e99820af7238aef3ce5a736312ff76a9482f"
+  },
+  "params": {
+    "DFF": 256,
+    "DModel": 128,
+    "Layers": 2,
+    "NumHeads": 8,
+    "SeqLen": 256
+  },
+  "page_bytes": 4096,
+  "buffers": [
+    {
+      "tag": "pf.Context",
+      "go_var": "b.dContext",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.FF1",
+      "go_var": "b.dFF1",
+      "bytes_expr": "uint64(b.SeqLen * b.DFF * 4)",
+      "bytes": 262144,
+      "pages": 64,
+      "unified": false
+    },
+    {
+      "tag": "pf.K",
+      "go_var": "b.dK",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.KV",
+      "go_var": "b.dKV",
+      "bytes_expr": "uint64(b.NumHeads * dh * dh * 4)",
+      "bytes": 8192,
+      "pages": 2,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.B1",
+      "go_var": "b.dB1[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.B2",
+      "go_var": "b.dB2[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.G1",
+      "go_var": "b.dG1[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.G2",
+      "go_var": "b.dG2[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.W1",
+      "go_var": "b.dW1[l]",
+      "bytes_expr": "w1Bytes",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.W2",
+      "go_var": "b.dW2[l]",
+      "bytes_expr": "w2Bytes",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L0.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.B1",
+      "go_var": "b.dB1[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.B2",
+      "go_var": "b.dB2[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.G1",
+      "go_var": "b.dG1[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.G2",
+      "go_var": "b.dG2[l]",
+      "bytes_expr": "normBytes",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.W1",
+      "go_var": "b.dW1[l]",
+      "bytes_expr": "w1Bytes",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.W2",
+      "go_var": "b.dW2[l]",
+      "bytes_expr": "w2Bytes",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.Wk",
+      "go_var": "b.dWk[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.Wo",
+      "go_var": "b.dWo[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.Wq",
+      "go_var": "b.dWq[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.L1.Wv",
+      "go_var": "b.dWv[l]",
+      "bytes_expr": "wMatBytes",
+      "bytes": 65536,
+      "pages": 16,
+      "unified": false
+    },
+    {
+      "tag": "pf.PhiK",
+      "go_var": "b.dPhiK",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.PhiQ",
+      "go_var": "b.dPhiQ",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.Q",
+      "go_var": "b.dQ",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.TmpOut",
+      "go_var": "b.dTmpOut",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.V",
+      "go_var": "b.dV",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.X",
+      "go_var": "b.dX",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.X2",
+      "go_var": "b.dX2",
+      "bytes_expr": "uint64(b.SeqLen * b.DModel * 4)",
+      "bytes": 131072,
+      "pages": 32,
+      "unified": false
+    },
+    {
+      "tag": "pf.Z",
+      "go_var": "b.dZ",
+      "bytes_expr": "uint64(b.NumHeads * dh * 4)",
+      "bytes": 512,
+      "pages": 1,
+      "unified": false
+    }
+  ],
+  "kernels": [
+    {
+      "name": "pf_q_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_k_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_v_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_phi_q",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "N",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_phi_k",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Out",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "N",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_kv_reduce",
+      "args": [
+        {
+          "index": 0,
+          "name": "PhiK",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "V",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "KV",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "SeqLen",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "DHead",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "NumHeads",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_z_reduce",
+      "args": [
+        {
+          "index": 0,
+          "name": "PhiK",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Z",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "SeqLen",
+          "ir_name": "arg2",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "DHead",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "NumHeads",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_linear_context",
+      "args": [
+        {
+          "index": 0,
+          "name": "PhiQ",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "KV",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Z",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Context",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DHead",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "NumHeads",
+          "ir_name": "arg6",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 4,
+        "num_global_loads": 3,
+        "num_global_stores": 1,
+        "num_loads": 3,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 3,
+        "recorded_global_stores": 1,
+        "recorded_loads": 3,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_o_proj",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_add_resid1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_add_resid2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Out",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "N",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_layernorm1",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_layernorm2",
+      "args": [
+        {
+          "index": 0,
+          "name": "In",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "Gamma",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "Beta",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "Out",
+          "ir_name": "arg3",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "SeqLen",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "DModel",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 6,
+          "name": "Eps",
+          "ir_name": "arg6",
+          "type": "float",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 6,
+        "num_global_loads": 5,
+        "num_global_stores": 1,
+        "num_loads": 5,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 5,
+        "recorded_global_stores": 1,
+        "recorded_loads": 5,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_ff1",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_relu",
+      "args": [
+        {
+          "index": 0,
+          "name": "X",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "N",
+          "ir_name": "arg1",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 2,
+        "num_global_loads": 1,
+        "num_global_stores": 1,
+        "num_loads": 1,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 1,
+        "recorded_global_stores": 1,
+        "recorded_loads": 1,
+        "recorded_stores": 1
+      }
+    },
+    {
+      "name": "pf_ff2",
+      "args": [
+        {
+          "index": 0,
+          "name": "A",
+          "ir_name": "arg0",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 1,
+          "name": "B",
+          "ir_name": "arg1",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 2,
+          "name": "C",
+          "ir_name": "arg2",
+          "type": "float addrspace(1)*",
+          "is_pointer": true,
+          "addrspace": 1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 3,
+          "name": "M",
+          "ir_name": "arg3",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 4,
+          "name": "N",
+          "ir_name": "arg4",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        },
+        {
+          "index": 5,
+          "name": "K",
+          "ir_name": "arg5",
+          "type": "i32",
+          "is_pointer": false,
+          "addrspace": -1,
+          "elem_bytes": -1
+        }
+      ],
+      "summary": {
+        "cap_max_access_records": 2000,
+        "capped_access_records": 3,
+        "num_global_loads": 2,
+        "num_global_stores": 1,
+        "num_loads": 2,
+        "num_stores": 1,
+        "record_non_global": false,
+        "recorded_global_loads": 2,
+        "recorded_global_stores": 1,
+        "recorded_loads": 2,
+        "recorded_stores": 1
+      }
+    }
+  ],
+  "launches": [
+    {
+      "id": 0,
+      "kernel": "pf_layernorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "pf_layernorm1|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=128|sf=param_arg6=1e-05|r=pf.L0.B1,pf.L0.G1,pf.X|w=pf.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "pf.L0.G1",
+          "expr": "b.dG1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "pf.L0.B1",
+          "expr": "b.dB1[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "pf.L0.B1",
+        "pf.L0.G1",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.X2"
+      ],
+      "buffer_roles": {
+        "pf.L0.B1": "read_only",
+        "pf.L0.G1": "read_only",
+        "pf.X": "read_only",
+        "pf.X2": "write_only"
+      }
+    },
+    {
+      "id": 1,
+      "kernel": "pf_q_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_q_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L0.Wq,pf.X2|w=pf.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L0.Wq",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.Q"
+      ],
+      "buffer_roles": {
+        "pf.L0.Wq": "read_only",
+        "pf.Q": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 2,
+      "kernel": "pf_k_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_k_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L0.Wk,pf.X2|w=pf.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L0.Wk",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.K"
+      ],
+      "buffer_roles": {
+        "pf.K": "write_only",
+        "pf.L0.Wk": "read_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 3,
+      "kernel": "pf_v_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_v_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L0.Wv,pf.X2|w=pf.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L0.Wv",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.V"
+      ],
+      "buffer_roles": {
+        "pf.L0.Wv": "read_only",
+        "pf.V": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 4,
+      "kernel": "pf_phi_q",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_phi_q|g=32768,1,1|l=64,1,1|si=param_arg2=32768|r=pf.Q|w=pf.PhiQ",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.PhiQ",
+          "expr": "b.dPhiQ"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32768
+      },
+      "reads": [
+        "pf.Q"
+      ],
+      "writes": [
+        "pf.PhiQ"
+      ],
+      "buffer_roles": {
+        "pf.PhiQ": "write_only",
+        "pf.Q": "read_only"
+      }
+    },
+    {
+      "id": 5,
+      "kernel": "pf_phi_k",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_phi_k|g=32768,1,1|l=64,1,1|si=param_arg2=32768|r=pf.K|w=pf.PhiK",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32768
+      },
+      "reads": [
+        "pf.K"
+      ],
+      "writes": [
+        "pf.PhiK"
+      ],
+      "buffer_roles": {
+        "pf.K": "read_only",
+        "pf.PhiK": "write_only"
+      }
+    },
+    {
+      "id": 6,
+      "kernel": "pf_kv_reduce",
+      "global_size": [
+        2048,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "pf_kv_reduce|g=2048,1,1|l=64,1,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=pf.PhiK,pf.V|w=pf.KV",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiK",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "pf.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "KV",
+          "kind": "buffer",
+          "tag": "pf.KV",
+          "expr": "b.dKV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "pf.PhiK",
+        "pf.V"
+      ],
+      "writes": [
+        "pf.KV"
+      ],
+      "buffer_roles": {
+        "pf.KV": "write_only",
+        "pf.PhiK": "read_only",
+        "pf.V": "read_only"
+      }
+    },
+    {
+      "id": 7,
+      "kernel": "pf_z_reduce",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "pf_z_reduce|g=128,1,1|l=64,1,1|si=param_arg2=256;param_arg3=16;param_arg4=8|r=pf.PhiK|w=pf.Z",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiK",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Z",
+          "kind": "buffer",
+          "tag": "pf.Z",
+          "expr": "b.dZ"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 16,
+        "param_arg4": 8
+      },
+      "reads": [
+        "pf.PhiK"
+      ],
+      "writes": [
+        "pf.Z"
+      ],
+      "buffer_roles": {
+        "pf.PhiK": "read_only",
+        "pf.Z": "write_only"
+      }
+    },
+    {
+      "id": 8,
+      "kernel": "pf_linear_context",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_linear_context|g=32768,1,1|l=64,1,1|si=param_arg4=256;param_arg5=16;param_arg6=8|r=pf.KV,pf.PhiQ,pf.Z|w=pf.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiQ",
+          "kind": "buffer",
+          "tag": "pf.PhiQ",
+          "expr": "b.dPhiQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "KV",
+          "kind": "buffer",
+          "tag": "pf.KV",
+          "expr": "b.dKV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Z",
+          "kind": "buffer",
+          "tag": "pf.Z",
+          "expr": "b.dZ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "pf.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "pf.KV",
+        "pf.PhiQ",
+        "pf.Z"
+      ],
+      "writes": [
+        "pf.Context"
+      ],
+      "buffer_roles": {
+        "pf.Context": "write_only",
+        "pf.KV": "read_only",
+        "pf.PhiQ": "read_only",
+        "pf.Z": "read_only"
+      }
+    },
+    {
+      "id": 9,
+      "kernel": "pf_o_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_o_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.Context,pf.L0.Wo|w=pf.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.Context",
+        "pf.L0.Wo"
+      ],
+      "writes": [
+        "pf.TmpOut"
+      ],
+      "buffer_roles": {
+        "pf.Context": "read_only",
+        "pf.L0.Wo": "read_only",
+        "pf.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 10,
+      "kernel": "pf_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=pf.TmpOut,pf.X|w=pf.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "pf.TmpOut",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.X2"
+      ],
+      "buffer_roles": {
+        "pf.TmpOut": "read_only",
+        "pf.X": "read_only",
+        "pf.X2": "write_only"
+      }
+    },
+    {
+      "id": 11,
+      "kernel": "pf_layernorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "pf_layernorm2|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=128|sf=param_arg6=1e-05|r=pf.L0.B2,pf.L0.G2,pf.X2|w=pf.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "pf.L0.G2",
+          "expr": "b.dG2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "pf.L0.B2",
+          "expr": "b.dB2[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "pf.L0.B2",
+        "pf.L0.G2",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.X"
+      ],
+      "buffer_roles": {
+        "pf.L0.B2": "read_only",
+        "pf.L0.G2": "read_only",
+        "pf.X": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 12,
+      "kernel": "pf_ff1",
+      "global_size": [
+        65536,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1024,
+        1,
+        1
+      ],
+      "num_wg_total": 1024,
+      "launch_signature": "pf_ff1|g=65536,1,1|l=64,1,1|si=param_arg3=256;param_arg4=256;param_arg5=128|r=pf.L0.W1,pf.X|w=pf.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.W1",
+          "expr": "b.dW1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L0.W1",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.FF1"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "write_only",
+        "pf.L0.W1": "read_only",
+        "pf.X": "read_only"
+      }
+    },
+    {
+      "id": 13,
+      "kernel": "pf_relu",
+      "global_size": [
+        65536,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1024,
+        1,
+        1
+      ],
+      "num_wg_total": 1024,
+      "launch_signature": "pf_relu|g=65536,1,1|l=64,1,1|si=param_arg1=65536|r=pf.FF1|w=pf.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 65536
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 65536
+      },
+      "reads": [
+        "pf.FF1"
+      ],
+      "writes": [
+        "pf.FF1"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "read_write"
+      }
+    },
+    {
+      "id": 14,
+      "kernel": "pf_ff2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_ff2|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=256|r=pf.FF1,pf.L0.W2|w=pf.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L0.W2",
+          "expr": "b.dW2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "pf.FF1",
+        "pf.L0.W2"
+      ],
+      "writes": [
+        "pf.TmpOut"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "read_only",
+        "pf.L0.W2": "read_only",
+        "pf.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 15,
+      "kernel": "pf_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=pf.TmpOut,pf.X2|w=pf.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "pf.TmpOut",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.X"
+      ],
+      "buffer_roles": {
+        "pf.TmpOut": "read_only",
+        "pf.X": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 16,
+      "kernel": "pf_layernorm1",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "pf_layernorm1|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=128|sf=param_arg6=1e-05|r=pf.L1.B1,pf.L1.G1,pf.X|w=pf.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "pf.L1.G1",
+          "expr": "b.dG1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "pf.L1.B1",
+          "expr": "b.dB1[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "pf.L1.B1",
+        "pf.L1.G1",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.X2"
+      ],
+      "buffer_roles": {
+        "pf.L1.B1": "read_only",
+        "pf.L1.G1": "read_only",
+        "pf.X": "read_only",
+        "pf.X2": "write_only"
+      }
+    },
+    {
+      "id": 17,
+      "kernel": "pf_q_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_q_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L1.Wq,pf.X2|w=pf.Q",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.Wq",
+          "expr": "b.dWq[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L1.Wq",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.Q"
+      ],
+      "buffer_roles": {
+        "pf.L1.Wq": "read_only",
+        "pf.Q": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 18,
+      "kernel": "pf_k_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_k_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L1.Wk,pf.X2|w=pf.K",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.Wk",
+          "expr": "b.dWk[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L1.Wk",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.K"
+      ],
+      "buffer_roles": {
+        "pf.K": "write_only",
+        "pf.L1.Wk": "read_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 19,
+      "kernel": "pf_v_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_v_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.L1.Wv,pf.X2|w=pf.V",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.Wv",
+          "expr": "b.dWv[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L1.Wv",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.V"
+      ],
+      "buffer_roles": {
+        "pf.L1.Wv": "read_only",
+        "pf.V": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 20,
+      "kernel": "pf_phi_q",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_phi_q|g=32768,1,1|l=64,1,1|si=param_arg2=32768|r=pf.Q|w=pf.PhiQ",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.Q",
+          "expr": "b.dQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.PhiQ",
+          "expr": "b.dPhiQ"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32768
+      },
+      "reads": [
+        "pf.Q"
+      ],
+      "writes": [
+        "pf.PhiQ"
+      ],
+      "buffer_roles": {
+        "pf.PhiQ": "write_only",
+        "pf.Q": "read_only"
+      }
+    },
+    {
+      "id": 21,
+      "kernel": "pf_phi_k",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_phi_k|g=32768,1,1|l=64,1,1|si=param_arg2=32768|r=pf.K|w=pf.PhiK",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.K",
+          "expr": "b.dK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 32768
+      },
+      "reads": [
+        "pf.K"
+      ],
+      "writes": [
+        "pf.PhiK"
+      ],
+      "buffer_roles": {
+        "pf.K": "read_only",
+        "pf.PhiK": "write_only"
+      }
+    },
+    {
+      "id": 22,
+      "kernel": "pf_kv_reduce",
+      "global_size": [
+        2048,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        32,
+        1,
+        1
+      ],
+      "num_wg_total": 32,
+      "launch_signature": "pf_kv_reduce|g=2048,1,1|l=64,1,1|si=param_arg3=256;param_arg4=16;param_arg5=8|r=pf.PhiK,pf.V|w=pf.KV",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiK",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "V",
+          "kind": "buffer",
+          "tag": "pf.V",
+          "expr": "b.dV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "KV",
+          "kind": "buffer",
+          "tag": "pf.KV",
+          "expr": "b.dKV"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 16,
+        "param_arg5": 8
+      },
+      "reads": [
+        "pf.PhiK",
+        "pf.V"
+      ],
+      "writes": [
+        "pf.KV"
+      ],
+      "buffer_roles": {
+        "pf.KV": "write_only",
+        "pf.PhiK": "read_only",
+        "pf.V": "read_only"
+      }
+    },
+    {
+      "id": 23,
+      "kernel": "pf_z_reduce",
+      "global_size": [
+        128,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        2,
+        1,
+        1
+      ],
+      "num_wg_total": 2,
+      "launch_signature": "pf_z_reduce|g=128,1,1|l=64,1,1|si=param_arg2=256;param_arg3=16;param_arg4=8|r=pf.PhiK|w=pf.Z",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiK",
+          "kind": "buffer",
+          "tag": "pf.PhiK",
+          "expr": "b.dPhiK"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Z",
+          "kind": "buffer",
+          "tag": "pf.Z",
+          "expr": "b.dZ"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg2": 256,
+        "param_arg3": 16,
+        "param_arg4": 8
+      },
+      "reads": [
+        "pf.PhiK"
+      ],
+      "writes": [
+        "pf.Z"
+      ],
+      "buffer_roles": {
+        "pf.PhiK": "read_only",
+        "pf.Z": "write_only"
+      }
+    },
+    {
+      "id": 24,
+      "kernel": "pf_linear_context",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_linear_context|g=32768,1,1|l=64,1,1|si=param_arg4=256;param_arg5=16;param_arg6=8|r=pf.KV,pf.PhiQ,pf.Z|w=pf.Context",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "PhiQ",
+          "kind": "buffer",
+          "tag": "pf.PhiQ",
+          "expr": "b.dPhiQ"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "KV",
+          "kind": "buffer",
+          "tag": "pf.KV",
+          "expr": "b.dKV"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Z",
+          "kind": "buffer",
+          "tag": "pf.Z",
+          "expr": "b.dZ"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Context",
+          "kind": "buffer",
+          "tag": "pf.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DHead",
+          "kind": "scalar",
+          "value": 16
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "NumHeads",
+          "kind": "scalar",
+          "value": 8
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 16,
+        "param_arg6": 8
+      },
+      "reads": [
+        "pf.KV",
+        "pf.PhiQ",
+        "pf.Z"
+      ],
+      "writes": [
+        "pf.Context"
+      ],
+      "buffer_roles": {
+        "pf.Context": "write_only",
+        "pf.KV": "read_only",
+        "pf.PhiQ": "read_only",
+        "pf.Z": "read_only"
+      }
+    },
+    {
+      "id": 25,
+      "kernel": "pf_o_proj",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_o_proj|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=128|r=pf.Context,pf.L1.Wo|w=pf.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.Context",
+          "expr": "b.dContext"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.Wo",
+          "expr": "b.dWo[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.Context",
+        "pf.L1.Wo"
+      ],
+      "writes": [
+        "pf.TmpOut"
+      ],
+      "buffer_roles": {
+        "pf.Context": "read_only",
+        "pf.L1.Wo": "read_only",
+        "pf.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 26,
+      "kernel": "pf_add_resid1",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_add_resid1|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=pf.TmpOut,pf.X|w=pf.X2",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "pf.TmpOut",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.X2"
+      ],
+      "buffer_roles": {
+        "pf.TmpOut": "read_only",
+        "pf.X": "read_only",
+        "pf.X2": "write_only"
+      }
+    },
+    {
+      "id": 27,
+      "kernel": "pf_layernorm2",
+      "global_size": [
+        256,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        4,
+        1,
+        1
+      ],
+      "num_wg_total": 4,
+      "launch_signature": "pf_layernorm2|g=256,1,1|l=64,1,1|si=param_arg4=256;param_arg5=128|sf=param_arg6=1e-05|r=pf.L1.B2,pf.L1.G2,pf.X2|w=pf.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "In",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "Gamma",
+          "kind": "buffer",
+          "tag": "pf.L1.G2",
+          "expr": "b.dG2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Beta",
+          "kind": "buffer",
+          "tag": "pf.L1.B2",
+          "expr": "b.dB2[l]"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "SeqLen",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "DModel",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 6,
+          "arg_name": "Eps",
+          "kind": "scalar_float",
+          "float_value": 0.00001
+        }
+      ],
+      "scalar_map": {
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "float_scalar_map": {
+        "param_arg6": 0.00001
+      },
+      "reads": [
+        "pf.L1.B2",
+        "pf.L1.G2",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.X"
+      ],
+      "buffer_roles": {
+        "pf.L1.B2": "read_only",
+        "pf.L1.G2": "read_only",
+        "pf.X": "write_only",
+        "pf.X2": "read_only"
+      }
+    },
+    {
+      "id": 28,
+      "kernel": "pf_ff1",
+      "global_size": [
+        65536,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1024,
+        1,
+        1
+      ],
+      "num_wg_total": 1024,
+      "launch_signature": "pf_ff1|g=65536,1,1|l=64,1,1|si=param_arg3=256;param_arg4=256;param_arg5=128|r=pf.L1.W1,pf.X|w=pf.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.W1",
+          "expr": "b.dW1[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 128
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 256,
+        "param_arg5": 128
+      },
+      "reads": [
+        "pf.L1.W1",
+        "pf.X"
+      ],
+      "writes": [
+        "pf.FF1"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "write_only",
+        "pf.L1.W1": "read_only",
+        "pf.X": "read_only"
+      }
+    },
+    {
+      "id": 29,
+      "kernel": "pf_relu",
+      "global_size": [
+        65536,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        1024,
+        1,
+        1
+      ],
+      "num_wg_total": 1024,
+      "launch_signature": "pf_relu|g=65536,1,1|l=64,1,1|si=param_arg1=65536|r=pf.FF1|w=pf.FF1",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "X",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 65536
+        }
+      ],
+      "scalar_map": {
+        "param_arg1": 65536
+      },
+      "reads": [
+        "pf.FF1"
+      ],
+      "writes": [
+        "pf.FF1"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "read_write"
+      }
+    },
+    {
+      "id": 30,
+      "kernel": "pf_ff2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_ff2|g=32768,1,1|l=64,1,1|si=param_arg3=256;param_arg4=128;param_arg5=256|r=pf.FF1,pf.L1.W2|w=pf.TmpOut",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.FF1",
+          "expr": "b.dFF1"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.L1.W2",
+          "expr": "b.dW2[l]"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "C",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "M",
+          "kind": "scalar",
+          "value": 256
+        },
+        {
+          "arg_index": 4,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 128
+        },
+        {
+          "arg_index": 5,
+          "arg_name": "K",
+          "kind": "scalar",
+          "value": 256
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 256,
+        "param_arg4": 128,
+        "param_arg5": 256
+      },
+      "reads": [
+        "pf.FF1",
+        "pf.L1.W2"
+      ],
+      "writes": [
+        "pf.TmpOut"
+      ],
+      "buffer_roles": {
+        "pf.FF1": "read_only",
+        "pf.L1.W2": "read_only",
+        "pf.TmpOut": "write_only"
+      }
+    },
+    {
+      "id": 31,
+      "kernel": "pf_add_resid2",
+      "global_size": [
+        32768,
+        1,
+        1
+      ],
+      "local_size": [
+        64,
+        1,
+        1
+      ],
+      "num_wg": [
+        512,
+        1,
+        1
+      ],
+      "num_wg_total": 512,
+      "launch_signature": "pf_add_resid2|g=32768,1,1|l=64,1,1|si=param_arg3=32768|r=pf.TmpOut,pf.X2|w=pf.X",
+      "arg_bindings": [
+        {
+          "arg_index": 0,
+          "arg_name": "A",
+          "kind": "buffer",
+          "tag": "pf.X2",
+          "expr": "b.dX2"
+        },
+        {
+          "arg_index": 1,
+          "arg_name": "B",
+          "kind": "buffer",
+          "tag": "pf.TmpOut",
+          "expr": "b.dTmpOut"
+        },
+        {
+          "arg_index": 2,
+          "arg_name": "Out",
+          "kind": "buffer",
+          "tag": "pf.X",
+          "expr": "b.dX"
+        },
+        {
+          "arg_index": 3,
+          "arg_name": "N",
+          "kind": "scalar",
+          "value": 32768
+        }
+      ],
+      "scalar_map": {
+        "param_arg3": 32768
+      },
+      "reads": [
+        "pf.TmpOut",
+        "pf.X2"
+      ],
+      "writes": [
+        "pf.X"
+      ],
+      "buffer_roles": {
+        "pf.TmpOut": "read_only",
+        "pf.X": "write_only",
+        "pf.X2": "read_only"
+      }
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": 0,
+        "to": 1,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 4,
+        "buffer": "pf.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 5,
+        "buffer": "pf.K",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 6,
+        "buffer": "pf.PhiK",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 6,
+        "buffer": "pf.V",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 7,
+        "buffer": "pf.PhiK",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 8,
+        "buffer": "pf.KV",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 8,
+        "buffer": "pf.PhiQ",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 8,
+        "buffer": "pf.Z",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 9,
+        "buffer": "pf.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 10,
+        "buffer": "pf.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 10,
+        "buffer": "pf.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 1,
+        "to": 10,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 2,
+        "to": 10,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 3,
+        "to": 10,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 0,
+        "to": 11,
+        "buffer": "pf.X",
+        "type": "WAR"
+      },
+      {
+        "from": 10,
+        "to": 11,
+        "buffer": "pf.X",
+        "type": "WAR"
+      },
+      {
+        "from": 11,
+        "to": 12,
+        "buffer": "pf.X",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "pf.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 12,
+        "to": 13,
+        "buffer": "pf.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 13,
+        "to": 14,
+        "buffer": "pf.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 9,
+        "to": 14,
+        "buffer": "pf.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 10,
+        "to": 14,
+        "buffer": "pf.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 14,
+        "to": 15,
+        "buffer": "pf.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 15,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 11,
+        "to": 15,
+        "buffer": "pf.X",
+        "type": "WAW"
+      },
+      {
+        "from": 12,
+        "to": 15,
+        "buffer": "pf.X",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "pf.X",
+        "type": "RAW"
+      },
+      {
+        "from": 10,
+        "to": 16,
+        "buffer": "pf.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 11,
+        "to": 16,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 15,
+        "to": 16,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 17,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 1,
+        "to": 17,
+        "buffer": "pf.Q",
+        "type": "WAW"
+      },
+      {
+        "from": 4,
+        "to": 17,
+        "buffer": "pf.Q",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 18,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 2,
+        "to": 18,
+        "buffer": "pf.K",
+        "type": "WAW"
+      },
+      {
+        "from": 5,
+        "to": 18,
+        "buffer": "pf.K",
+        "type": "WAR"
+      },
+      {
+        "from": 16,
+        "to": 19,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 3,
+        "to": 19,
+        "buffer": "pf.V",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 19,
+        "buffer": "pf.V",
+        "type": "WAR"
+      },
+      {
+        "from": 17,
+        "to": 20,
+        "buffer": "pf.Q",
+        "type": "RAW"
+      },
+      {
+        "from": 4,
+        "to": 20,
+        "buffer": "pf.PhiQ",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 20,
+        "buffer": "pf.PhiQ",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 21,
+        "buffer": "pf.K",
+        "type": "RAW"
+      },
+      {
+        "from": 5,
+        "to": 21,
+        "buffer": "pf.PhiK",
+        "type": "WAW"
+      },
+      {
+        "from": 6,
+        "to": 21,
+        "buffer": "pf.PhiK",
+        "type": "WAR"
+      },
+      {
+        "from": 7,
+        "to": 21,
+        "buffer": "pf.PhiK",
+        "type": "WAR"
+      },
+      {
+        "from": 21,
+        "to": 22,
+        "buffer": "pf.PhiK",
+        "type": "RAW"
+      },
+      {
+        "from": 19,
+        "to": 22,
+        "buffer": "pf.V",
+        "type": "RAW"
+      },
+      {
+        "from": 6,
+        "to": 22,
+        "buffer": "pf.KV",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 22,
+        "buffer": "pf.KV",
+        "type": "WAR"
+      },
+      {
+        "from": 21,
+        "to": 23,
+        "buffer": "pf.PhiK",
+        "type": "RAW"
+      },
+      {
+        "from": 7,
+        "to": 23,
+        "buffer": "pf.Z",
+        "type": "WAW"
+      },
+      {
+        "from": 8,
+        "to": 23,
+        "buffer": "pf.Z",
+        "type": "WAR"
+      },
+      {
+        "from": 22,
+        "to": 24,
+        "buffer": "pf.KV",
+        "type": "RAW"
+      },
+      {
+        "from": 20,
+        "to": 24,
+        "buffer": "pf.PhiQ",
+        "type": "RAW"
+      },
+      {
+        "from": 23,
+        "to": 24,
+        "buffer": "pf.Z",
+        "type": "RAW"
+      },
+      {
+        "from": 8,
+        "to": 24,
+        "buffer": "pf.Context",
+        "type": "WAW"
+      },
+      {
+        "from": 9,
+        "to": 24,
+        "buffer": "pf.Context",
+        "type": "WAR"
+      },
+      {
+        "from": 24,
+        "to": 25,
+        "buffer": "pf.Context",
+        "type": "RAW"
+      },
+      {
+        "from": 14,
+        "to": 25,
+        "buffer": "pf.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 15,
+        "to": 25,
+        "buffer": "pf.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 25,
+        "to": 26,
+        "buffer": "pf.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 26,
+        "buffer": "pf.X",
+        "type": "RAW"
+      },
+      {
+        "from": 16,
+        "to": 26,
+        "buffer": "pf.X2",
+        "type": "WAW"
+      },
+      {
+        "from": 17,
+        "to": 26,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 18,
+        "to": 26,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 19,
+        "to": 26,
+        "buffer": "pf.X2",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 15,
+        "to": 27,
+        "buffer": "pf.X",
+        "type": "WAW"
+      },
+      {
+        "from": 16,
+        "to": 27,
+        "buffer": "pf.X",
+        "type": "WAR"
+      },
+      {
+        "from": 26,
+        "to": 27,
+        "buffer": "pf.X",
+        "type": "WAR"
+      },
+      {
+        "from": 27,
+        "to": 28,
+        "buffer": "pf.X",
+        "type": "RAW"
+      },
+      {
+        "from": 13,
+        "to": 28,
+        "buffer": "pf.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 14,
+        "to": 28,
+        "buffer": "pf.FF1",
+        "type": "WAR"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "pf.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 28,
+        "to": 29,
+        "buffer": "pf.FF1",
+        "type": "WAW"
+      },
+      {
+        "from": 29,
+        "to": 30,
+        "buffer": "pf.FF1",
+        "type": "RAW"
+      },
+      {
+        "from": 25,
+        "to": 30,
+        "buffer": "pf.TmpOut",
+        "type": "WAW"
+      },
+      {
+        "from": 26,
+        "to": 30,
+        "buffer": "pf.TmpOut",
+        "type": "WAR"
+      },
+      {
+        "from": 30,
+        "to": 31,
+        "buffer": "pf.TmpOut",
+        "type": "RAW"
+      },
+      {
+        "from": 26,
+        "to": 31,
+        "buffer": "pf.X2",
+        "type": "RAW"
+      },
+      {
+        "from": 27,
+        "to": 31,
+        "buffer": "pf.X",
+        "type": "WAW"
+      },
+      {
+        "from": 28,
+        "to": 31,
+        "buffer": "pf.X",
+        "type": "WAR"
+      }
+    ]
+  },
+  "notes": [
+    "freshness: regenerate this global json whenever benchmark.go, kernels.cl, kernels.json, or kernels.config.json changes"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "params": {
+    "SeqLen": 64,
+    "DModel": 64,
+    "NumHeads": 8,
+    "DFF": 64,
+    "Layers": 2,
+    "Experts": 4
+  },
+  "page_bytes": 4096,
+  "buffer_tags": {
+    "b.dX": "sw.X",
+    "b.dX2": "sw.X2",
+    "b.dQ": "sw.Q",
+    "b.dK": "sw.K",
+    "b.dV": "sw.V",
+    "b.dScores": "sw.Scores",
+    "b.dProbs": "sw.Probs",
+    "b.dContext": "sw.Context",
+    "b.dTmpOut": "sw.TmpOut",
+    "b.dRoutes": "sw.Routes",
+    "b.dFF1": "sw.FF1"
+  },
+  "benchmark": "switch_tiny"
+}
